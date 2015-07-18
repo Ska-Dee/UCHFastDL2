@@ -1,0 +1,15 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "NewPorkCity/VendingMachine"
+	"$BumpMap"		"NewPorkCity/VendingMachine_Normal"
+	//"$envmap"		"env_cubemap"
+	"$Phong"		1
+	"$PhongExponent"	1.0
+	"$PhongBoost"		2.0
+	"$PhongFresnelRanges"	[.1 6 8]
+	//"$lightwarptexture" "models/player/pyro/pyro_lightwarp"
+	"$phongfresnelranges" "[.1 2 8]" 
+	//"$rimlight" "1" // To enable rim lighting (requires phong)
+	//"$rimlightexponent" "2" // Exponent for phong component of rim lighting
+	//"$rimlightboost" "10" // Boost for ambient cube component of rim lighting
+}
