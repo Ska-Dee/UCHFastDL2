@@ -10,3 +10,4 @@ sound/hl/weapons/357_shot1.wav
 sound/hl/weapons/357_shot2.wav
 models/cubemath/chars/d6.mdl
 models/cubemath/chars/percent.mdl
+sound/gta2/wasted.wav

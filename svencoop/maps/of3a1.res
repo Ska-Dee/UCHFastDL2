@@ -1,5 +1,6 @@
-models/player/nsmbw_iggy/nsmbw_iggy.bmp
-models/player/nsmbw_iggy/nsmbw_iggy.mdl
+models/player/teemo_a1/teemo_a1.bmp
+models/player/teemo_a1/teemo_a1.mdl
+sound/player/playersounds/teemo_hut.wav
 sprites/hl_weapons/weapon_hl357.txt
 models/hl/p_357.mdl
 models/hl/v_357.mdl
@@ -10,3 +11,4 @@ sound/hl/weapons/357_shot1.wav
 sound/hl/weapons/357_shot2.wav
 models/cubemath/chars/d6.mdl
 models/cubemath/chars/percent.mdl
+sound/gta2/wasted.wav

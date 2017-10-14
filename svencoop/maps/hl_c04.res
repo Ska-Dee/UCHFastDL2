@@ -10,3 +10,4 @@ models/hl/w_357t.mdl
 sound/hl/weapons/357_reload1.wav
 sound/hl/weapons/357_shot1.wav
 sound/hl/weapons/357_shot2.wav
+sound/gta2/wasted.wav
