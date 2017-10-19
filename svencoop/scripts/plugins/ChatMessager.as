@@ -12,7 +12,6 @@ final class CooldownTimes {
 	float m_flLongJumpMessageTime;
 	float m_flRespectMessageTime;
 	float m_flDropperMessageTime;
-	float m_flDonationMessageTime;
 	
 	CooldownTimes(){
 		ResetData();
@@ -32,7 +31,6 @@ final class CooldownTimes {
 		m_flLongJumpMessageTime = g_Engine.time;
 		m_flRespectMessageTime = g_Engine.time;
 		m_flDropperMessageTime = g_Engine.time;
-		m_flDonationMessageTime = g_Engine.time;
 	}
 }
 
@@ -250,21 +248,6 @@ void ChatCheck( SayParameters@ m_pArgs ) {
 		g_CooldownTimes.m_flDropperMessageTime = g_Engine.time + 60.0f;
 		string aStr = "SERVER: Write: Dropammo <primary-count> <secondary-count> to drop ammo.\n";
 		g_Game.AlertMessage( at_logged, "\"SERVER\" says \"Write: Dropammo <primary-count> <secondary-count> to drop ammo.\"\n" );
-		g_PlayerFuncs.ClientPrintAll( HUD_PRINTTALK, aStr ); 
-		readyPrint = false;
-	}
-
-	strTest = (str.Find("DONATE") < String::INVALID_INDEX);
-	strTest = strTest || (str.Find("DONATION") < String::INVALID_INDEX);
-	strTest = strTest || (str.Find("MONEY") < String::INVALID_INDEX);
-	strTest = strTest || (str.Find("DOLLAR") < String::INVALID_INDEX);
-	strTest = strTest || ((str.Find("EURO") < String::INVALID_INDEX) && !(str.Find("EUROP") < String::INVALID_INDEX));
-	strTest = strTest && (g_CooldownTimes.m_flDonationMessageTime < g_Engine.time);
-
-	if (strTest && readyPrint) {
-		g_CooldownTimes.m_flDonationMessageTime = g_Engine.time + 100.0f;
-		string aStr = "SERVER: Donate to CubeMath via PayPal: BrianLessmann@gmail.com\n";
-		g_Game.AlertMessage( at_logged, "\"SERVER\" says \"Donate to CubeMath via PayPal: BrianLessmann@gmail.com\"\n" );
 		g_PlayerFuncs.ClientPrintAll( HUD_PRINTTALK, aStr ); 
 		readyPrint = false;
 	}
