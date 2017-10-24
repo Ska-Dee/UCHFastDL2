@@ -9,7 +9,7 @@
 	"plugin"
 	{
 		"name" "Dropper"
-		"script" "CubeMath/Dropper"
+		"script" "cubemath/Dropper"
 	}
 	
 	"plugin"
@@ -73,7 +73,7 @@
 	"plugin"
 	{
 		"name" "AntiSpam"
-		"script" "CubeMath/AntiSpam"
+		"script" "cubemath/AntiSpam"
 	}
 
 //	"plugin"
@@ -93,14 +93,14 @@
 	"plugin"
 	{
 		"name" "DynamicDifficulty"
-		"script" "CubeMath/DynamicDifficulty9"
+		"script" "cubemath/DynamicDifficulty9"
 		"concommandns" "dyndiff"
 	}
 	
 //	"plugin"
 //	{
 //		"name" "Gunganese"
-//		"script" "CubeMath/Gunganese"
+//		"script" "cubemath/Gunganese"
 //	}
 //
 //	"plugin"
