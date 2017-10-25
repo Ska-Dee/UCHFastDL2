@@ -28,6 +28,7 @@ void PluginInit()
 	g_Module.ScriptInfo.SetMinimumAdminLevel( ADMIN_YES );
 	
 	PlayerManagement::Initialize();
+	g_AdminControl.SetReservedSlots( 0 );
 }
 
 namespace PlayerManagement
@@ -43,6 +44,103 @@ Config g_Config;
 
 AdminCommands g_AdminCommands;
 
+
+/*
+* Gets the formatted Time in the console
+*/
+string getFormattedMinutes(float minutes){
+	if(minutes == 0.0f){
+		return "Permanent";
+	}
+	
+	int minutesI;
+	if(minutes < 1.0f){
+		minutesI = int(minutes*6000.0f);
+		if(minutesI == 100){
+			return "1.00 Second";
+		}else if(minutesI < 1000){
+			return "" + (minutesI/100) + "." + (minutesI%100/10) + (minutesI%10) + " Seconds";
+		}else{
+			return "" + (minutesI/1000) + (minutesI%1000/100) + "." + (minutesI%100/10) + " Seconds";
+		}
+	}
+	
+	if(minutes < 60.0f){
+		minutesI = int(minutes*100.0f);
+		if(minutesI == 100){
+			return "1.00 Minute";
+		}else if(minutesI < 1000){
+			return "" + (minutesI/100) + "." + (minutesI%100/10) + (minutesI%10) + " Minutes";
+		}else{
+			return "" + (minutesI/1000) + (minutesI%1000/100) + "." + (minutesI%100/10) + " Minutes";
+		}
+	}
+	
+	minutes = minutes / 60.0f;
+	
+	if(minutes < 24.0f){
+		minutesI = int(minutes*100.0f);
+		if(minutesI == 100){
+			return "1.00 Hour";
+		}else if(minutesI < 1000){
+			return "" + (minutesI/100) + "." + (minutesI%100/10) + (minutesI%10) + " Hours";
+		}else{
+			return "" + (minutesI/1000) + (minutesI%1000/100) + "." + (minutesI%100/10) + " Hours";
+		}
+	}
+	
+	minutes = minutes / 24.0f;
+	
+	if(minutes < 7.0f){
+		minutesI = int(minutes*100.0f);
+		if(minutesI == 100){
+			return "1.00 Day";
+		}else{
+			return "" + (minutesI/100) + "." + (minutesI%100/10) + (minutesI%10) + " Days";
+		}
+	}
+	
+	minutes = minutes / 7.0f;
+	
+	if(minutes < 4.348125f){
+		minutesI = int(minutes*100.0f);
+		if(minutesI == 100){
+			return "1.00 Week";
+		}else{
+			return "" + (minutesI/100) + "." + (minutesI%100/10) + (minutesI%10) + " Weeks";
+		}
+	}
+	
+	minutes = minutes / 4.348125f;
+	
+	if(minutes < 12.0f){
+		minutesI = int(minutes*100.0f);
+		if(minutesI == 100){
+			return "1.00 Month";
+		}else if(minutesI < 1000){
+			return "" + (minutesI/100) + "." + (minutesI%100/10) + (minutesI%10) + " Months";
+		}else{
+			return "" + (minutesI/1000) + (minutesI%1000/100) + "." + (minutesI%100/10) + " Months";
+		}
+	}
+	
+	minutes = minutes / 12.0f;
+	
+	if(minutes < 100.0f){
+		minutesI = int(minutes*100.0f);
+		if(minutesI == 100){
+			return "1.00 Year";
+		}else if(minutesI < 1000){
+			return "" + (minutesI/100) + "." + (minutesI%100/10) + (minutesI%10) + " Years";
+		}else{
+			return "" + (minutesI/1000) + (minutesI%1000/100) + "." + (minutesI%100/10) + " Years";
+		}
+	}
+	
+	return "Permanent";
+}
+
+
 /*
 * Initializes the plugin, register hooks, commands, etc
 */
@@ -53,20 +151,14 @@ void Initialize()
 	LoadConfig();
 	
 	//Register commands here
-	g_AdminCommands.AddCommand( CreateCommand( "slap", @AdminSlap, 0, "[damage] [count]", false, "Cannot slap admins" ) );
-		
-	g_AdminCommands.AddCommand( CreateCommand( "slay", @AdminSlay, 0, "", false, "Cannot slay admins" ) );
-	
-	g_AdminCommands.AddCommand( CreateCommand( "kick", @AdminKick, 0, "[ban time, in minutes]", false, "Cannot kick admins" ) );
-	
-	g_AdminCommands.AddCommand( CreateCommand( "ban", @AdminBan, 0, "[ban time, in minutes]", false, "Cannot ban admins" ) );
+	g_AdminCommands.AddCommand( CreateCommand( "slay", @AdminSlay, 0, "[slay reason]", false, "Cannot slay admins" ) );
+	g_AdminCommands.AddCommand( CreateCommand( "kick", @AdminKick, 0, "[kick reason]", false, "Cannot kick admins" ) );
+	//g_AdminCommands.AddCommand( CreateCommand( "ban", @AdminBan, 0, "[ban time in minutes] [ban reason]", false, "Cannot ban admins" ) );
+	g_AdminCommands.AddCommand( CreateCommand( "ban", @AdminBan, 0, "[ban time in minutes] [ban reason]" ) );
 	
 	g_AdminCommands.AddCommand( CreateCommand( "teleport", @AdminTeleport, 0, "[x] [y] [z]" ) );
 	g_AdminCommands.AddCommand( CreateCommand( "teleportto", @AdminTeleportToPlayer, 1, "<name or steam id>" ) );
 	
-	g_AdminCommands.AddCommand( CreateCommand( "sethealth", @AdminSetHealth, 1, "<health>" ) );
-	
-	g_AdminCommands.AddCommand( CreateCommand( "setarmor", @AdminSetArmor, 1, "<armor>" ) );
 }
 
 void LoadConfig()
@@ -383,42 +475,24 @@ final class AdminCommands
 	}
 }
 
-void PrintAdminCommand( CBasePlayer@ pAdmin, CBasePlayer@ pTarget, const string& in szAction, const string& in szExtra = "" )
-{
-	g_PlayerFuncs.ClientPrintAll( HUD_PRINTTALK, "Admin " + pAdmin.pev.netname + ": " + szAction + " " + pTarget.pev.netname + szExtra + "\n" );
-}
-
-void AdminSlap( AdminCommandParameters@ pParams )
+void AdminSlay( AdminCommandParameters@ pParams )
 {
 	const CCommand@ args = pParams.Args;
 	
-	float flDamage = 0;
+	string s2 = "Blocking";
 	
-	if( args.ArgC() >= 3 )
-	{
-		flDamage = atof( args[ 2 ] );
+	if( args.ArgC() >= 3 ){
+		for(int i = 2; i < args.ArgC(); i++){
+			if(i > 2){
+				s2 = s2+" "+args[i];
+			}else{
+				s2 = args[i];
+			}
+		}
 	}
 	
-	uint uiCount = 1;
-	
-	if( args.ArgC() >= 4 )
-	{
-		uiCount = atoui( args[ 3 ] );
-	}
-	
-	const string szCountMessage = uiCount > 1 ? " " + uiCount + " times" : "";
-	const string szDmgMessage = flDamage != 0 ? " with " + flDamage + " damage" : "";
-	
-	PrintAdminCommand( pParams.Admin, pParams.Target, "Slapping", szCountMessage + szDmgMessage );
-		
-	for( uint uiSlapped = 0; uiSlapped < uiCount; ++uiSlapped )
-		g_AdminControl.SlapPlayer( pParams.Admin, pParams.Target, flDamage, DMG_GENERIC );
-}
-
-void AdminSlay( AdminCommandParameters@ pParams )
-{
-	PrintAdminCommand( pParams.Admin, pParams.Target, "Slaying" );
-	
+	g_Game.AlertMessage( at_logged, "SLAYED: \"" + pParams.Target.pev.netname + "\" Reason: " + s2 + "\n" );
+	g_PlayerFuncs.ClientPrintAll( HUD_PRINTTALK, "SLAYED: \"" + pParams.Target.pev.netname + "\" Reason: " + s2 + "\n" );
 	g_AdminControl.KillPlayer( pParams.Admin, pParams.Target );
 }
 
@@ -426,28 +500,50 @@ void AdminKick( AdminCommandParameters@ pParams )
 {	
 	const CCommand@ args = pParams.Args;
 	
-	float flBanTime = -1;
+	string s2 = "Breaking Rules";
 	
-	if( args.ArgC() >= 3 )
-		flBanTime = atof( args[ 2 ] );
-		
-	PrintAdminCommand( pParams.Admin, pParams.Target, "Kicking" );
+	if( args.ArgC() >= 3 ){
+		for(int i = 2; i < args.ArgC(); i++){
+			if(i > 2){
+				s2 = s2+" "+args[i];
+			}else{
+				s2 = args[i];
+			}
+		}
+	}
 
-	g_AdminControl.KickPlayer( pParams.Admin, pParams.Target, flBanTime );
+	g_Game.AlertMessage( at_logged, "KICKED: \"" + pParams.Target.pev.netname + "\" Reason: " + s2 + "\n" );
+	g_PlayerFuncs.ClientPrintAll( HUD_PRINTTALK, "KICKED: \"" + pParams.Target.pev.netname + "\" Reason: " + s2 + "\n" );
+	g_EngineFuncs.ServerCommand("kick \"#" + g_EngineFuncs.GetPlayerUserId(pParams.Target.edict()) + "\" \"KICKED: "+s2+"\"\n");
+	g_EngineFuncs.ServerExecute();
 }
 
 void AdminBan( AdminCommandParameters@ pParams )
 {	
 	const CCommand@ args = pParams.Args;
-	
+	string s = "Permanent";
+	string s2 = "Breaking Rules";
 	float flBanTime = -1;
 	
-	if( args.ArgC() >= 3 )
+	if( args.ArgC() >= 3 ){
 		flBanTime = atof( args[ 2 ] );
-		
-	PrintAdminCommand( pParams.Admin, pParams.Target, "Banning" );
-		
-	g_AdminControl.BanPlayer( pParams.Admin, pParams.Target, flBanTime );
+		s = getFormattedMinutes(flBanTime);
+		if( args.ArgC() >= 4 ){
+			for(int i = 3; i < args.ArgC(); i++){
+				if(i > 3){
+					s2 = s2+" "+args[i];
+				}else{
+					s2 = args[i];
+				}
+			}
+		}
+	}
+	
+	g_Game.AlertMessage( at_logged, "BANNED( "+s+" ): \"" + pParams.Target.pev.netname + "\" Reason: " + s2 + "\n" );
+	g_PlayerFuncs.ClientPrintAll( HUD_PRINTTALK, "BANNED( "+s+" ): \"" + pParams.Target.pev.netname + "\" Reason: " + s2 + "\n" );
+	g_EngineFuncs.ServerCommand("banid "+flBanTime+" " + g_EngineFuncs.GetPlayerAuthId(pParams.Target.edict()) + "\n");
+	g_EngineFuncs.ServerCommand("kick \"#" + g_EngineFuncs.GetPlayerUserId(pParams.Target.edict()) + "\" \"BANNED( "+s+" ): "+s2+"\"\n");
+	g_EngineFuncs.ServerExecute();
 }
 
 const int ADMIN_TP_FIRST_COORD_IDX = 2;
@@ -470,8 +566,8 @@ void AdminTeleport( AdminCommandParameters@ pParams )
 		}
 	}
 	
-	PrintAdminCommand( pParams.Admin, pParams.Target, "Teleporting" );
-	
+	g_Game.AlertMessage( at_logged, "Teleporting Player: \"" + pParams.Target.pev.netname +"\"\n" );
+	g_PlayerFuncs.ClientPrintAll( HUD_PRINTTALK, "Teleporting Player: \"" + pParams.Target.pev.netname +"\"\n" );
 	pParams.Target.SetOrigin( vecDestination );
 }
 
@@ -489,32 +585,8 @@ void AdminTeleportToPlayer( AdminCommandParameters@ pParams )
 		return;
 	}
 	
-	PrintAdminCommand( pParams.Admin, pParams.Target, "Teleporting", " To " + pDestPlayer.pev.netname );
-	
+	g_Game.AlertMessage( at_logged, "Teleporting Player: \"" + pParams.Target.pev.netname +"\"\n" );
+	g_PlayerFuncs.ClientPrintAll( HUD_PRINTTALK, "Teleporting Player: \"" + pParams.Target.pev.netname +"\"\n" );
 	pParams.Target.SetOrigin( pDestPlayer.pev.origin );
-}
-
-void AdminSetHealth( AdminCommandParameters@ pParams )
-{
-	const CCommand@ args = pParams.Args;
-	
-	const float flHealth = atof( args[ 2 ] ); 
-	
-	PrintAdminCommand( pParams.Admin, pParams.Target, "Set Health", " To " + flHealth );
-	
-	//Don't allow player health to drop below 1; this can break game code TODO needs fixing
-	pParams.Target.pev.health = Math.max( 1, flHealth );
-}
-
-void AdminSetArmor( AdminCommandParameters@ pParams )
-{
-	const CCommand@ args = pParams.Args;
-	
-	const float flArmor = atof( args[ 2 ] );
-	
-	PrintAdminCommand( pParams.Admin, pParams.Target, "Set Armor", " To " + flArmor );
-	
-	//Don't allow player armor to drop below 0; this can break game code TODO needs fixing
-	pParams.Target.pev.armorvalue = Math.max( 0, flArmor );
 }
 }
