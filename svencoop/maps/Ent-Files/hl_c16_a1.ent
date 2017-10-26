@@ -5488,6 +5488,8 @@
 }
 {
 "origin" "-185 276 -240"
+"minhullsize" "-16 -228 -64"
+"maxhullsize" "16 140 128"
 "angles" "0 52 0"
 "classname" "point_checkpoint"
 }

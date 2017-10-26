@@ -29,7 +29,15 @@ final class Diffy {
 			1.000, //21
 			1.000, //22
 			1.000, //23
-			1.000  //24
+			1.000, //24
+			1.000, //25
+			1.000, //26
+			1.000, //27
+			1.000, //28
+			1.000, //29
+			1.000, //30
+			1.000, //31
+			1.000  //32
 	};
 	private bool useFails = false;
 	private int fails = 0;
@@ -701,7 +709,7 @@ final class Diffy {
 				}
 				
 				if(m_sMap == "hl_c10"){
-					if(pEntity.GetTargetname() == "psychobot"){
+					if(pEntity.GetTargetname() == "psychobot" || pEntity.GetTargetname() == "psychobot2"){
 						multiplyMethod = 14;
 						g_EntityFuncs.DispatchKeyValue( pEntity.edict(), "maxspeed", (pEntity.pev.maxspeed*getEntchangeValue(multiplyMethod)) );
 						g_EntityFuncs.DispatchKeyValue( pEntity.edict(), "speed", (pEntity.pev.speed*getEntchangeValue(multiplyMethod)) );
@@ -868,7 +876,7 @@ final class Diffy {
 		}
 		
 		if(playersTotal < 0) playersTotal = 0;
-		if(playersTotal > 24) playersTotal = 24;
+		if(playersTotal > 32) playersTotal = 32;
 		
 		peepNum = playersTotal;
 		
