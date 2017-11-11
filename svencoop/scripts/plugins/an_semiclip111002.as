@@ -3,7 +3,7 @@
 *	[Plugin] Semiclip
 *
 */
-const string	PLUGIN_VERSION	=	"1.1.1.001";
+const string	PLUGIN_VERSION	=	"1.1.0.002";
 const string	PLUGIN_AUTHOR	=	"Anggara_nothing";
 const string	PLUGIN_CONTACT	=	"forums.svencoop.com";
 const bool	DEBUG_ENABLED	=	true;
@@ -11,19 +11,17 @@ const bool	DEBUG_ENABLED	=	true;
 
 array<PlayerData@> g_pCachedPlayerData();
 CCVar@ g_pCvarCrouchAdjustment;
-CCVar@ g_pCvarAllowStacking;
 
 void PluginInit()
 {
 	g_Module.ScriptInfo.SetAuthor( PLUGIN_AUTHOR );
 	g_Module.ScriptInfo.SetContactInfo( PLUGIN_CONTACT );
 	
-	@g_pCvarAllowStacking = CCVar( "semiclip_allow_stacking", 1.0, "Enable/Disable player stacking on each other ", ConCommandFlag::AdminOnly );
-	@g_pCvarCrouchAdjustment = CCVar( "semiclip_crouch", 39.f, "Calibrate crouch height distance for disable semiclip", ConCommandFlag::AdminOnly );
+	@g_pCvarCrouchAdjustment = CCVar( "semiclip_crouch", 39.f, "Calibrate crouch height", ConCommandFlag::AdminOnly );
 
 	// Hooks
 	g_Hooks.RegisterHook( Hooks::Player::ClientDisconnect,	@HookClientDisconnect );
-	g_Hooks.RegisterHook( Hooks::Player::PlayerSpawn,	@HookPlayerSpawn );
+	g_Hooks.RegisterHook( Hooks::Player::PlayerSpawn,		@HookPlayerSpawn );
 	g_Hooks.RegisterHook( Hooks::Player::ClientPutInServer,	@HookClientPutInServer );
 }
 
@@ -91,6 +89,13 @@ HookReturnCode HookClientPutInServer( CBasePlayer@ pPlayer )
 
 HookReturnCode HookPlayerSpawn( CBasePlayer@ pPlayer )
 {
+	//if-Condition added by CubeMath
+	//For unknown reason the game crashes, when the Entity touches a trigger_teleport on this map.
+	//Mysteriously it crashes only on th_ep1_01. All other Teleports are fine.
+	//I wasted many, many hours to find out why it crashes, but I couldn't find the reason.
+	if (g_Engine.mapname == "th_ep1_01") return HOOK_CONTINUE;
+	
+	
 	int player_id = pPlayer.entindex();
 	
 	PlayerData@ pData = GetPlayerData( @pPlayer );
@@ -109,20 +114,20 @@ HookReturnCode HookPlayerSpawn( CBasePlayer@ pPlayer )
 final class PlayerData
 {
 	private bool	m_bIsSemiclip;
-	private int	m_iPlayerId;
+	private int		m_iPlayerId;
 	private EHandle m_hPlayer;
 	private EHandle m_hTrigger;
 	
 	CBasePlayer@ PlayerEnt
 	{
 		get const	{ return cast<CBasePlayer@>( m_hPlayer.GetEntity() ); }
-		set		{ m_hPlayer = EHandle( @value ); }
+		set			{ m_hPlayer = EHandle( @value ); }
 	}
 	
 	CBaseEntity@ TriggerEnt
 	{
 		get const	{ return m_hTrigger.GetEntity(); }
-		set		{ m_hTrigger = EHandle( @value ); }
+		set			{ m_hTrigger = EHandle( @value ); }
 	}
 	
 	bool isSemiclipOn()
@@ -206,11 +211,6 @@ class CTriggerSemiclip : ScriptBaseEntity
 	private Vector		m_vecMins, m_vecMaxs;
 	private float		m_flLastTouch;
 	
-	CBaseEntity@ OwnerEnt
-	{
-		get const	{ return g_EntityFuncs.Instance( pev.owner ); }
-	}
-	
 	bool KeyValue( const string& in szKey, const string& in szValue )
 	{
 		return BaseClass.KeyValue( szKey, szValue );
@@ -250,8 +250,8 @@ class CTriggerSemiclip : ScriptBaseEntity
 			if( pev.owner !is null )
 			{
 				AttachToOwner();
-				m_vecMins = VEC_DUCK_HULL_MIN; //VEC_HUMAN_HULL_MIN; //pev.owner.vars.mins;
-				m_vecMaxs = VEC_HUMAN_HULL_MAX; //pev.owner.vars.maxs;
+				m_vecMins = pev.owner.vars.mins;
+				m_vecMaxs = pev.owner.vars.maxs;
 			}
 			
 			g_EntityFuncs.SetSize( pev, m_vecMins, m_vecMaxs );
@@ -268,7 +268,7 @@ class CTriggerSemiclip : ScriptBaseEntity
 			
 			pev.solid = SOLID_NOT;
 			
-			SetTouch( TouchFunction( null ) ); //Dont use: SetTouch( null );
+			SetTouch( null );
 		}
 	}
 	
@@ -312,7 +312,7 @@ class CTriggerSemiclip : ScriptBaseEntity
 		{
 			m_flLastTouch = 0.f;
 			
-			PlayerData@ pPlayerData = GetPlayerData( OwnerEnt );
+			PlayerData@ pPlayerData = GetPlayerData( g_EntityFuncs.Instance( pev.owner ) );
 			if( pPlayerData !is null )
 			{
 				pPlayerData.SetPlayerSemiclip( false );
@@ -328,21 +328,22 @@ class CTriggerSemiclip : ScriptBaseEntity
 		return ( pOther !is null && pev.owner !is null
 		&& pOther.IsPlayer() && pOther.edict() !is pev.owner
 		&& pev.owner.vars.deadflag == DEAD_NO && pOther.pev.deadflag == DEAD_NO 
-		&& ( isOnLadder( pOther ) || !isStacking( pOther ) )
+		&& ( !isValidCrouch( pOther ) )
 		);
 	}
 	
-	bool isStacking( CBaseEntity@ pOther )
+	bool isValidCrouch( CBaseEntity@ pOther )
 	{
-		return g_pCvarAllowStacking.GetInt() > 0 && ( pev.owner.vars.groundentity is pOther.edict() || pOther.pev.groundentity is pev.owner || fabs(pev.owner.vars.origin.z - pOther.pev.origin.z) >= g_pCvarCrouchAdjustment.GetFloat() );
+		return ( pev.owner.vars.groundentity is pOther.edict() || pOther.pev.groundentity is pev.owner || fabs(pev.owner.vars.origin.z - pOther.pev.origin.z) >= g_pCvarCrouchAdjustment.GetFloat() ) && !isOnLadder(pOther);
 	}
 	
 	bool isOnLadder( CBaseEntity@ pOther )
 	{
-		CBasePlayer@ pPlayerOwner = cast<CBasePlayer@>( @OwnerEnt );
-		CBasePlayer@ pPlayerOther = cast<CBasePlayer@>( @pOther );
+		CBasePlayer@ pPlayer = cast<CBasePlayer@>( @pOther );
+		if( pPlayer is null )
+			return false;
 		
-		return ( pPlayerOwner !is null && pPlayerOwner.IsOnLadder() ) || ( pPlayerOther !is null && pPlayerOther.IsOnLadder() );
+		return pPlayer.IsOnLadder();
 	}
 }
 
