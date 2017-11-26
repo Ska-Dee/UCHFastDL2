@@ -229,7 +229,8 @@ final class Diffy {
 			{ 0.0, 0.0, 0.0, 0.0, 0.2, 0.6, 1.0, 1.0 }, //hard-multiply
 			{ 0.25, 0.35, 0.45, 0.5, 0.75, 1.0, 1.0, 1.0 }, //silofan_changefriction
 			{ 1.0, 1.0, 1.0, 1.0, 1.25, 2.0, 5.0, 6.0 }, //faster speed (psychobot) (hl_c13_a3 platforms)
-			{ 0.5, 0.75, 0.9, 1.0, 1.25, 2.0, 5.0, 6.0 } //mixed speed (hl_c13_a3 platforms)
+			{ 0.5, 0.75, 0.9, 1.0, 1.25, 2.0, 5.0, 6.0 }, //mixed speed (hl_c13_a3 platforms)
+			{ 0.01, 0.1, 0.5, 1.0, 1.0, 1.0, 0.0, 0.0 } //trigger_hurt ignore hardcore
 	};
 	
 	/**
@@ -644,9 +645,14 @@ final class Diffy {
 						multiplyMethod = 2;
 					}
 				}
+				if(m_sMap == "th_ep2_04"){
+                    if(pEntity.pev.modelindex == 226 || pEntity.pev.modelindex == 259 || pEntity.pev.modelindex == 640){
+						multiplyMethod = 16;
+                    }
+                }
 				
 				if(canHurt){
-					if(hurtAlwaysIn || (pEntity.pev.dmg > 0.5 && pEntity.pev.dmg < 150.0 && !hurtExeptions)){
+					if( hurtAlwaysIn || (pEntity.pev.dmg > 0.5 && pEntity.pev.dmg < 150.0 && !hurtExeptions) ){
 						g_EntityFuncs.DispatchKeyValue( pEntity.edict(), "dmg", (pEntity.pev.dmg*getEntchangeValue(multiplyMethod)) );
 					}
 					if( pEntity.pev.dmg < 0.0 && m_flAverageVoteDifficulty == 1.0 ){

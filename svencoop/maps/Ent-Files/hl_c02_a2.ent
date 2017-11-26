@@ -1216,7 +1216,6 @@
 "killtarget" "water_door_current"
 "delay" "0"
 "waterbubblesms" "1"
-"show_arrow_2" "5"
 "classname" "multi_manager"
 }
 {
@@ -8479,7 +8478,6 @@
 "retinal_scanner#10" "5.8"
 "retinal_scanner#11" "2"
 "retinal_scanner_door" "4"
-"show_arrow_1" "4"
 "kill_nevergonnaopen" "4"
 "classname" "multi_manager"
 }
@@ -8892,52 +8890,4 @@
 "maxhullsize" "-312 1481 -1056"
 "target" "percent_lock_3"
 "classname" "trigger_once_mp"
-}
-{
-"origin" "-615 -2781 1358"
-"angles" "0 90 90"
-"rendermode" "1"
-"targetname" "model_arrow_1"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "-81 -2792 1293"
-"angles" "-90 180 0"
-"rendermode" "1"
-"targetname" "model_arrow_2"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_1"
-"netname" "show_arrow_1"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_1"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_2"
-"netname" "show_arrow_2"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_2"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
 }

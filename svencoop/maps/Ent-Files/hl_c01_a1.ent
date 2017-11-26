@@ -3874,7 +3874,6 @@
 "origin" "-1185 -2614 -1080"
 "angles" "0 0 0"
 "targetname" "ctrltalkmm"
-"show_arrow_2" "1"
 "ctrltalk1" "1"
 "ctrltalk2" "5.2"
 "ctrltalk3" "11.6"
@@ -6818,7 +6817,6 @@
 "lk1" "1"
 "lk1lock1" "0"
 "airlockdoorbuzz1" "0"
-"show_arrow_1" "1"
 "classname" "multi_manager"
 }
 {
@@ -9564,72 +9562,4 @@
 "offset" "0 0 -64"
 "spawnflags" "897"
 "classname" "trigger_setorigin"
-}
-{
-"origin" "-1112 320 -240"
-"angles" "0 180 0"
-"rendermode" "1"
-"targetname" "model_arrow_1"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "-1820 320 -288"
-"angles" "0 270 0"
-"rendermode" "1"
-"targetname" "model_arrow_1"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "-2672 1168 -288"
-"angles" "0 0 0"
-"rendermode" "1"
-"targetname" "model_arrow_1"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "-1580 -752 -1160"
-"angles" "0 0 0"
-"rendermode" "1"
-"targetname" "model_arrow_2"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_1"
-"netname" "show_arrow_1"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_1"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_2"
-"netname" "show_arrow_2"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_2"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
 }

@@ -400,7 +400,6 @@
 "rendermode" "2"
 "health" "20"
 "spawnflags" "256"
-"target" "show_arrow_6_mm"
 "classname" "func_breakable"
 }
 {
@@ -4292,7 +4291,6 @@
 "material" "5"
 "health" "70"
 "spawnflags" "260"
-"target" "show_arrow_9_r2"
 "classname" "func_breakable"
 }
 {
@@ -4852,8 +4850,6 @@
 }
 {
 "doorgetter1" "0"
-"model_arrow_11" "0#2"
-"show_arrow_14" "1"
 "targetname" "doorgetter1_mm"
 "classname" "multi_manager"
 }
@@ -6967,7 +6963,6 @@
 "kill_sci_tackle" "1.4"
 "sci_tackle" "1.3"
 "zombie" "2"
-"show_arrow_15" "20"
 "classname" "multi_manager"
 }
 {
@@ -7999,7 +7994,6 @@
 "targetname" "vort_spawner_mm"
 "2teleport_mm1#1" "2"
 "teleport_mm1" "0"
-"show_arrow_9_r1" "6"
 "classname" "multi_manager"
 }
 {
@@ -15475,8 +15469,6 @@
 "classname" "func_train"
 }
 {
-"model_arrow_12" "0#2"
-"show_arrow_13" "20"
 "targetname" "platform"
 "classname" "multi_manager"
 }
@@ -16371,8 +16363,6 @@
 "rendercolor" "0 0 0"
 "angles" "0 90 0"
 "spawnflags" "1"
-"TriggerCondition" "4"
-"TriggerTarget" "show_arrow_12_mm"
 "classname" "monster_bullchicken"
 }
 {
@@ -17501,7 +17491,6 @@
 "minhullsize" "-329 -193 -32"
 "maxhullsize" "47 357 118"
 "angles" "0 127 0"
-"target" "show_arrows_10_11"
 "classname" "point_checkpoint"
 }
 {
@@ -17816,8 +17805,6 @@
 "noopen3" "1.0#2"
 "halldoor1" "1.0"
 "halldoor2" "1.0"
-"model_arrow_2" "0#2"
-"show_arrow_3" "2"
 "targetname" "opendoors1"
 "classname" "multi_manager"
 }
@@ -18684,14 +18671,12 @@
 "padlock_1_model" "0.5#2"
 "key_1_model" "0.5#2"
 "blocker_wall_barncrabs" "0.5"
-"show_arrow_5" "5"
 "targetname" "activate_lock_1"
 "classname" "multi_manager"
 }
 {
 "key_1_train" "0"
 "endofhall1_r" "0"
-"show_arrow_4" "1"
 "targetname" "activate_key_1"
 "classname" "multi_manager"
 }
@@ -18804,503 +18789,4 @@
 "origin" "-472 -240 -480"
 "targetname" "key_1_path_16"
 "classname" "path_track"
-}
-{
-"origin" "1388 -576 -508"
-"angles" "0 180 90"
-"rendermode" "1"
-"targetname" "model_arrow_1"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "1148 -608 -576"
-"angles" "0 90 0"
-"rendermode" "1"
-"targetname" "model_arrow_2"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "1012 -864 -576"
-"angles" "0 180 0"
-"rendermode" "1"
-"targetname" "model_arrow_3"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "-80 -818 -512"
-"angles" "0 270 90"
-"rendermode" "1"
-"targetname" "model_arrow_4"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "-512 -840 -474"
-"angles" "0 90 90"
-"rendermode" "1"
-"targetname" "model_arrow_5"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "-448 -560 -520"
-"angles" "0 180 90"
-"rendermode" "1"
-"targetname" "model_arrow_5"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "156 -512 -192"
-"angles" "0 0 90"
-"rendermode" "1"
-"targetname" "model_arrow_6"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "576 -128 -192"
-"angles" "0 0 90"
-"rendermode" "1"
-"targetname" "model_arrow_6"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "1024 -288 -192"
-"angles" "0 90 90"
-"rendermode" "1"
-"targetname" "model_arrow_6"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "704 -736 -192"
-"angles" "0 90 90"
-"rendermode" "1"
-"targetname" "model_arrow_6"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "576 -736 -192"
-"angles" "0 90 90"
-"rendermode" "1"
-"targetname" "model_arrow_6"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "1360 -566 -187"
-"angles" "90 180 0"
-"rendermode" "1"
-"targetname" "model_arrow_7"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "1616 -544 244"
-"angles" "-90 0 0"
-"rendermode" "1"
-"targetname" "model_arrow_8"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "512 832 64"
-"angles" "0 270 0"
-"rendermode" "1"
-"targetname" "model_arrow_9"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "240 496 128"
-"angles" "0 180 90"
-"rendermode" "1"
-"targetname" "model_arrow_10"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "-112 504 64"
-"angles" "0 237 0"
-"rendermode" "1"
-"targetname" "model_arrow_11"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "-208 -448 64"
-"angles" "0 180 90"
-"rendermode" "1"
-"targetname" "model_arrow_11"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "-2914 -1262 74"
-"angles" "-45 270 90"
-"rendermode" "1"
-"targetname" "model_arrow_12"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "-2560 -1294 64"
-"angles" "0 180 90"
-"rendermode" "1"
-"targetname" "model_arrow_12"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "-2930 -1278 192"
-"angles" "-90 90 0"
-"rendermode" "1"
-"targetname" "model_arrow_12"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "-2230 -490 122"
-"angles" "0 180 90"
-"rendermode" "1"
-"targetname" "model_arrow_13"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "-112 504 64"
-"angles" "0 325 0"
-"rendermode" "1"
-"targetname" "model_arrow_14"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "240 -176 64"
-"angles" "0 270 0"
-"rendermode" "1"
-"targetname" "model_arrow_14"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"origin" "-778 -632 497"
-"angles" "-90 0 0"
-"rendermode" "1"
-"targetname" "model_arrow_15"
-"movetype" "5"
-"model" "models/cubemath/arrow2d.mdl"
-"topcolor" "0"
-"classname" "item_generic"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_1"
-"netname" "show_arrow_1"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_1"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_2"
-"netname" "show_arrow_2"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_2"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_3"
-"netname" "show_arrow_3"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_3"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_4"
-"netname" "show_arrow_4"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_4"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_5"
-"netname" "show_arrow_5"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_5"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_6"
-"netname" "show_arrow_6"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_6"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_7"
-"netname" "show_arrow_7"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_7"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_8"
-"netname" "show_arrow_8"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_8"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_9"
-"netname" "show_arrow_9"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_9"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_10"
-"netname" "show_arrow_10"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_10"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_11"
-"netname" "show_arrow_11"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_11"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_12"
-"netname" "show_arrow_12"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_12"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_13"
-"netname" "show_arrow_13"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_13"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_14"
-"netname" "show_arrow_14"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_14"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
-}
-{
-"$i_rmode" "0"
-"m_iAppendSpaces" "0"
-"m_trigonometricBehaviour" "0"
-"m_FloatConversion" "0"
-"m_iszValueType" "0"
-"targetname" "show_arrow_15"
-"netname" "show_arrow_15"
-"m_iszSrcValueName" "$i_rmode"
-"target" "model_arrow_15"
-"m_iszDstValueName" "rendermode"
-"spawnflags" "128"
-"classname" "trigger_copyvalue"
-}
-{
-"show_arrow_10" "0"
-"show_arrow_11" "1"
-"targetname" "show_arrows_10_11"
-"classname" "multi_manager"
-}
-{
-"show_arrow_12" "30"
-"targetname" "show_arrow_12_mm"
-"classname" "multi_manager"
-}
-{
-"target" "show_arrow_9"
-"targetname" "show_arrow_9_ms"
-"classname" "multisource"
-}
-{
-"target" "show_arrow_9_ms"
-"targetname" "show_arrow_9_r1"
-"triggerstate" "1"
-"classname" "trigger_relay"
-}
-{
-"target" "show_arrow_9_ms"
-"targetname" "show_arrow_9_r2"
-"triggerstate" "1"
-"classname" "trigger_relay"
-}
-{
-"show_arrow_8" "18"
-"show_arrow_7" "10"
-"targetname" "ceiling_wood_gibs"
-"classname" "multi_manager"
-}
-{
-"show_arrow_6" "5"
-"targetname" "show_arrow_6_mm"
-"classname" "multi_manager"
-}
-{
-"show_arrow_1" "20"
-"targetname" "start_light_shutdown"
-"classname" "multi_manager"
-}
-{
-"show_arrow_2" "10"
-"targetname" "zombie_walk"
-"classname" "multi_manager"
 }
