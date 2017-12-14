@@ -1428,7 +1428,7 @@
 "targetname" "fescape_breaks"
 "renderamt" "32"
 "rendermode" "5"
-"spawnflags" "256"
+"spawnflags" "257"
 "classname" "func_breakable"
 }
 {
@@ -6112,8 +6112,8 @@
 }
 {
 "m_flPercentage" "0.66"
-"minhullsize" "640 464 -1856"
-"maxhullsize" "880 976 -1697"
+"minhullsize" "588 464 -1856"
+"maxhullsize" "880 976 -1472"
 "target" "grunts_n_tank_killed_4"
 "classname" "trigger_once_mp"
 }
