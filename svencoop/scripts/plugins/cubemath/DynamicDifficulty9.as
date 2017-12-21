@@ -925,7 +925,7 @@ final class Diffy {
 		
 		if(somebodyIsOnline && !somebodyIsAlive){
 			++everybodyDead;
-			if(everybodyDead == 18){
+			if(everybodyDead == 1){
 				useFails = true;
 				++fails;
 				
