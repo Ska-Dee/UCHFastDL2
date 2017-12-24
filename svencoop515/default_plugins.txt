@@ -1,0 +1,117 @@
+//========================================
+//
+//	This file lists all plugins that are loaded by the game
+//	Plugins use Angelscript
+//
+//========================================
+"plugins"
+{
+	"plugin"
+	{
+		"name" "Dropper"
+		"script" "cubemath/Dropper"
+	}
+	
+	"plugin"
+	{
+		"name" "PlayerManagement"
+		"script" "admin/PlayerManagement"
+		"concommandns" "plrmgr"
+	}
+	
+	"plugin"
+	{
+		"name" "NetworkBanhammer"
+		"script" "admin/NetworkBanhammer"
+		"concommandns" "nban"
+	}
+	
+	"plugin"
+	{
+		"name" "AdminSay"
+		"script" "admin/AdminSay"
+	}
+
+	"plugin"
+	{
+		"name" "InsultKiller"
+		"script" "InsultKiller"
+	}
+	
+	"plugin"
+	{
+		"name" "SinkingShip"
+		"script" "cubemath/SinkingShip2"
+	}
+	
+	"plugin"
+	{
+		"name" "MapChanger"
+		"script" "admin/MapChanger"
+	}
+
+	"plugin"
+	{
+		"name" "PlayerDecalTracker"
+		"script" "admin/PlayerDecalTracker"
+		"concommandns" "plydecaltrack"
+	}
+
+	"plugin"
+	{
+		"name" "AFKKick"
+		"script" "admin/KickIdlePlayers"
+		"concommandns" "afkkick"
+	}
+
+	"plugin"
+	{
+		"name" "ChatMessager"
+		"script" "ChatMessager"
+	}
+
+	"plugin"
+	{
+		"name" "AntiSpam"
+		"script" "cubemath/AntiSpam"
+	}
+
+//	"plugin"
+//	{
+//		"name" "AntiFlood"
+//		"script" "Zode/AntiFlood"
+//		"concommandns" "antiflood"
+//	}
+	
+	"plugin"
+	{
+		"name" "EntityManager"
+		"script" "EntityManager"
+		"concommandns" "entmngr"
+	}
+	
+	"plugin"
+	{
+		"name" "DynamicDifficulty"
+		"script" "cubemath/DynamicDifficulty9"
+		"concommandns" "dyndiff"
+	}
+	
+//	"plugin"
+//	{
+//		"name" "Gunganese"
+//		"script" "cubemath/Gunganese"
+//	}
+//
+//	"plugin"
+//	{
+//		"name" "Teleport"
+//		"script" "Teleport"
+//	}
+//
+//	"plugin"
+//	{
+//		"name" "Vox"
+//		"script" "Vox"
+//	}
+}
