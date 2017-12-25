@@ -2,7 +2,7 @@
 // Parachute grunt (based on repel grunt)
 // Author: GeckonCZ
 
-namespace GruntRepel
+namespace THMonsterGruntRepel
 {
 
 const int TH_GRUNT_PARACHUTE_BODYPART = 3;
@@ -11,13 +11,9 @@ const int TH_GRUNT_PARACHUTE_VISIBLE = 1;
 
 const string TH_GRUNT_MODEL = "models/hunger/hgrunt.mdl";
 
-class monster_th_grunt_repel : ScriptBaseMonsterEntity
+class CGruntRepel : ScriptBaseMonsterEntity
 {
 	private EHandle m_hHgrunt;
-	
-	monster_th_grunt_repel( void )
-	{
-	}
 
 	void Spawn( void )
 	{
@@ -46,11 +42,19 @@ class monster_th_grunt_repel : ScriptBaseMonsterEntity
 		
 		// Use custom model
 		dictionary keyvalues = { { "model", TH_GRUNT_MODEL } };
-		CBaseEntity@ pEntity = g_EntityFuncs.CreateEntity( "monster_human_grunt", keyvalues, true );
+		CBaseEntity@ pEntity = g_EntityFuncs.CreateEntity( "monster_human_grunt", keyvalues, false ); // Delayed spawn
 		
 		CBaseMonster@ pGrunt = pEntity.MyMonsterPointer();
+		
 		pGrunt.pev.origin = pev.origin;
 		pGrunt.pev.angles = pev.angles;
+		pGrunt.pev.spawnflags = pev.spawnflags;
+		pGrunt.pev.health = pev.health;
+		pGrunt.pev.netname = pev.netname;
+		pGrunt.pev.weapons = pev.weapons;
+		
+		g_EntityFuncs.DispatchSpawn( pGrunt.edict() );
+		
 		pGrunt.pev.movetype = MOVETYPE_FLY;
 		pGrunt.pev.velocity = Vector( 0, 0, Math.RandomFloat( -196, -128 ) );
 		pGrunt.SetActivity( ACT_GLIDE );
@@ -103,7 +107,7 @@ class monster_th_grunt_repel : ScriptBaseMonsterEntity
 
 void Register()
 {
-	g_CustomEntityFuncs.RegisterCustomEntity( "GruntRepel::monster_th_grunt_repel", "monster_th_grunt_repel" );
+	g_CustomEntityFuncs.RegisterCustomEntity( "THMonsterGruntRepel::CGruntRepel", "monster_th_grunt_repel" );
 }
 
 } // end of namespace

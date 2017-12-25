@@ -2,7 +2,7 @@
 // Cyber-Franklin's hornet entity (based on agrunt hornet)
 // Author: GeckonCZ
 
-namespace FranklinHornet
+namespace THMonsterFranklinHornet
 {
 
 const int HORNET_TYPE_PRI			= 0;
@@ -16,7 +16,7 @@ const int HORNET_DAMAGE				= 10;
 const string HORNET_MODEL			= "models/hornet.mdl";
 
 
-class franklinhornet : ScriptBaseMonsterEntity
+class CFranklinHornet : ScriptBaseMonsterEntity
 {
 	private float			m_flStopAttack;
 	private int				m_iHornetType;
@@ -24,10 +24,6 @@ class franklinhornet : ScriptBaseMonsterEntity
 	
 	private int				m_iHornetTrail;
 	private int				m_iHornetPuff;
-	
-	franklinhornet( void )
-	{
-	}
 	
 	// don't let hornets gib, ever.
 	int TakeDamage( entvars_t@ pevInflictor, entvars_t@ pevAttacker, float flDamage, int bitsDamageType)
@@ -393,7 +389,7 @@ class franklinhornet : ScriptBaseMonsterEntity
 
 void Register()
 {
-	g_CustomEntityFuncs.RegisterCustomEntity( "FranklinHornet::franklinhornet", "franklinhornet" );
+	g_CustomEntityFuncs.RegisterCustomEntity( "THMonsterFranklinHornet::CFranklinHornet", "franklinhornet" );
 }
 
 } // end of namespace

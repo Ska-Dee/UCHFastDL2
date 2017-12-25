@@ -1,4 +1,19 @@
-//Author: KernCore
+// Author: KernCore
+// Modified by: GeckonCZ
+
+#include "baseweapon"
+
+namespace THWeaponM16A1
+{
+
+const string WEAPON_NAME			= "weapon_m16a1";
+const string AMMO_DROP_NAME			= "ammo_556clip";
+const string AMMO_TYPE				= "556";
+
+const int M16A1_MAX_CARRY   		= 600;
+const int M16A1_DEFAULT_GIVE		= 100;
+const int M16A1_MAX_CLIP    		= 20;
+const int M16A1_WEIGHT      		= 25;
 
 enum TheyHungerM16A1Animation_e
 {
@@ -10,23 +25,8 @@ enum TheyHungerM16A1Animation_e
 	M16A1_SHOOT
 };
 
-const int M16A1_MAX_CARRY   	= 600;
-const int M16A1_DEFAULT_GIVE	= 100;
-const int M16A1_MAX_CLIP    	= 20;
-const int M16A1_WEIGHT      	= 25;
-
-
-class weapon_m16a1 : ScriptBasePlayerWeaponEntity
+class CM16A1 : CBaseCustomWeapon
 {
-	private CBasePlayer@ m_pPlayer = null;
-	
-	int m_iBurstLeft = 0;
-	int m_iBurstCount = 0;
-	int m_iShotsFired;
-	float m_flNextBurstFireTime = 0;
-	bool m_isSemiAuto;
-	bool m_isBurstFire;
-
 	string M16A1_W_MODEL = "models/hunger/weapons/m16a1/w_m16.mdl";
 	string M16A1_V_MODEL = "models/hunger/weapons/m16a1/v_m16.mdl";
 	string M16A1_P_MODEL = "models/hunger/weapons/m16a1/p_m16.mdl";
@@ -36,8 +36,17 @@ class weapon_m16a1 : ScriptBasePlayerWeaponEntity
 	string M16A1_S_FIRE2 = "hunger/weapons/m16a1/m16_fire2.wav";
 	string M16A1_S_FIRE3 = "hunger/weapons/m16a1/m16_fire3.wav";
 
+	int m_iShotsFired;
+	
 	int m_iShell;
 
+	int m_iBurstLeft = 0;
+	int m_iBurstCount = 0;
+	
+	float m_flNextBurstFireTime = 0;
+	bool m_isSemiAuto;
+	bool m_isBurstFire;
+	
 	void Spawn()
 	{
 		Precache();
@@ -46,7 +55,7 @@ class weapon_m16a1 : ScriptBasePlayerWeaponEntity
 		self.m_iDefaultAmmo = M16A1_DEFAULT_GIVE;
 		m_iShotsFired = 0;
 
-		self.FallInit();
+		BaseClass.Spawn();
 	}
 
 	void Precache()
@@ -71,7 +80,9 @@ class weapon_m16a1 : ScriptBasePlayerWeaponEntity
 	bool GetItemInfo( ItemInfo& out info )
 	{
 		info.iMaxAmmo1	= M16A1_MAX_CARRY;
+		info.iAmmo1Drop	= M16A1_MAX_CLIP;
 		info.iMaxAmmo2	= -1;
+		info.iAmmo2Drop	= -1;
 		info.iMaxClip	= M16A1_MAX_CLIP;
 		info.iSlot   	= 2;
 		info.iPosition	= 7;
@@ -114,14 +125,12 @@ class weapon_m16a1 : ScriptBasePlayerWeaponEntity
  
 	bool Deploy()
 	{
-		bool bResult;
-		{
-			bResult = self.DefaultDeploy ( self.GetV_Model( M16A1_V_MODEL ), self.GetP_Model( M16A1_P_MODEL ), M16A1_DEPLOY, "m16" );
+		bool fResult = self.DefaultDeploy( self.GetV_Model( M16A1_V_MODEL ), self.GetP_Model( M16A1_P_MODEL ), M16A1_DEPLOY, "m16" );
 
-			float deployTime = 0.56;
-			self.m_flTimeWeaponIdle = self.m_flNextPrimaryAttack = self.m_flNextSecondaryAttack = g_Engine.time + deployTime;
-			return bResult;
-		}
+		float deployTime = 0.56;
+		self.m_flTimeWeaponIdle = self.m_flNextPrimaryAttack = self.m_flNextSecondaryAttack = g_Engine.time + deployTime;
+
+		return fResult;
 	}
 
 	void Holster( int skipLocal = 0 )
@@ -198,7 +207,7 @@ class weapon_m16a1 : ScriptBasePlayerWeaponEntity
 
 		Vector vecShellVelocity, vecShellOrigin;
 		
-		THGetDefaultShellInfo( m_pPlayer, vecShellVelocity, vecShellOrigin, 16, 7, -7 );
+		GetDefaultShellInfo( m_pPlayer, vecShellVelocity, vecShellOrigin, 16, 7, -7 );
 		
 		vecShellVelocity.y *= 1;
 		
@@ -230,7 +239,9 @@ class weapon_m16a1 : ScriptBasePlayerWeaponEntity
 
 	void PrimaryAttack()
 	{
-		if( m_pPlayer.pev.waterlevel == WATERLEVEL_HEAD || self.m_iClip <= 0 )
+		CBasePlayer@ pPlayer = m_pPlayer;
+		
+		if( pPlayer.pev.waterlevel == WATERLEVEL_HEAD || self.m_iClip <= 0 )
 		{
 			self.PlayEmptySound();
 			self.m_flNextPrimaryAttack = WeaponTimeBase() + 0.15f;
@@ -255,7 +266,9 @@ class weapon_m16a1 : ScriptBasePlayerWeaponEntity
 
 	void SecondaryAttack()
 	{
-		if( m_pPlayer.pev.waterlevel == WATERLEVEL_HEAD || self.m_iClip <= 0 )
+		CBasePlayer@ pPlayer = m_pPlayer;
+		
+		if( pPlayer.pev.waterlevel == WATERLEVEL_HEAD || self.m_iClip <= 0 )
 		{
 			self.PlayEmptySound();
 			self.m_flNextSecondaryAttack = WeaponTimeBase() + 0.15f;
@@ -272,7 +285,7 @@ class weapon_m16a1 : ScriptBasePlayerWeaponEntity
 		   
 		if( m_iBurstCount == 3 )
 		{
-			g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_AUTO, M16A1_S_BURST, Math.RandomFloat( 0.99, 1.0 ), ATTN_NORM, 0, 93 + Math.RandomLong( 0, 0x0f ) );
+			g_SoundSystem.EmitSoundDyn( pPlayer.edict(), CHAN_AUTO, M16A1_S_BURST, Math.RandomFloat( 0.99, 1.0 ), ATTN_NORM, 0, 93 + Math.RandomLong( 0, 0x0f ) );
 		}
 		else
 		{
@@ -369,17 +382,14 @@ class weapon_m16a1 : ScriptBasePlayerWeaponEntity
 
 		self.SendWeaponAnim( iAnim, 0, 0 );
 
-		self.m_flTimeWeaponIdle = WeaponTimeBase() + g_PlayerFuncs.SharedRandomFloat( m_pPlayer.random_seed,  5, 7 );
+		self.m_flTimeWeaponIdle = WeaponTimeBase() + g_PlayerFuncs.SharedRandomFloat( m_pPlayer.random_seed, 5, 7 );
 	}
 }
 
-string M16A1Name()
+void Register()
 {
-	return "weapon_m16a1";
+	g_CustomEntityFuncs.RegisterCustomEntity( "THWeaponM16A1::CM16A1", WEAPON_NAME );
+	g_ItemRegistry.RegisterWeapon( WEAPON_NAME, "hunger/weapons", AMMO_TYPE, "", AMMO_DROP_NAME, "" );
 }
 
-void RegisterM16A1()
-{
-	g_CustomEntityFuncs.RegisterCustomEntity( M16A1Name(), M16A1Name() );
-	g_ItemRegistry.RegisterWeapon( M16A1Name(), "hunger/weapons", "556" );
-}
+} // end of namespace

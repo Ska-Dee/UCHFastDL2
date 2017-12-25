@@ -2,7 +2,7 @@
 // Sheriff apache entity
 // Author: GeckonCZ
 
-namespace Boss
+namespace THMonsterBoss
 {
 
 const int SF_WAITFORTRIGGER	= (0x04 | 0x40); // UNDONE: Fix!
@@ -15,7 +15,7 @@ const int EXPLOSION_DAMAGE_RADIUS = 128; // TODO: Wild guess
 
 const string BOSS_MODEL = "models/hunger/boss.mdl";
 
-class monster_th_boss : ScriptBaseMonsterEntity
+class CBoss : ScriptBaseMonsterEntity
 {
 	private float m_flForce;
 	private float m_flNext;
@@ -52,10 +52,6 @@ class monster_th_boss : ScriptBaseMonsterEntity
 	{
 		pev.absmin = pev.origin + Vector( -300, -300, -172);
 		pev.absmax = pev.origin + Vector(300, 300, 8);
-	}
-	
-	monster_th_boss()
-	{
 	}
 	
 	void UpdateOnRemove()
@@ -865,10 +861,9 @@ class monster_th_boss : ScriptBaseMonsterEntity
 	}
 }
 
-
 void Register()
 {
-	g_CustomEntityFuncs.RegisterCustomEntity( "Boss::monster_th_boss", "monster_th_boss" );
+	g_CustomEntityFuncs.RegisterCustomEntity( "THMonsterBoss::CBoss", "monster_th_boss" );
 }
 
 } // end of namespace

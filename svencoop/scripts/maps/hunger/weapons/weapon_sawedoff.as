@@ -1,3 +1,25 @@
+// Author: KernCore
+// Modified by: GeckonCZ
+
+#include "baseweapon"
+
+namespace THWeaponSawedoff
+{
+
+const string WEAPON_NAME			= "weapon_sawedoff";
+const string AMMO_DROP_NAME			= "ammo_buckshot";
+const string AMMO_TYPE				= "buckshot";
+
+const int SAWEDOFF_MAX_CARRY		= 125;
+const int SAWEDOFF_DEFAULT_GIVE		= 8;
+const int SAWEDOFF_MAX_CLIP 		= 2;
+const int SAWEDOFF_WEIGHT   		= 35;
+
+const uint SAWEDOFF_SINGLE_PELLETCOUNTER = 8;
+const uint SAWEDOFF_DOUBLE_PELLETCOUNT = SAWEDOFF_SINGLE_PELLETCOUNTER * 2;
+const Vector VECTOR_CONE_DM_SAWEDOFFS( 0.08716, 0.04362, 0.00 );
+const Vector VECTOR_CONE_DM_SAWEDOFFD( 0.08716, 0.17365, 0.00 );
+
 enum TheyHungerSAWEDOFFAnimation_e
 {
 	TOZ34_IDLE = 0,
@@ -7,21 +29,8 @@ enum TheyHungerSAWEDOFFAnimation_e
 	TOZ34_SHOOT1
 };
 
-const int SAWEDOFF_MAX_CARRY	= 125;
-const int SAWEDOFF_DEFAULT_GIVE	= 8;
-const int SAWEDOFF_MAX_CLIP 	= 2;
-const int SAWEDOFF_WEIGHT   	= 35;
-const uint SAWEDOFF_SINGLE_PELLETCOUNTER = 8;
-const uint SAWEDOFF_DOUBLE_PELLETCOUNT = SAWEDOFF_SINGLE_PELLETCOUNTER * 2;
-const Vector VECTOR_CONE_DM_SAWEDOFFS( 0.08716, 0.04362, 0.00 );
-const Vector VECTOR_CONE_DM_SAWEDOFFD( 0.08716, 0.17365, 0.00 );
-
-class weapon_sawedoff : ScriptBasePlayerWeaponEntity
+class CSawedoff : CBaseCustomWeapon
 {
-	private CBasePlayer@ m_pPlayer = null;
-	
-	int m_iShotsFired;
-
 	string TOZ34_W_MODEL = "models/hunger/weapons/dbarrel/w_dbarrel.mdl";
 	string TOZ34_V_MODEL = "models/hunger/weapons/dbarrel/v_dbarrel.mdl";
 	string TOZ34_P_MODEL = "models/hunger/weapons/dbarrel/p_dbarrel.mdl";
@@ -29,6 +38,8 @@ class weapon_sawedoff : ScriptBasePlayerWeaponEntity
 	string TOZ34_S_FIRE1 = "hunger/weapons/dbarrel/fire.wav";
 	string TOZ34_S_DFIRE = "hunger/weapons/dbarrel/doublefire.wav";
 
+	int m_iShotsFired;
+	
 	void Spawn()
 	{
 		Precache();
@@ -37,7 +48,7 @@ class weapon_sawedoff : ScriptBasePlayerWeaponEntity
 		self.m_iDefaultAmmo = SAWEDOFF_DEFAULT_GIVE;
 		m_iShotsFired = 0;
 		
-		self.FallInit();
+		BaseClass.Spawn();
 	}
 
 	void Precache()
@@ -60,7 +71,9 @@ class weapon_sawedoff : ScriptBasePlayerWeaponEntity
 	bool GetItemInfo( ItemInfo& out info )
 	{
 		info.iMaxAmmo1	= SAWEDOFF_MAX_CARRY;
+		info.iAmmo1Drop	= SAWEDOFF_DEFAULT_GIVE;
 		info.iMaxAmmo2	= -1;
+		info.iAmmo2Drop	= -1;
 		info.iMaxClip	= SAWEDOFF_MAX_CLIP;
 		info.iSlot		= 2;
 		info.iPosition	= 6;
@@ -102,14 +115,12 @@ class weapon_sawedoff : ScriptBasePlayerWeaponEntity
 
 	bool Deploy()
 	{
-		bool bResult;
-		{
-			bResult = self.DefaultDeploy ( self.GetV_Model( TOZ34_V_MODEL ), self.GetP_Model( TOZ34_P_MODEL ), TOZ34_DRAW, "shotgun" );
-			
-			float deployTime = 1.15f;
-			self.m_flTimeWeaponIdle = self.m_flNextPrimaryAttack = self.m_flNextSecondaryAttack = g_Engine.time + deployTime;
-			return bResult;
-		}
+		bool fResult = self.DefaultDeploy( self.GetV_Model( TOZ34_V_MODEL ), self.GetP_Model( TOZ34_P_MODEL ), TOZ34_DRAW, "shotgun" );
+		
+		float deployTime = 1.15f;
+		self.m_flTimeWeaponIdle = self.m_flNextPrimaryAttack = self.m_flNextSecondaryAttack = g_Engine.time + deployTime;
+		
+		return fResult;
 	}
 
 	void Holster( int skipLocal = 0 ) 
@@ -151,7 +162,9 @@ class weapon_sawedoff : ScriptBasePlayerWeaponEntity
 
 	void PrimaryAttack()
 	{
-		if( m_pPlayer.pev.waterlevel == WATERLEVEL_HEAD || self.m_iClip <= 0 )
+		CBasePlayer@ pPlayer = m_pPlayer;
+		
+		if( pPlayer.pev.waterlevel == WATERLEVEL_HEAD || self.m_iClip <= 0 )
 		{
 			self.PlayEmptySound();
 			self.m_flNextPrimaryAttack = WeaponTimeBase() + 0.15f;
@@ -166,31 +179,31 @@ class weapon_sawedoff : ScriptBasePlayerWeaponEntity
 		
 		self.m_flNextPrimaryAttack = WeaponTimeBase() + 0.123;
 		
-		m_pPlayer.m_iWeaponVolume = LOUD_GUN_VOLUME;
-		m_pPlayer.m_iWeaponFlash = NORMAL_GUN_FLASH;
+		pPlayer.m_iWeaponVolume = LOUD_GUN_VOLUME;
+		pPlayer.m_iWeaponFlash = NORMAL_GUN_FLASH;
 		
 		--self.m_iClip;
 		
-		m_pPlayer.pev.effects |= EF_MUZZLEFLASH;
+		pPlayer.pev.effects |= EF_MUZZLEFLASH;
 		//self.pev.effects |= EF_MUZZLEFLASH;
-		m_pPlayer.SetAnimation( PLAYER_ATTACK1 );
+		pPlayer.SetAnimation( PLAYER_ATTACK1 );
 		
 		self.SendWeaponAnim( TOZ34_SHOOT1, 0, 0 );
-		m_pPlayer.SetAnimation( PLAYER_ATTACK1 );
+		pPlayer.SetAnimation( PLAYER_ATTACK1 );
 		
-		g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_AUTO, TOZ34_S_FIRE1, Math.RandomFloat( 0.98, 1.0 ), ATTN_NORM, 0, 85 + Math.RandomLong( 0, 0x1f ) );
+		g_SoundSystem.EmitSoundDyn( pPlayer.edict(), CHAN_AUTO, TOZ34_S_FIRE1, Math.RandomFloat( 0.98, 1.0 ), ATTN_NORM, 0, 85 + Math.RandomLong( 0, 0x1f ) );
 		
-		Vector vecSrc	 = m_pPlayer.GetGunPosition();
-		Vector vecAiming = m_pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES );
+		Vector vecSrc	 = pPlayer.GetGunPosition();
+		Vector vecAiming = pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES );
 
-		m_pPlayer.FireBullets( SAWEDOFF_SINGLE_PELLETCOUNTER, vecSrc, vecAiming, VECTOR_CONE_DM_SAWEDOFFS, 2048, BULLET_PLAYER_BUCKSHOT, 0 );
+		pPlayer.FireBullets( SAWEDOFF_SINGLE_PELLETCOUNTER, vecSrc, vecAiming, VECTOR_CONE_DM_SAWEDOFFS, 2048, BULLET_PLAYER_BUCKSHOT, 0 );
 
-		if( self.m_iClip == 0 && m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 0 )
+		if( self.m_iClip == 0 && pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 0 )
 		{
-			m_pPlayer.SetSuitUpdate( "!HEV_AMO0", false, 0 );
+			pPlayer.SetSuitUpdate( "!HEV_AMO0", false, 0 );
 		}
 
-		m_pPlayer.pev.punchangle.x += Math.RandomLong( -5, -3 );
+		pPlayer.pev.punchangle.x += Math.RandomLong( -5, -3 );
 
 		//self.m_flNextPrimaryAttack = self.m_flNextPrimaryAttack + 0.15f;
 		if( self.m_flNextPrimaryAttack < WeaponTimeBase() )
@@ -201,8 +214,10 @@ class weapon_sawedoff : ScriptBasePlayerWeaponEntity
 
 	void SecondaryAttack()
 	{
+		CBasePlayer@ pPlayer = m_pPlayer;
+		
 		// don't fire underwater
-		if( m_pPlayer.pev.waterlevel == WATERLEVEL_HEAD )
+		if( pPlayer.pev.waterlevel == WATERLEVEL_HEAD )
 		{
 			self.PlayEmptySound();
 			self.m_flNextPrimaryAttack = g_Engine.time + 0.15;
@@ -217,25 +232,25 @@ class weapon_sawedoff : ScriptBasePlayerWeaponEntity
 		}
 		
 		self.SendWeaponAnim( TOZ34_SHOOT1, 0, 0 );
-		m_pPlayer.SetAnimation( PLAYER_ATTACK1 );
+		pPlayer.SetAnimation( PLAYER_ATTACK1 );
 		self.m_iClip -= 2;
 		
-		g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_AUTO, TOZ34_S_DFIRE, Math.RandomFloat( 0.98, 1.0 ), ATTN_NORM, 0, 85 + Math.RandomLong( 0, 0x1f ) );
+		g_SoundSystem.EmitSoundDyn( pPlayer.edict(), CHAN_AUTO, TOZ34_S_DFIRE, Math.RandomFloat( 0.98, 1.0 ), ATTN_NORM, 0, 85 + Math.RandomLong( 0, 0x1f ) );
 
-		m_pPlayer.m_iWeaponVolume = LOUD_GUN_VOLUME;
-		m_pPlayer.m_iWeaponFlash = BRIGHT_GUN_FLASH;
-		m_pPlayer.pev.effects |= EF_MUZZLEFLASH;
+		pPlayer.m_iWeaponVolume = LOUD_GUN_VOLUME;
+		pPlayer.m_iWeaponFlash = BRIGHT_GUN_FLASH;
+		pPlayer.pev.effects |= EF_MUZZLEFLASH;
 		//self.pev.effects |= EF_MUZZLEFLASH;
 
-		Vector vecSrc	 = m_pPlayer.GetGunPosition();
-		Vector vecAiming = m_pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES );
+		Vector vecSrc	 = pPlayer.GetGunPosition();
+		Vector vecAiming = pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES );
 		
-		m_pPlayer.FireBullets( SAWEDOFF_DOUBLE_PELLETCOUNT, vecSrc, vecAiming, VECTOR_CONE_DM_SAWEDOFFD, 2048, BULLET_PLAYER_BUCKSHOT, 0 );
+		pPlayer.FireBullets( SAWEDOFF_DOUBLE_PELLETCOUNT, vecSrc, vecAiming, VECTOR_CONE_DM_SAWEDOFFD, 2048, BULLET_PLAYER_BUCKSHOT, 0 );
 
-		if( self.m_iClip == 0 && m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 0 )
+		if( self.m_iClip == 0 && pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 0 )
 		{
 			// HEV suit - indicate out of ammo condition
-			m_pPlayer.SetSuitUpdate( "!HEV_AMO0", false, 0 );
+			pPlayer.SetSuitUpdate( "!HEV_AMO0", false, 0 );
 		}
 
 		self.m_flNextPrimaryAttack = g_Engine.time + 0.60;
@@ -246,31 +261,22 @@ class weapon_sawedoff : ScriptBasePlayerWeaponEntity
 		else
 			self.m_flTimeWeaponIdle = g_Engine.time + 0.60;
 			
-		m_pPlayer.pev.punchangle.x = -10.0;
+		pPlayer.pev.punchangle.x = -10.0;
 		
 		CreatePelletDecals( vecSrc, vecAiming, VECTOR_CONE_DM_SAWEDOFFD, SAWEDOFF_DOUBLE_PELLETCOUNT );
 	}
 
 	void Reload()
 	{
-		if( self.m_iClip < SAWEDOFF_MAX_CLIP )
-		{
+		if ( self.m_iClip < SAWEDOFF_MAX_CLIP )
 			BaseClass.Reload();
-		}
+			
 		m_iShotsFired = 0;
 
-		( self.m_iClip == 1 || m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 1 ) ? self.DefaultReload( SAWEDOFF_MAX_CLIP, TOZ34_RELOAD_SINGLE, 3.62, 0 ) : 
-																						self.DefaultReload( SAWEDOFF_MAX_CLIP, TOZ34_RELOAD, 3.02, 0 );
-
-		/*if( self.m_iClip == 1 || m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 1)
-		{
-			
-		}
-		else if( self.m_iClip < 1 )
-		{
-			m_iShotsFired = 0;
+		if ( self.m_iClip == 1 || m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 1 )
+			self.DefaultReload( SAWEDOFF_MAX_CLIP, TOZ34_RELOAD_SINGLE, 3.62, 0 );
+		else
 			self.DefaultReload( SAWEDOFF_MAX_CLIP, TOZ34_RELOAD, 3.02, 0 );
-		}*/
 	}
 
 	void WeaponIdle()
@@ -295,17 +301,14 @@ class weapon_sawedoff : ScriptBasePlayerWeaponEntity
 			return;
 		
 		self.SendWeaponAnim( TOZ34_IDLE, 0, 0 );
-		self.m_flTimeWeaponIdle = WeaponTimeBase() + g_PlayerFuncs.SharedRandomFloat( m_pPlayer.random_seed,  5, 7 );
+		self.m_flTimeWeaponIdle = WeaponTimeBase() + g_PlayerFuncs.SharedRandomFloat( m_pPlayer.random_seed, 5, 7 );
 	}
 }
 
-string SAWEDOFFName()
+void Register()
 {
-	return "weapon_sawedoff";
+	g_CustomEntityFuncs.RegisterCustomEntity( "THWeaponSawedoff::CSawedoff", WEAPON_NAME );
+	g_ItemRegistry.RegisterWeapon( WEAPON_NAME, "hunger/weapons", AMMO_TYPE, "", AMMO_DROP_NAME, "" );
 }
 
-void RegisterSAWEDOFF()
-{
-	g_CustomEntityFuncs.RegisterCustomEntity( SAWEDOFFName(), SAWEDOFFName() );
-	g_ItemRegistry.RegisterWeapon( SAWEDOFFName(), "hunger/weapons", "buckshot" );
-}
+} // end of namespace

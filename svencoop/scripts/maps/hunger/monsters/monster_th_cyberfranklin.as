@@ -4,19 +4,19 @@
 
 #include "franklinhornet"
 
-namespace CyberFranklin
+namespace THMonsterCyberFranklin
 {
 
-const int		CYBERFRANKLIN_AE_RELOAD			= ( 2 );
-const int		CYBERFRANKLIN_AE_KICK			= ( 3 );
-const int		CYBERFRANKLIN_AE_BURST1			= ( 4 );
-const int		CYBERFRANKLIN_AE_BURST2			= ( 5 ); 
-const int		CYBERFRANKLIN_AE_BURST3			= ( 6 );
-const int		CYBERFRANKLIN_AE_GREN_TOSS		= ( 7 );
-const int		CYBERFRANKLIN_AE_GREN_LAUNCH	= ( 8 );
-const int		CYBERFRANKLIN_AE_GREN_DROP		= ( 9 );
-const int		CYBERFRANKLIN_AE_CAUGHT_ENEMY	= ( 10 ); // grunt established sight with an enemy (player only) that had previously eluded the squad.
-const int		CYBERFRANKLIN_AE_DROP_GUN		= ( 11 ); // grunt (probably dead) is dropping his mp5.
+const int		CYBERFRANKLIN_AE_RELOAD			= 2;
+const int		CYBERFRANKLIN_AE_KICK			= 3;
+const int		CYBERFRANKLIN_AE_BURST1			= 4;
+const int		CYBERFRANKLIN_AE_BURST2			= 5; 
+const int		CYBERFRANKLIN_AE_BURST3			= 6;
+const int		CYBERFRANKLIN_AE_GREN_TOSS		= 7;
+const int		CYBERFRANKLIN_AE_GREN_LAUNCH	= 8;
+const int		CYBERFRANKLIN_AE_GREN_DROP		= 9;
+const int		CYBERFRANKLIN_AE_CAUGHT_ENEMY	= 10; // grunt established sight with an enemy (player only) that had previously eluded the squad.
+const int		CYBERFRANKLIN_AE_DROP_GUN		= 11; // grunt (probably dead) is dropping his mp5.
 
 const int		CYBERFRANKLIN_HEALTH_BASE		= 400;
 const int		CYBERFRANKLIN_HEALTH_PER_PLAYER_INC = 110;
@@ -26,7 +26,7 @@ const int		CYBERFRANKLIN_DAMAGE_KICK		= 25;
 
 const string	CYBERFRANKLIN_MODEL				= "models/hunger/franklin2.mdl";
 
-class monster_th_cyberfranklin : ScriptBaseMonsterEntity
+class CCyberFranklin : ScriptBaseMonsterEntity
 {
 	private float	m_painTime;
 	private int		m_head;
@@ -36,7 +36,8 @@ class monster_th_cyberfranklin : ScriptBaseMonsterEntity
 	
 	private int		m_iAgruntMuzzleFlash;
 	
-	monster_th_cyberfranklin( void )
+	// Constructor
+	CCyberFranklin()
 	{
 		@this.m_Schedules = @monster_th_cyberfranklin_schedules;
 	}
@@ -546,11 +547,11 @@ void InitSchedules()
 void Register()
 {
 	// Register Franklin's custom hornet
-	FranklinHornet::Register();
+	THMonsterFranklinHornet::Register();
 	// Initialize schedules, so the main script does not have to take care of this
 	InitSchedules();
 	// Finally register Franklin's entity
-	g_CustomEntityFuncs.RegisterCustomEntity( "CyberFranklin::monster_th_cyberfranklin", "monster_th_cyberfranklin" );
+	g_CustomEntityFuncs.RegisterCustomEntity( "THMonsterCyberFranklin::CCyberFranklin", "monster_th_cyberfranklin" );
 }
 
 } // end of namespace

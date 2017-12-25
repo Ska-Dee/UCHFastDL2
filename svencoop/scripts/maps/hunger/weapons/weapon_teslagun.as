@@ -1,4 +1,19 @@
-//Author: KernCore
+// Author: KernCore
+// Modified by: GeckonCZ
+
+#include "baseweapon"
+
+namespace THWeaponTeslagun
+{
+
+const string WEAPON_NAME			= "weapon_teslagun";
+const string AMMO_DROP_NAME			= ""; // "ammo_gaussclip";
+const string AMMO_TYPE				= "uranium"; // GeckoN: TODO: Custom ammo?
+
+const int TESLA_MAX_CARRY   		= 100;
+const int TESLA_DEFAULT_GIVE 		= 100;
+const int TESLA_AMMO_DROP	 		= 0; // 20;
+const int TESLA_WEIGHT      		= 15;
 
 enum TESLAGUNAnimation_e
 {
@@ -11,17 +26,17 @@ enum TESLAGUNAnimation_e
 	TESLAGUN_SPINDOWN
 };
 
-const int TESLA_MAX_CARRY   	= 100;
-const int TESLA_DEFAULT_GIVE 	= 100;
-const int TESLA_WEIGHT      	= 15;
-
-class weapon_teslagun : ScriptBasePlayerWeaponEntity
+class CTeslagun : CBaseCustomWeapon
 {
-	private CBasePlayer@ m_pPlayer = null;
-	
 	string TG_W_MODEL = "models/hunger/weapons/tesla/w_tesla.mdl";
 	string TG_V_MODEL = "models/hunger/weapons/tesla/v_tesla.mdl";
 	string TG_P_MODEL = "models/hunger/weapons/tesla/p_tesla.mdl";
+
+	string TG_S_FIRE1 = "hunger/weapons/tesla/tesla_fire.ogg";
+	string TG_S_FIRE2 = "hunger/weapons/tesla/tesla_bigrelease.ogg";
+	string TG_S_CHARGE1 = "hunger/weapons/tesla/tesla_bigcharge.ogg";
+	string TG_S_CHARGE2 = "hunger/weapons/tesla/tesla_chargehold.ogg";
+	string TG_S_SPINUP1 = "hunger/weapons/tesla/tesla_spinup.ogg";
 
 	private float m_flAmmoLoss;
 	private float m_flNextAnim;
@@ -38,14 +53,7 @@ class weapon_teslagun : ScriptBasePlayerWeaponEntity
 	CBeam@ pBeam;
 	CBeam@ pBeam2;
 	CBeam@ pBeam3;
-
-	string TG_S_FIRE1 = "hunger/weapons/tesla/tesla_fire.ogg";
-	string TG_S_FIRE2 = "hunger/weapons/tesla/tesla_bigrelease.ogg";
-	string TG_S_CHARGE1 = "hunger/weapons/tesla/tesla_bigcharge.ogg";
-	string TG_S_CHARGE2 = "hunger/weapons/tesla/tesla_chargehold.ogg";
-	string TG_S_SPINUP1 = "hunger/weapons/tesla/tesla_spinup.ogg";
-
-
+	
 	void Spawn()
 	{
 		Precache();
@@ -61,7 +69,7 @@ class weapon_teslagun : ScriptBasePlayerWeaponEntity
 		RemoveLightning2();
 		RemoveLightning3();
 		
-		self.FallInit();
+		BaseClass.Spawn();
 	}
 
 	void Precache()
@@ -83,7 +91,9 @@ class weapon_teslagun : ScriptBasePlayerWeaponEntity
 	bool GetItemInfo( ItemInfo& out info )
 	{
 		info.iMaxAmmo1	= TESLA_MAX_CARRY;
+		info.iAmmo1Drop	= TESLA_AMMO_DROP;
 		info.iMaxAmmo2	= -1;
+		info.iAmmo2Drop	= -1;
 		info.iMaxClip	= WEAPON_NOCLIP;
 		info.iSlot		= 3;
 		info.iPosition	= 5;
@@ -128,19 +138,17 @@ class weapon_teslagun : ScriptBasePlayerWeaponEntity
 	
 	bool Deploy()
 	{
-		bool bResult;
-		{
-			bResult = self.DefaultDeploy ( self.GetV_Model( TG_V_MODEL ), self.GetP_Model( TG_P_MODEL ), TESLAGUN_DRAW, "gauss" );
+		bool fResult = self.DefaultDeploy ( self.GetV_Model( TG_V_MODEL ), self.GetP_Model( TG_P_MODEL ), TESLAGUN_DRAW, "gauss" );
 		
-			float deployTime = 1.0;
-			m_bShooting = false;
-			mWasShooting = false;
-			RemoveLightning();
-			RemoveLightning2();
-			RemoveLightning3();
-			m_pPlayer.m_flNextAttack = deployTime;
-			return bResult;
-		}
+		float deployTime = 1.0;
+		m_bShooting = false;
+		mWasShooting = false;
+		RemoveLightning();
+		RemoveLightning2();
+		RemoveLightning3();
+		m_pPlayer.m_flNextAttack = deployTime;
+		
+		return fResult;
 	}
 
 	void Holster( int skipLocal = 0 ) 
@@ -156,11 +164,13 @@ class weapon_teslagun : ScriptBasePlayerWeaponEntity
 
 	void PrimaryAttack()
 	{
-		Vector vecSrc	 = m_pPlayer.GetGunPosition();
-		Vector vecAiming = m_pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES );
-		int iAmmo = m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType );
+		CBasePlayer@ pPlayer = m_pPlayer;
+		
+		Vector vecSrc	 = pPlayer.GetGunPosition();
+		Vector vecAiming = pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES );
+		int iAmmo = pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType );
 
-		if( m_pPlayer.pev.waterlevel == WATERLEVEL_HEAD || iAmmo <= 0 )
+		if( pPlayer.pev.waterlevel == WATERLEVEL_HEAD || iAmmo <= 0 )
 		{
 			self.PlayEmptySound();
 			self.m_flNextPrimaryAttack = WeaponTimeBase() + 0.75f;
@@ -173,7 +183,7 @@ class weapon_teslagun : ScriptBasePlayerWeaponEntity
 		{
 			//Weapon is Spining up
 			self.SendWeaponAnim( TESLAGUN_SPINUP, 0, 0 );
-			g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_AUTO, TG_S_SPINUP1, 0.95, ATTN_NORM, 0, 100 );
+			g_SoundSystem.EmitSoundDyn( pPlayer.edict(), CHAN_AUTO, TG_S_SPINUP1, 0.95, ATTN_NORM, 0, 100 );
 			m_flNextAnim = g_Engine.time + 0.6;
 			mCanFire = false;
 			m_bShooting = true;
@@ -183,7 +193,7 @@ class weapon_teslagun : ScriptBasePlayerWeaponEntity
 		{
 			//After spining, attack
 			self.SendWeaponAnim( TESLAGUN_ATTACK, 0, 0 );
-			g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_AUTO, TG_S_FIRE1, 0.95, ATTN_NORM, 0, 100 );
+			g_SoundSystem.EmitSoundDyn( pPlayer.edict(), CHAN_AUTO, TG_S_FIRE1, 0.95, ATTN_NORM, 0, 100 );
 			m_flNextAnim = g_Engine.time + 0.2;
 			mCanFire = true;
 			m_bShooting = true;
@@ -197,11 +207,11 @@ class weapon_teslagun : ScriptBasePlayerWeaponEntity
 			if( mCanFire == true )
 			{
 				//fire only when attacking
-				m_pPlayer.pev.punchangle.x = -1.3;
+				pPlayer.pev.punchangle.x = -1.3;
 				UpdateLightning( vecSrc, vecAiming, Math.RandomLong( 2, 6 ) );
 				UpdateLightning2( vecSrc, vecAiming, 2 );
 				UpdateLightning3( vecSrc, vecAiming, 2 );
-				THDynamicLight( m_pPlayer.pev.origin, 10, 255, 255, 255, 1, 10 );
+				DynamicLight( pPlayer.pev.origin, 10, 255, 255, 255, 1, 10 );
 				m_flNextBeamTime = g_Engine.time + 0.035;
 			}
 		}
@@ -216,22 +226,24 @@ class weapon_teslagun : ScriptBasePlayerWeaponEntity
 			}
 		}
 		
-		m_pPlayer.m_iWeaponVolume = NORMAL_GUN_VOLUME;
-		m_pPlayer.m_iWeaponFlash = BRIGHT_GUN_FLASH;
+		pPlayer.m_iWeaponVolume = NORMAL_GUN_VOLUME;
+		pPlayer.m_iWeaponFlash = BRIGHT_GUN_FLASH;
 	
 		if( iAmmo <= 0 )
 		{
-			m_pPlayer.SetSuitUpdate( "!HEV_AMO0", false, 0 );
+			pPlayer.SetSuitUpdate( "!HEV_AMO0", false, 0 );
 		}
 
-		m_pPlayer.m_rgAmmo(self.m_iPrimaryAmmoType, iAmmo);
+		pPlayer.m_rgAmmo(self.m_iPrimaryAmmoType, iAmmo);
 	}
 
 	void SecondaryAttack()
 	{
+		CBasePlayer@ pPlayer = m_pPlayer;
+		
 		// don't fire underwater
-		int iAmmo = m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType );
-		if( m_pPlayer.pev.waterlevel == WATERLEVEL_HEAD )
+		int iAmmo = pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType );
+		if( pPlayer.pev.waterlevel == WATERLEVEL_HEAD )
 		{
 			self.PlayEmptySound( );
 			self.m_flNextSecondaryAttack = WeaponTimeBase() + 0.55;
@@ -254,7 +266,7 @@ class weapon_teslagun : ScriptBasePlayerWeaponEntity
 			self.m_flTimeWeaponIdle = WeaponTimeBase() + 0.25;
 			m_flStartCharge = WeaponTimeBase();
 			m_flAmmoStartCharge = WeaponTimeBase() + 3.0;
-			g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_WEAPON, TG_S_CHARGE1, 1.0, ATTN_NORM, 0, 100 );
+			g_SoundSystem.EmitSoundDyn( pPlayer.edict(), CHAN_WEAPON, TG_S_CHARGE1, 1.0, ATTN_NORM, 0, 100 );
 			self.SendWeaponAnim( TESLAGUN_CHARGE, 0, 0 );
 			
 			if ( iAmmo <= 0 )
@@ -309,34 +321,36 @@ class weapon_teslagun : ScriptBasePlayerWeaponEntity
 				return;
 			}
 		}
-		m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType, iAmmo );
+		pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType, iAmmo );
 		self.m_flNextSecondaryAttack = self.m_flNextPrimaryAttack = WeaponTimeBase() + 0.2;
 	}
 
 	//Nero
 	void StartFire()
 	{
-		Vector vecSrc	 = m_pPlayer.GetGunPosition();
-		Vector vecAiming = m_pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES );
+		CBasePlayer@ pPlayer = m_pPlayer;
+		
+		Vector vecSrc	 = pPlayer.GetGunPosition();
+		Vector vecAiming = pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES );
 
-		m_pPlayer.SetAnimation( PLAYER_ATTACK1 );
+		pPlayer.SetAnimation( PLAYER_ATTACK1 );
 		
-		g_SoundSystem.StopSound( m_pPlayer.edict(), CHAN_WEAPON, TG_S_CHARGE1 );
+		g_SoundSystem.StopSound( pPlayer.edict(), CHAN_WEAPON, TG_S_CHARGE1 );
 		
-		Math.MakeVectors( m_pPlayer.pev.v_angle + m_pPlayer.pev.punchangle );
+		Math.MakeVectors( pPlayer.pev.v_angle + pPlayer.pev.punchangle );
 		
 		self.SendWeaponAnim( TESLAGUN_ATTACK_BIG, 0, 0 );
 
 		UpdateLightning( vecSrc, vecAiming, 5 * m_iWastedAmmo );
 		UpdateLightning2( vecSrc, vecAiming, 5 * m_iWastedAmmo );
 		UpdateLightning3( vecSrc, vecAiming, 5 * m_iWastedAmmo );
-		THDynamicLight( m_pPlayer.pev.origin, 10, 255, 255, 255, 1, 10 );
+		DynamicLight( pPlayer.pev.origin, 10, 255, 255, 255, 1, 10 );
 		
-		g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_AUTO, TG_S_FIRE2, 1.0, ATTN_NORM, 0, 100 );
+		g_SoundSystem.EmitSoundDyn( pPlayer.edict(), CHAN_AUTO, TG_S_FIRE2, 1.0, ATTN_NORM, 0, 100 );
 		
 		self.m_flNextSecondaryAttack = WeaponTimeBase() + 2.0;
 		self.m_flNextPrimaryAttack = WeaponTimeBase() + 1.0;
-		m_pPlayer.pev.punchangle.x -= 2 + m_iWastedAmmo;
+		pPlayer.pev.punchangle.x -= 2 + m_iWastedAmmo;
 		m_iWastedAmmo = 0;
 		m_fInAttack = 0;
 	}
@@ -607,13 +621,10 @@ class weapon_teslagun : ScriptBasePlayerWeaponEntity
 	}
 }
 
-string TESLAGUNName()
+void Register()
 {
-	return "weapon_teslagun";
+	g_CustomEntityFuncs.RegisterCustomEntity( "THWeaponTeslagun::CTeslagun", WEAPON_NAME );
+	g_ItemRegistry.RegisterWeapon( WEAPON_NAME, "hunger/weapons", AMMO_TYPE, "", AMMO_DROP_NAME, "" );
 }
 
-void RegisterTESLAGUN()
-{
-	g_CustomEntityFuncs.RegisterCustomEntity( TESLAGUNName(), TESLAGUNName() );
-	g_ItemRegistry.RegisterWeapon( TESLAGUNName(), "hunger/weapons", "uranium" );
-}
+} // end of namespace

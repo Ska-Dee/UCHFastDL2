@@ -1,4 +1,19 @@
-//Author: KernCore
+// Author: KernCore
+// Modified by: GeckonCZ
+
+#include "baseweapon"
+
+namespace THWeaponM14
+{
+
+const string WEAPON_NAME			= "weapon_m14";
+const string AMMO_DROP_NAME			= "ammo_762";
+const string AMMO_TYPE				= "m40a1";
+
+const int M14_MAX_CARRY 			= 15;
+const int M14_DEFAULT_GIVE			= 10;
+const int M14_MAX_CLIP  			= 10;
+const int M14_WEIGHT    			= 30;
 
 enum TheyHungerM14Animation_e
 {
@@ -12,27 +27,31 @@ enum TheyHungerM14Animation_e
 	M14_DEPLOY
 };
 
-const int M14_MAX_CARRY 	= 15;
-const int M14_DEFAULT_GIVE	= 10;
-const int M14_MAX_CLIP  	= 10;
-const int M14_WEIGHT    	= 30;
-
-class weapon_m14 : ScriptBasePlayerWeaponEntity
+enum ZOOM_MODE
 {
-	private CBasePlayer@ m_pPlayer = null;
-	
-	int g_iCurrentMode;
-	int m_iShotsFired;
+	ZOOM_NOSCOPE = 0,
+	ZOOM_SCOPED,
+	ZOOM_SCOPED_2X
+};
 
+class CM14 : CBaseCustomWeapon
+{
 	string M14_V_MODEL = "models/hunger/weapons/m14/v_m14.mdl";
 	string M14_W_MODEL = "models/hunger/weapons/m14/w_m14.mdl";
 	string M14_P_MODEL = "models/hunger/weapons/m14/p_m14.mdl";
-
-	int m_iShell;
-
+	
 	string M14_S_FIRE1 = "hunger/weapons/m14/m14_shot1.wav";
 	string M14_S_FIRE2 = "hunger/weapons/m14/m14_shot2.wav";
 	string M14_S_ZOOM = "hunger/weapons/m14/m14_zoom.wav";
+
+	int m_iCurrentMode;
+	int m_iShotsFired;
+	
+	int m_iShell;
+	
+	// GeckoN: Movement speed modifier
+	int m_iSpeedType;
+	float m_flSpeedModifier;
 
 	void Spawn()
 	{
@@ -40,10 +59,10 @@ class weapon_m14 : ScriptBasePlayerWeaponEntity
 		g_EntityFuncs.SetModel( self, M14_W_MODEL );
 		
 		self.m_iDefaultAmmo = M14_DEFAULT_GIVE;
-		g_iCurrentMode = TH_MODE_NOSCOPE;
+		m_iCurrentMode = ZOOM_NOSCOPE;
 		m_iShotsFired = 0;
 		
-		self.FallInit();
+		BaseClass.Spawn();
 	}
 	
 	void Precache()
@@ -66,7 +85,9 @@ class weapon_m14 : ScriptBasePlayerWeaponEntity
 	bool GetItemInfo( ItemInfo& out info )
 	{
 		info.iMaxAmmo1	= M14_MAX_CARRY;
+		info.iAmmo1Drop	= M14_MAX_CLIP;
 		info.iMaxAmmo2	= -1;
+		info.iAmmo2Drop	= -1;
 		info.iMaxClip	= M14_MAX_CLIP;
 		info.iSlot		= 5;
 		info.iPosition	= 9;
@@ -86,8 +107,44 @@ class weapon_m14 : ScriptBasePlayerWeaponEntity
 		NetworkMessage hunger5( MSG_ONE, NetworkMessages::WeapPickup, pPlayer.edict() );
 		hunger5.WriteLong( self.m_iId );
 		hunger5.End();
+		
+		// GeckoN: Movement speed modifier
+		m_iSpeedType = ZOOM_NOSCOPE;
+		m_flSpeedModifier = 0.0f;
 
 		return true;
+	}
+	
+	// GeckoN: Movement speed modifier
+	void SetPlayerSpeed()
+	{
+		const int iType = m_iCurrentMode;
+		
+		// Do we even need to change the speed?
+		if( iType == m_iSpeedType )
+			return;
+
+		// Remove previous speed reduction we applied
+		m_pPlayer.m_flEffectSpeed += m_flSpeedModifier;
+
+		switch( iType )
+		{
+		case ZOOM_SCOPED:
+			m_flSpeedModifier = 0.45f; // Scoped, 45% speed reduction
+			break;
+		case ZOOM_SCOPED_2X:
+			m_flSpeedModifier = 0.65f; // 2x scoped, 65% speed reduction
+			break;
+		case ZOOM_NOSCOPE:
+		default:
+			m_flSpeedModifier = 0.0f; // Not holding or dropping weapon
+			break;
+		}
+		
+		m_pPlayer.m_flEffectSpeed -= m_flSpeedModifier;
+
+		m_pPlayer.ApplyEffects();
+		m_iSpeedType = iType;
 	}
 	
 	bool PlayEmptySound()
@@ -111,9 +168,9 @@ class weapon_m14 : ScriptBasePlayerWeaponEntity
 			SecondaryAttack();
 		}
 
-		g_iCurrentMode = TH_MODE_NOSCOPE;
+		m_iCurrentMode = ZOOM_NOSCOPE;
 		ToggleZoom( 0 );
-		m_pPlayer.pev.maxspeed = 0;
+		SetPlayerSpeed();
 		m_pPlayer.m_szAnimExtension = "sniper";
 		
 		BaseClass.Holster( skipLocal );
@@ -143,21 +200,21 @@ class weapon_m14 : ScriptBasePlayerWeaponEntity
 	
 	bool Deploy()
 	{
-		bool bResult;
-		{
-			bResult = self.DefaultDeploy ( self.GetV_Model( M14_V_MODEL ), self.GetP_Model( M14_P_MODEL ), M14_DEPLOY, "sniper" );
+		bool fResult = self.DefaultDeploy ( self.GetV_Model( M14_V_MODEL ), self.GetP_Model( M14_P_MODEL ), M14_DEPLOY, "sniper" );
 		
-			g_iCurrentMode = TH_MODE_NOSCOPE;
-			ToggleZoom( 0 );
-			float deployTime = 0.7;
-			self.m_flTimeWeaponIdle = self.m_flNextPrimaryAttack = self.m_flNextSecondaryAttack = g_Engine.time + deployTime;
-			return bResult;
-		}
+		m_iCurrentMode = ZOOM_NOSCOPE;
+		ToggleZoom( 0 );
+		float deployTime = 0.7;
+		self.m_flTimeWeaponIdle = self.m_flNextPrimaryAttack = self.m_flNextSecondaryAttack = g_Engine.time + deployTime;
+		
+		return fResult;
 	}
 
 	void PrimaryAttack()
 	{
-		if( m_pPlayer.pev.waterlevel == WATERLEVEL_HEAD || self.m_iClip <= 0 )
+		CBasePlayer@ pPlayer = m_pPlayer;
+		
+		if( pPlayer.pev.waterlevel == WATERLEVEL_HEAD || self.m_iClip <= 0 )
 		{
 			self.PlayEmptySound();
 			self.m_flNextPrimaryAttack = WeaponTimeBase() + 0.15f;
@@ -172,16 +229,16 @@ class weapon_m14 : ScriptBasePlayerWeaponEntity
 		
 		--self.m_iClip;
 		
-		m_pPlayer.pev.effects |= EF_MUZZLEFLASH;
-		m_pPlayer.m_iWeaponVolume = LOUD_GUN_VOLUME;
-		m_pPlayer.m_iWeaponFlash = BRIGHT_GUN_FLASH;
-		m_pPlayer.SetAnimation( PLAYER_ATTACK1 );
+		pPlayer.pev.effects |= EF_MUZZLEFLASH;
+		pPlayer.m_iWeaponVolume = LOUD_GUN_VOLUME;
+		pPlayer.m_iWeaponFlash = BRIGHT_GUN_FLASH;
+		pPlayer.SetAnimation( PLAYER_ATTACK1 );
 		
 		self.m_flNextSecondaryAttack = WeaponTimeBase() + 0.25f;
 		if( self.m_iClip == 0 )
 		{
 			self.SendWeaponAnim( M14_SHOOT_LAST, 0, 0 );
-			m_pPlayer.m_flNextAttack = 0.3;
+			pPlayer.m_flNextAttack = 0.3;
 		}
 		else
 		{
@@ -191,27 +248,27 @@ class weapon_m14 : ScriptBasePlayerWeaponEntity
 		
 		switch( Math.RandomLong( 0, 1 ) )
 		{
-			case 0: g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_AUTO, M14_S_FIRE1, Math.RandomFloat( 0.95, 1.0 ), ATTN_NORM, 0, 93 + Math.RandomLong( 0, 0xf ) ); break;
-			case 1: g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_AUTO, M14_S_FIRE2, Math.RandomFloat( 0.95, 1.0 ), ATTN_NORM, 0, 93 + Math.RandomLong( 0, 0xf ) ); break;
+			case 0: g_SoundSystem.EmitSoundDyn( pPlayer.edict(), CHAN_AUTO, M14_S_FIRE1, Math.RandomFloat( 0.95, 1.0 ), ATTN_NORM, 0, 93 + Math.RandomLong( 0, 0xf ) ); break;
+			case 1: g_SoundSystem.EmitSoundDyn( pPlayer.edict(), CHAN_AUTO, M14_S_FIRE2, Math.RandomFloat( 0.95, 1.0 ), ATTN_NORM, 0, 93 + Math.RandomLong( 0, 0xf ) ); break;
 		}
 		
-		Vector vecSrc	 = m_pPlayer.GetGunPosition();
-		Vector vecAiming = m_pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES );
+		Vector vecSrc	 = pPlayer.GetGunPosition();
+		Vector vecAiming = pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES );
 
 		int m_iBulletDamage = 55;
 		
-		if ( g_iCurrentMode == TH_MODE_NOSCOPE )
+		if ( m_iCurrentMode == ZOOM_NOSCOPE )
 		{
-			m_pPlayer.FireBullets( 1, vecSrc, vecAiming, VECTOR_CONE_5DEGREES, 8192, BULLET_PLAYER_CUSTOMDAMAGE, 4, m_iBulletDamage );
+			pPlayer.FireBullets( 1, vecSrc, vecAiming, VECTOR_CONE_5DEGREES, 8192, BULLET_PLAYER_CUSTOMDAMAGE, 4, m_iBulletDamage );
 		}
 		else
 		{
-			m_pPlayer.FireBullets( 1, vecSrc, vecAiming, VECTOR_CONE_1DEGREES, 8192, BULLET_PLAYER_CUSTOMDAMAGE, 4, m_iBulletDamage );
+			pPlayer.FireBullets( 1, vecSrc, vecAiming, VECTOR_CONE_1DEGREES, 8192, BULLET_PLAYER_CUSTOMDAMAGE, 4, m_iBulletDamage );
 		}
 
-		if( self.m_iClip == 0 && m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 0 )
+		if( self.m_iClip == 0 && pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 0 )
 		{
-			m_pPlayer.SetSuitUpdate( "!HEV_AMO0", false, 0 );
+			pPlayer.SetSuitUpdate( "!HEV_AMO0", false, 0 );
 		}
 		
 		//self.m_flNextPrimaryAttack = self.m_flNextPrimaryAttack + 0.15f;
@@ -230,28 +287,28 @@ class weapon_m14 : ScriptBasePlayerWeaponEntity
 		
 		Vector vecDir;
 		
-		if ( g_iCurrentMode == TH_MODE_NOSCOPE )
+		if ( m_iCurrentMode == ZOOM_NOSCOPE )
 		{
 			vecDir = vecAiming + x * VECTOR_CONE_5DEGREES.x * g_Engine.v_right + y * VECTOR_CONE_5DEGREES.y * g_Engine.v_up;
-			m_pPlayer.pev.punchangle.x += -3;
+			pPlayer.pev.punchangle.x += -3;
 		}
 		else
 		{
 			vecDir = vecAiming + x * VECTOR_CONE_1DEGREES.x * g_Engine.v_right + y * VECTOR_CONE_1DEGREES.y * g_Engine.v_up;
-			m_pPlayer.pev.punchangle.x += -2;
+			pPlayer.pev.punchangle.x += -2;
 		}
 
 		Vector vecEnd	= vecSrc + vecDir * 4096;
 
-		g_Utility.TraceLine( vecSrc, vecEnd, dont_ignore_monsters, m_pPlayer.edict(), tr );
+		g_Utility.TraceLine( vecSrc, vecEnd, dont_ignore_monsters, pPlayer.edict(), tr );
 
 		Vector vecShellVelocity, vecShellOrigin;
 		
-		THGetDefaultShellInfo( m_pPlayer, vecShellVelocity, vecShellOrigin, 14, 7, -7 );
+		GetDefaultShellInfo( pPlayer, vecShellVelocity, vecShellOrigin, 14, 7, -7 );
 		
 		vecShellVelocity.y *= 1;
 		
-		g_EntityFuncs.EjectBrass( vecShellOrigin, vecShellVelocity, m_pPlayer.pev.angles[ 1 ], m_iShell, TE_BOUNCE_SHELL );
+		g_EntityFuncs.EjectBrass( vecShellOrigin, vecShellVelocity, pPlayer.pev.angles[ 1 ], m_iShell, TE_BOUNCE_SHELL );
 		
 		if( tr.flFraction < 1.0 )
 		{
@@ -269,37 +326,39 @@ class weapon_m14 : ScriptBasePlayerWeaponEntity
 
 	void SecondaryAttack()
 	{
+		CBasePlayer@ pPlayer = m_pPlayer;
+		
 		self.m_flNextSecondaryAttack = self.m_flNextPrimaryAttack = WeaponTimeBase() + 0.25f;
-		switch ( g_iCurrentMode )
+		switch ( m_iCurrentMode )
 		{
-			case TH_MODE_NOSCOPE:
+			case ZOOM_NOSCOPE:
 			{
-				g_iCurrentMode = TH_MODE_SCOPED;
+				m_iCurrentMode = ZOOM_SCOPED;
 				ToggleZoom( 45 );
-				m_pPlayer.pev.maxspeed = 150;
-				m_pPlayer.m_szAnimExtension = "sniperscope";
+				SetPlayerSpeed();
+				pPlayer.m_szAnimExtension = "sniperscope";
 				break;
 			}
 		
-			case TH_MODE_SCOPED:
+			case ZOOM_SCOPED:
 			{
-				g_iCurrentMode = TH_MODE_2XSCOPED;
+				m_iCurrentMode = ZOOM_SCOPED_2X;
 				ToggleZoom( 20 );
-				m_pPlayer.pev.maxspeed = 150;
-				m_pPlayer.m_szAnimExtension = "sniperscope";
+				SetPlayerSpeed();
+				pPlayer.m_szAnimExtension = "sniperscope";
 				break;
 			}
 			
-			case TH_MODE_2XSCOPED:
+			case ZOOM_SCOPED_2X:
 			{
-				g_iCurrentMode = TH_MODE_NOSCOPE;
+				m_iCurrentMode = ZOOM_NOSCOPE;
 				ToggleZoom( 0 );
-				m_pPlayer.pev.maxspeed = 0;
-				m_pPlayer.m_szAnimExtension = "sniper";
+				SetPlayerSpeed();
+				pPlayer.m_szAnimExtension = "sniper";
 				break;
 			}
 		}
-		g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_AUTO, M14_S_ZOOM, 0.9, ATTN_NORM, 0, PITCH_NORM );
+		g_SoundSystem.EmitSoundDyn( pPlayer.edict(), CHAN_AUTO, M14_S_ZOOM, 0.9, ATTN_NORM, 0, PITCH_NORM );
 	}
 	
 	void Reload()
@@ -308,9 +367,9 @@ class weapon_m14 : ScriptBasePlayerWeaponEntity
 		if( self.m_iClip < M14_MAX_CLIP && m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) > 0 )
 		{
 			BaseClass.Reload();
-			g_iCurrentMode = TH_MODE_NOSCOPE;
+			m_iCurrentMode = ZOOM_NOSCOPE;
 			m_iShotsFired = 0;
-			m_pPlayer.pev.maxspeed = 0;
+			SetPlayerSpeed();
 			ToggleZoom( 0 );
 		}
 
@@ -353,17 +412,14 @@ class weapon_m14 : ScriptBasePlayerWeaponEntity
 
 		self.SendWeaponAnim( iAnim, 0, 0 );
 
-		self.m_flTimeWeaponIdle = WeaponTimeBase() + g_PlayerFuncs.SharedRandomFloat( m_pPlayer.random_seed,  5, 7 );
+		self.m_flTimeWeaponIdle = WeaponTimeBase() + g_PlayerFuncs.SharedRandomFloat( m_pPlayer.random_seed, 5, 7 );
 	}
 }
 
-string GetM14Name()
+void Register()
 {
-	return "weapon_m14";
+	g_CustomEntityFuncs.RegisterCustomEntity( "THWeaponM14::CM14", WEAPON_NAME );
+	g_ItemRegistry.RegisterWeapon( WEAPON_NAME, "hunger/weapons", AMMO_TYPE, "", AMMO_DROP_NAME, "" );
 }
 
-void RegisterM14()
-{
-	g_CustomEntityFuncs.RegisterCustomEntity( GetM14Name(), GetM14Name() );
-	g_ItemRegistry.RegisterWeapon( GetM14Name(), "hunger/weapons", "m40a1" );
-}
+} // end of namespace

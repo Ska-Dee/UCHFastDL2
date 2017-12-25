@@ -1,3 +1,20 @@
+// Author: KernCore
+// Modified by: GeckonCZ
+
+#include "baseweapon"
+
+namespace THWeaponGreasegun
+{
+
+const string WEAPON_NAME			= "weapon_greasegun";
+const string AMMO_DROP_NAME			= "ammo_greasegun";
+const string AMMO_TYPE				= "9mm";
+
+const int GREASEGUN_MAX_CARRY    	= 250;
+const int GREASEGUN_DEFAULT_GIVE 	= 60;
+const int GREASEGUN_MAX_CLIP     	= 20;
+const int GREASEGUN_WEIGHT       	= 15;
+
 enum TheyHungerM3GREASEGUNAnimation_e
 {
 	M3GREASEGUN_LONGIDLE = 0,
@@ -10,23 +27,16 @@ enum TheyHungerM3GREASEGUNAnimation_e
 	M3GREASEGUN_SHOOT3
 };
 
-const int GREASEGUN_MAX_CARRY    	= 250;
-const int GREASEGUN_DEFAULT_GIVE 	= 60;
-const int GREASEGUN_MAX_CLIP     	= 20;
-const int GREASEGUN_WEIGHT       	= 15;
-
-class weapon_greasegun : ScriptBasePlayerWeaponEntity
+class CGreasegun : CBaseCustomWeapon
 {
-	private CBasePlayer@ m_pPlayer = null;
-	
 	string M3_W_MODEL = "models/hunger/weapons/greasegun/w_greasegun.mdl";
 	string M3_V_MODEL = "models/hunger/weapons/greasegun/v_greasegun.mdl";
 	string M3_P_MODEL = "models/hunger/weapons/greasegun/p_greasegun.mdl";
 
-	int m_iShell;
-
 	string M3_S_FIRE1 = "hunger/weapons/greasegun/M3_shoot1.wav";
 
+	int m_iShell;
+	
 	void Spawn()
 	{
 		Precache();
@@ -34,7 +44,7 @@ class weapon_greasegun : ScriptBasePlayerWeaponEntity
 		
 		self.m_iDefaultAmmo = GREASEGUN_DEFAULT_GIVE;
 		
-		self.FallInit();
+		BaseClass.Spawn();
 	}
 
 	void Precache()
@@ -50,12 +60,16 @@ class weapon_greasegun : ScriptBasePlayerWeaponEntity
 		g_SoundSystem.PrecacheSound( "hunger/weapons/greasegun/M3_boltpull.wav" );
 		g_SoundSystem.PrecacheSound( "hunger/weapons/greasegun/M3_magin.wav" );
 		g_SoundSystem.PrecacheSound( "hunger/weapons/greasegun/M3_magout.wav" );
+		
+		g_Game.PrecacheOther( AMMO_DROP_NAME );
 	}
 
 	bool GetItemInfo( ItemInfo& out info )
 	{
 		info.iMaxAmmo1	= GREASEGUN_MAX_CARRY;
+		info.iAmmo1Drop	= GREASEGUN_MAX_CLIP;
 		info.iMaxAmmo2	= -1;
+		info.iAmmo2Drop	= -1;
 		info.iMaxClip	= GREASEGUN_MAX_CLIP;
 		info.iSlot		= 2;
 		info.iPosition	= 4;
@@ -97,14 +111,12 @@ class weapon_greasegun : ScriptBasePlayerWeaponEntity
 	
 	bool Deploy()
 	{
-		bool bResult;
-		{
-			bResult = self.DefaultDeploy ( self.GetV_Model( M3_V_MODEL ), self.GetP_Model( M3_P_MODEL ), M3GREASEGUN_DRAW, "mp5" );
+		bool fResult = self.DefaultDeploy ( self.GetV_Model( M3_V_MODEL ), self.GetP_Model( M3_P_MODEL ), M3GREASEGUN_DRAW, "mp5" );
 		
-			float deployTime = 1.03;
-			self.m_flTimeWeaponIdle = self.m_flNextPrimaryAttack = self.m_flNextSecondaryAttack = g_Engine.time + deployTime;
-			return bResult;
-		}
+		float deployTime = 1.03;
+		self.m_flTimeWeaponIdle = self.m_flNextPrimaryAttack = self.m_flNextSecondaryAttack = g_Engine.time + deployTime;
+		
+		return fResult;
 	}
 
 	void Holster( int skipLocal = 0 ) 
@@ -115,7 +127,9 @@ class weapon_greasegun : ScriptBasePlayerWeaponEntity
 
 	void PrimaryAttack()
 	{
-		if( m_pPlayer.pev.waterlevel == WATERLEVEL_HEAD || self.m_iClip <= 0 )
+		CBasePlayer@ pPlayer = m_pPlayer;
+		
+		if( pPlayer.pev.waterlevel == WATERLEVEL_HEAD || self.m_iClip <= 0 )
 		{
 			self.PlayEmptySound();
 			self.m_flNextPrimaryAttack = WeaponTimeBase() + 0.15f;
@@ -124,38 +138,38 @@ class weapon_greasegun : ScriptBasePlayerWeaponEntity
 		
 		self.m_flNextPrimaryAttack = self.m_flNextSecondaryAttack = WeaponTimeBase() + 0.147;
 		
-		m_pPlayer.m_iWeaponVolume = NORMAL_GUN_VOLUME;
-		m_pPlayer.m_iWeaponFlash = BRIGHT_GUN_FLASH;
+		pPlayer.m_iWeaponVolume = NORMAL_GUN_VOLUME;
+		pPlayer.m_iWeaponFlash = BRIGHT_GUN_FLASH;
 		
 		--self.m_iClip;
 		
-		m_pPlayer.pev.effects |= EF_MUZZLEFLASH;
-		m_pPlayer.SetAnimation( PLAYER_ATTACK1 );
+		pPlayer.pev.effects |= EF_MUZZLEFLASH;
+		pPlayer.SetAnimation( PLAYER_ATTACK1 );
 		
-		switch ( g_PlayerFuncs.SharedRandomLong( m_pPlayer.random_seed, 0, 2 ) )
+		switch ( g_PlayerFuncs.SharedRandomLong( pPlayer.random_seed, 0, 2 ) )
 		{
 			case 0: 
 			self.SendWeaponAnim( M3GREASEGUN_SHOOT1, 0, 0 );
-			m_pPlayer.pev.punchangle.y += Math.RandomFloat( -0.4, 0.4 );
+			pPlayer.pev.punchangle.y += Math.RandomFloat( -0.4, 0.4 );
 			break;
 
 			case 1:
 			self.SendWeaponAnim( M3GREASEGUN_SHOOT2, 0, 0 );
-			m_pPlayer.pev.punchangle.y += -0.3;
+			pPlayer.pev.punchangle.y += -0.3;
 			break;
 			case 2:
 			self.SendWeaponAnim( M3GREASEGUN_SHOOT3, 0, 0 );
-			m_pPlayer.pev.punchangle.y += 0.3;
+			pPlayer.pev.punchangle.y += 0.3;
 			break;
 		}
 		
-		g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_WEAPON, M3_S_FIRE1, Math.RandomFloat( 0.95, 1.0 ), ATTN_NORM, 0, 93 + Math.RandomLong( 0, 0xf ) );
+		g_SoundSystem.EmitSoundDyn( pPlayer.edict(), CHAN_WEAPON, M3_S_FIRE1, Math.RandomFloat( 0.95, 1.0 ), ATTN_NORM, 0, 93 + Math.RandomLong( 0, 0xf ) );
 		
-		Vector vecSrc	 = m_pPlayer.GetGunPosition();
-		Vector vecAiming = m_pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES );
+		Vector vecSrc	 = pPlayer.GetGunPosition();
+		Vector vecAiming = pPlayer.GetAutoaimVector( AUTOAIM_5DEGREES );
 
-		if( self.m_iClip == 0 && m_pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 0 )
-			m_pPlayer.SetSuitUpdate( "!HEV_AMO0", false, 0 );
+		if( self.m_iClip == 0 && pPlayer.m_rgAmmo( self.m_iPrimaryAmmoType ) <= 0 )
+			pPlayer.SetSuitUpdate( "!HEV_AMO0", false, 0 );
 
 		//self.m_flNextPrimaryAttack = self.m_flNextPrimaryAttack + 0.15f;
 		if( self.m_flNextPrimaryAttack < WeaponTimeBase() )
@@ -163,9 +177,9 @@ class weapon_greasegun : ScriptBasePlayerWeaponEntity
 
 		self.m_flTimeWeaponIdle = WeaponTimeBase() + Math.RandomFloat( 10, 15 );
 
-		m_pPlayer.pev.punchangle.x -= 1.6;
+		pPlayer.pev.punchangle.x -= 1.6;
 
-		m_pPlayer.FireBullets( 1, vecSrc, vecAiming, VECTOR_CONE_3DEGREES, 8192, BULLET_PLAYER_MP5 );
+		pPlayer.FireBullets( 1, vecSrc, vecAiming, VECTOR_CONE_3DEGREES, 8192, BULLET_PLAYER_MP5 );
 		
 		TraceResult tr;
 		
@@ -177,15 +191,15 @@ class weapon_greasegun : ScriptBasePlayerWeaponEntity
 
 		Vector vecEnd	= vecSrc + vecDir * 4096;
 
-		g_Utility.TraceLine( vecSrc, vecEnd, dont_ignore_monsters, m_pPlayer.edict(), tr );
+		g_Utility.TraceLine( vecSrc, vecEnd, dont_ignore_monsters, pPlayer.edict(), tr );
 
 		Vector vecShellVelocity, vecShellOrigin;
 		
-		THGetDefaultShellInfo( m_pPlayer, vecShellVelocity, vecShellOrigin, 25, 7, -7 );
+		GetDefaultShellInfo( pPlayer, vecShellVelocity, vecShellOrigin, 25, 7, -7 );
 		
 		vecShellVelocity.y *= 1;
 		
-		g_EntityFuncs.EjectBrass( vecShellOrigin, vecShellVelocity, m_pPlayer.pev.angles[ 1 ], m_iShell, TE_BOUNCE_SHELL );
+		g_EntityFuncs.EjectBrass( vecShellOrigin, vecShellVelocity, pPlayer.pev.angles[ 1 ], m_iShell, TE_BOUNCE_SHELL );
 		
 		if( tr.flFraction < 1.0 )
 		{
@@ -230,17 +244,28 @@ class weapon_greasegun : ScriptBasePlayerWeaponEntity
 
 		self.SendWeaponAnim( iAnim, 0, 0 );
 
-		self.m_flTimeWeaponIdle = WeaponTimeBase() + g_PlayerFuncs.SharedRandomFloat( m_pPlayer.random_seed,  5, 7 );
+		self.m_flTimeWeaponIdle = WeaponTimeBase() + g_PlayerFuncs.SharedRandomFloat( m_pPlayer.random_seed, 5, 7 );
 	}
 }
 
-string M3GREASEGUNName()
+class CGreasegunMagazine : CBaseCustomAmmo
 {
-	return "weapon_greasegun";
+	string GREASEGUN_MAG_MODEL = "models/hunger/weapons/greasegun/w_greasegun_mag.mdl";
+	
+	CGreasegunMagazine()
+	{
+		m_strModel = GREASEGUN_MAG_MODEL;
+		m_strName = AMMO_TYPE;
+		m_iAmount = GREASEGUN_MAX_CLIP;
+		m_iMax = GREASEGUN_MAX_CARRY;
+	}
 }
 
-void RegisterM3GREASEGUN()
+void Register()
 {
-	g_CustomEntityFuncs.RegisterCustomEntity( M3GREASEGUNName(), M3GREASEGUNName() );
-	g_ItemRegistry.RegisterWeapon( M3GREASEGUNName(), "hunger/weapons", "9mm" );
+	g_CustomEntityFuncs.RegisterCustomEntity( "THWeaponGreasegun::CGreasegunMagazine", AMMO_DROP_NAME );
+	g_CustomEntityFuncs.RegisterCustomEntity( "THWeaponGreasegun::CGreasegun", WEAPON_NAME );
+	g_ItemRegistry.RegisterWeapon( WEAPON_NAME, "hunger/weapons", AMMO_TYPE, "", AMMO_DROP_NAME, "" );
 }
+
+} // end of namespace

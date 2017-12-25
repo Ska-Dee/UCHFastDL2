@@ -54,8 +54,10 @@ class point_checkpoint : ScriptBaseAnimating
 			return BaseClass.KeyValue( szKey, szValue );
 	}
 	
-	void SetAnim(int animIndex) 
-	{ // if youre gonna use this in your script, make sure you dont try to access invalid animations -zode
+	// If youre gonna use this in your script, make sure you don't try
+	// to access invalid animations. -zode
+	void SetAnim( int animIndex ) 
+	{
 		self.pev.sequence = animIndex;
 		self.pev.frame = 0;
 		self.ResetSequenceInfo();
@@ -109,8 +111,8 @@ class point_checkpoint : ScriptBaseAnimating
 		else
 			g_EntityFuncs.SetSize( self.pev, Vector( -64, -64, -36 ), Vector( 64, 64, 36 ) );
 		
-		// set sequence to 1 aka idle_closed
-		SetAnim(1);
+		
+		SetAnim( 1 ); // set sequence to 1 aka idle_closed
 		
 		// If the map supports survival mode but survival is not active yet,
 		// spawn disabled checkpoint
@@ -122,12 +124,18 @@ class point_checkpoint : ScriptBaseAnimating
 		{
 			SetEnabled( true );
 		}
+		
+		SetThink( ThinkFunction( this.IdleThink ) );
+		self.pev.nextthink = g_Engine.time + 0.1f;
 	}
 	
 	void Touch( CBaseEntity@ pOther )
 	{
 		if( !IsEnabled() || IsActivated() || !pOther.IsPlayer() )
 			return;
+		
+		g_Game.AlertMessage( at_logged, "CHECKPOINT: \"%1\" activated Checkpoint\n", pOther.pev.netname );
+		g_PlayerFuncs.ClientPrintAll( HUD_PRINTTALK, "" + pOther.pev.netname + " just activated a Respawn-Point.\n" );
 		
 		// Set activated
 		self.pev.frags = 1.0f;
@@ -151,7 +159,7 @@ class point_checkpoint : ScriptBaseAnimating
 		
 		g_SoundSystem.EmitSound( self.edict(), CHAN_STATIC, "hunger/checkpointjingle.mp3", 1.0f, ATTN_NONE );
 		
-		SetAnim(2);
+		SetAnim( 2 ); 
 		
 		SetThink( ThinkFunction( this.RespawnStartThink ) );
 		self.pev.nextthink = g_Engine.time + m_flDelayBeforeStart;
@@ -179,10 +187,18 @@ class point_checkpoint : ScriptBaseAnimating
 		self.pev.health = bEnabled ? 1.0f : 0.0f;
 	}
 	
+	// GeckoN: Idle Think - just to make sure the animation gets updated properly.
+	// Should fix the "checkpoint jitter" issue.
+	void IdleThink()
+	{
+		self.StudioFrameAdvance();
+		self.pev.nextthink = g_Engine.time + 0.1;
+	}
+	
 	void RespawnStartThink()
 	{
 		m_iNextPlayerToRevive = 1;
-		SetAnim(0); // anim to open idle
+		SetAnim( 0 ); // set sequence to 0 aka open idle
 		SetThink( ThinkFunction( this.RespawnThink ) );
 		self.pev.nextthink = g_Engine.time + 0.1f;
 	}
@@ -198,7 +214,7 @@ class point_checkpoint : ScriptBaseAnimating
 			
 			//Only respawn if the player died before this checkpoint was activated
 			//Prevents exploitation
-			if( pPlayer !is null && !pPlayer.IsAlive() && pPlayer.m_fDeadTime < m_flRespawnStartTime )
+			if( pPlayer !is null && pPlayer.IsConnected() && !pPlayer.IsAlive() && pPlayer.m_fDeadTime < m_flRespawnStartTime )
 			{
 				//Revive player and move to this checkpoint
 				pPlayer.GetObserver().RemoveDeadBody();
@@ -211,33 +227,12 @@ class point_checkpoint : ScriptBaseAnimating
 				while ( ( @pEquipEntity = g_EntityFuncs.FindEntityByClassname( pEquipEntity, "game_player_equip" ) ) !is null  )
 					pEquipEntity.Touch( pPlayer );
 					
-					
-				// lightning effect
-				NetworkMessage message(MSG_BROADCAST, NetworkMessages::SVC_TEMPENTITY, null);
-					message.WriteByte(TE_BEAMPOINTS);
-					message.WriteCoord(m_vecLightningStart.x);
-					message.WriteCoord(m_vecLightningStart.y);
-					message.WriteCoord(m_vecLightningStart.z);
-					message.WriteCoord(pPlayer.pev.origin.x);
-					message.WriteCoord(pPlayer.pev.origin.y);
-					message.WriteCoord(pPlayer.pev.origin.z);
-					message.WriteShort(g_EngineFuncs.ModelIndex("sprites/lgtning.spr"));
-					message.WriteByte(0);
-					message.WriteByte(20); // framerate
-					message.WriteByte(1); // life
-					message.WriteByte(24); // width
-					message.WriteByte(80); // noise
-					message.WriteByte(172); // colors
-					message.WriteByte(255); 
-					message.WriteByte(255); 
-					message.WriteByte(255); // brightness
-					message.WriteByte(0); // scroll
-				message.End();
+				LightningEffect( pPlayer );
 				
 				//Congratulations, and celebrations, YOU'RE ALIVE!
 				g_SoundSystem.EmitSound( pPlayer.edict(), CHAN_ITEM, self.pev.message, 1.0f, ATTN_NORM );
 				
-				++m_iNextPlayerToRevive; //Make sure to increment this to avoid unneeded loop
+				m_iNextPlayerToRevive++; //Make sure to increment this to avoid unneeded loop
 				break;
 			}
 		}
@@ -250,19 +245,42 @@ class point_checkpoint : ScriptBaseAnimating
 			SetThink(ThinkFunction(this.FadeThink));
 			self.pev.nextthink = g_Engine.time + 0.1f;
 		}
-		else //Another player could require reviving
+		//Another player could require reviving
+		else
+		{
+			self.StudioFrameAdvance();
 			self.pev.nextthink = g_Engine.time + m_flDelayBetweenRevive;
+		}
 	}
 	
 	void FadeThink()
 	{
-		if(self.pev.renderamt > 0)
+		if (self.pev.renderamt > 0)
 		{
+			self.StudioFrameAdvance();
 			self.pev.renderamt -= 5;
 			self.pev.nextthink = g_Engine.time + 0.1f;
-		}else{
+		}
+		else
+		{
 			SetThink(null);
 		}
+	}
+	
+	void ReenableThink()
+	{
+		if ( IsEnabled() )
+		{
+			//Make visible again
+			self.pev.effects &= ~EF_NODRAW;
+		}
+		
+		self.pev.frags = 0.0f;
+		
+		SetAnim( 1 ); // set sequence to 1 aka idle_closed
+		
+		SetThink( ThinkFunction( this.IdleThink ) );
+		self.pev.nextthink = g_Engine.time + 0.1;
 	}
 	
 	void CheckReusable()
@@ -276,18 +294,30 @@ class point_checkpoint : ScriptBaseAnimating
 			SetThink( null );
 	}
 	
-	void ReenableThink()
+	void LightningEffect( CBasePlayer@ pPlayer )
 	{
-		if ( IsEnabled() )
-		{
-			//Make visible again
-			self.pev.effects &= ~EF_NODRAW;
-		}
-		
-		self.pev.frags = 0.0f;
-		
-		SetThink( null );
+		NetworkMessage message(MSG_BROADCAST, NetworkMessages::SVC_TEMPENTITY, null);
+			message.WriteByte(TE_BEAMPOINTS);
+			message.WriteCoord(m_vecLightningStart.x);
+			message.WriteCoord(m_vecLightningStart.y);
+			message.WriteCoord(m_vecLightningStart.z);
+			message.WriteCoord(pPlayer.pev.origin.x);
+			message.WriteCoord(pPlayer.pev.origin.y);
+			message.WriteCoord(pPlayer.pev.origin.z);
+			message.WriteShort(g_EngineFuncs.ModelIndex("sprites/lgtning.spr"));
+			message.WriteByte(0);
+			message.WriteByte(20);	// framerate
+			message.WriteByte(1);	// life
+			message.WriteByte(24);	// width
+			message.WriteByte(80);	// noise
+			message.WriteByte(172);	// colors
+			message.WriteByte(255); 
+			message.WriteByte(255); 
+			message.WriteByte(255);	// brightness
+			message.WriteByte(0);	// scroll
+		message.End();
 	}
+
 }
 
 void RegisterPointCheckPointEntity()

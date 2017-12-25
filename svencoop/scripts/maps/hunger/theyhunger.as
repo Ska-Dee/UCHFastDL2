@@ -1,11 +1,12 @@
+/*
+* They Hunger
+* Main script file
+*
+* Created by Josh "JPolito" Polito -- JPolito@svencoop.com
+* Modified by Tomas "GeckoN" Slavotinek
+*/
 
-#include "weapons/weapon_sawedoff"
-#include "weapons/weapon_m16a1"
-#include "weapons/weapon_colt1911"
-#include "weapons/weapon_tommygun"
-#include "weapons/weapon_m14"
-#include "weapons/weapon_greasegun"
-#include "weapons/weapon_teslagun"
+#include "th_weapons"
 #include "monsters/monster_th_grunt_repel"
 #include "monsters/monster_th_cyberfranklin"
 #include "monsters/monster_th_boss"
@@ -14,34 +15,36 @@
 #include "../cubemath/trigger_once_mp"
 #include "../cubemath/item_airbubble"
 
-array<ItemMapping@> g_ItemMappings = { 
-	ItemMapping( "weapon_9mmAR", THOMPSONM1Name() ), 
-	ItemMapping( "weapon_shotgun", SAWEDOFFName() ), 
-	ItemMapping( "weapon_m16", M16A1Name() ), 
-	ItemMapping( "weapon_9mmhandgun", COLTName() ), 
+array<ItemMapping@> g_ItemMappings =
+{ 
+	ItemMapping( "weapon_9mmAR", THWeaponThompson::WEAPON_NAME ), 
+	ItemMapping( "weapon_shotgun", THWeaponSawedoff::WEAPON_NAME ), 
+	ItemMapping( "weapon_m16", THWeaponM16A1::WEAPON_NAME ), 
+	ItemMapping( "weapon_9mmhandgun", THWeaponM1911::WEAPON_NAME ), 
 	ItemMapping( "weapon_eagle", "weapon_357" )
 };
 
 void MapInit()
-{	
+{
 	// Register custom weapons
-	RegisterSAWEDOFF();
-	RegisterM16A1();
-	RegisterCOLT();
-	RegisterTHOMPSONM1();
-	RegisterM14();
-	RegisterTESLAGUN();
-	RegisterM3GREASEGUN();
+	THWeaponSawedoff::Register();
+	THWeaponM16A1::Register();
+	THWeaponM1911::Register();
+	THWeaponThompson::Register();
+	THWeaponM14::Register();
+	THWeaponTeslagun::Register();
+	THWeaponGreasegun::Register();
+	THWeaponSpanner::Register();
 	
 	// Register checkpoint entity
 	RegisterPointCheckPointEntity();
 	
 	// Register custom monsters
-	GruntRepel::Register();
+	THMonsterGruntRepel::Register();
 	if ( g_Engine.mapname == "th_ep3_07" )
 	{
-		CyberFranklin::Register();
-		Boss::Register();
+		THMonsterCyberFranklin::Register();
+		THMonsterBoss::Register();
 	}
 	
 	// Register other stuff
@@ -97,77 +100,12 @@ void AdjustDifficulty( void )
 	int iSkill = int( g_EngineFuncs.CVarGetFloat( "skill" ) );
 	//g_Game.AlertMessage( at_console, "Adjusting difficulty for skill %1 and %2 player(s).\n", iSkill, iNumPlayers );
 	
-	iHealth = CalcNewHealth( Boss::BOSS_HEALTH_BASE, Boss::BOSS_HEALTH_PER_PLAYER_INC );
+	iHealth = CalcNewHealth( THMonsterBoss::BOSS_HEALTH_BASE, THMonsterBoss::BOSS_HEALTH_PER_PLAYER_INC );
 	SetHealthByClassname( "monster_th_boss", iHealth );
 		
-	iHealth = CalcNewHealth( CyberFranklin::CYBERFRANKLIN_HEALTH_BASE, CyberFranklin::CYBERFRANKLIN_HEALTH_PER_PLAYER_INC );
+	iHealth = CalcNewHealth( THMonsterCyberFranklin::CYBERFRANKLIN_HEALTH_BASE, THMonsterCyberFranklin::CYBERFRANKLIN_HEALTH_PER_PLAYER_INC );
 	SetHealthByClassname( "monster_th_cyberfranklin", iHealth );
 }
-
-void THDynamicLight( Vector vecPos, int radius, int r, int g, int b, int8 life, int decay )
-{
-	NetworkMessage THDL( MSG_PVS, NetworkMessages::SVC_TEMPENTITY );
-	THDL.WriteByte( TE_DLIGHT );
-	THDL.WriteCoord( vecPos.x );
-	THDL.WriteCoord( vecPos.y );
-	THDL.WriteCoord( vecPos.z );
-	THDL.WriteByte( radius );
-	THDL.WriteByte( int(r) );
-	THDL.WriteByte( int(g) );
-	THDL.WriteByte( int(b) );
-	THDL.WriteByte( life );
-	THDL.WriteByte( decay );
-	THDL.End();
-}
-
-void THGetDefaultShellInfo( CBasePlayer@ pPlayer, Vector& out ShellVelocity, Vector& out ShellOrigin, float forwardScale, float rightScale, float upScale )
-{
-	Vector vecForward, vecRight, vecUp;
-	
-	g_EngineFuncs.AngleVectors( pPlayer.pev.v_angle, vecForward, vecRight, vecUp );
-	
-	const float fR = Math.RandomFloat( 50, 70 );
-	const float fU = Math.RandomFloat( 100, 150 );
- 
-	for( int i = 0; i < 3; ++i )
-	{
-		ShellVelocity[i] = pPlayer.pev.velocity[i] + vecRight[i] * fR + vecUp[i] * fU + vecForward[i] * 25;
-		ShellOrigin[i]   = pPlayer.pev.origin[i] + pPlayer.pev.view_ofs[i] + vecUp[i] * upScale + vecForward[i] * forwardScale + vecRight[i] * rightScale;
-	}
-}
-
-enum TheyHungerM14ZoomModes_e
-{
-	TH_MODE_NOSCOPE = 0,
-	TH_MODE_SCOPED,
-	TH_MODE_2XSCOPED
-}
-
-void TheyHungerSmoke( Vector pos, string sprite = "sprites/wep_smoke_02.spr", int scale = 5, int frameRate = 15, NetworkMessageDest msgType = MSG_BROADCAST, edict_t@ dest = null)
-{
-    NetworkMessage TheyHungerSmoke( msgType, NetworkMessages::SVC_TEMPENTITY, dest );
-    TheyHungerSmoke.WriteByte( TE_SMOKE );
-    TheyHungerSmoke.WriteCoord( pos.x );
-    TheyHungerSmoke.WriteCoord( pos.y );
-    TheyHungerSmoke.WriteCoord( pos.z );
-    TheyHungerSmoke.WriteShort( g_EngineFuncs.ModelIndex( sprite ) );
-    TheyHungerSmoke.WriteByte( scale );
-    TheyHungerSmoke.WriteByte( frameRate );
-    TheyHungerSmoke.End();
-}
-
-/*void TheyHungerDynamicTracer( Vector start, Vector end, NetworkMessageDest msgType = MSG_BROADCAST, edict_t@ dest = null )
-{
-	NetworkMessage THDT( msgType, NetworkMessages::SVC_TEMPENTITY, dest );
-	THDT.WriteByte( TE_TRACER );
-	THDT.WriteCoord( start.x );
-	THDT.WriteCoord( start.y );
-	THDT.WriteCoord( start.z );
-	THDT.WriteCoord( end.x );
-	THDT.WriteCoord( end.y );
-	THDT.WriteCoord( end.z );
-	THDT.End();
-}*/
 
 void InitObserver()
 {
