@@ -21,106 +21,13 @@ HookReturnCode ClientSayDropper(SayParameters@ pParams){
 		string ammoName1 = "";
 		string ammoName2 = "";
 		
-		//Default
-		if ( pPlayer.pev.viewmodel == "models/v_medkit.mdl" ) ammoName1 = "health";
-		if ( pPlayer.pev.viewmodel == "models/v_9mmhandgun.mdl" ) ammoName1 = "9mm";
-		if ( pPlayer.pev.viewmodel == "models/v_357.mdl" ) ammoName1 = "357";
-		if ( pPlayer.pev.viewmodel == "models/v_desert_eagle.mdl" ) ammoName1 = "357";
-		if ( pPlayer.pev.viewmodel == "models/v_uzi.mdl" ) ammoName1 = "9mm";
-		if ( pPlayer.pev.viewmodel == "models/v_9mmAR.mdl" ) {ammoName1 = "9mm"; ammoName2 = "ARgrenades";}
-		if ( pPlayer.pev.viewmodel == "models/v_shotgun.mdl" ) ammoName1 = "buckshot";
-		if ( pPlayer.pev.viewmodel == "models/v_crossbow.mdl" ) ammoName1 = "bolts";
-		if ( pPlayer.pev.viewmodel == "models/v_m16a2.mdl" ) {ammoName1 = "556"; ammoName2 = "ARgrenades";}
-		if ( pPlayer.pev.viewmodel == "models/v_rpg.mdl" ) ammoName1 = "rockets";
-		if ( pPlayer.pev.viewmodel == "models/v_gauss.mdl" ) ammoName1 = "uranium";
-		if ( pPlayer.pev.viewmodel == "models/v_egon.mdl" ) ammoName1 = "uranium";
-		if ( pPlayer.pev.viewmodel == "models/v_grenade.mdl" ) ammoName1 = "Hand Grenade";
-		if ( pPlayer.pev.viewmodel == "models/v_satchel.mdl" ) ammoName1 = "Satchel Charge";
-		if ( pPlayer.pev.viewmodel == "models/v_satchel_radio.mdl" ) ammoName1 = "Satchel Charge";
-		if ( pPlayer.pev.viewmodel == "models/v_tripmine.mdl" ) ammoName1 = "Trip Mine";
-		if ( pPlayer.pev.viewmodel == "models/v_squeak.mdl" ) ammoName1 = "Snarks";
-		if ( pPlayer.pev.viewmodel == "models/v_m40a1.mdl" ) ammoName1 = "m40a1";
-		if ( pPlayer.pev.viewmodel == "models/v_saw.mdl" ) ammoName1 = "556";
-		if ( pPlayer.pev.viewmodel == "models/v_spore_launcher.mdl" ) ammoName1 = "sporeclip";
-		if ( pPlayer.pev.viewmodel == "models/v_displacer.mdl" ) ammoName1 = "uranium";
-		
-		//ClassicMode
-		if ( pPlayer.pev.viewmodel == "models/hlclassic/v_medkit.mdl" ) ammoName1 = "health";
-		if ( pPlayer.pev.viewmodel == "models/hlclassic/v_9mmhandgun.mdl" ) ammoName1 = "9mm";
-		if ( pPlayer.pev.viewmodel == "models/hlclassic/v_357.mdl" ) ammoName1 = "357";
-		if ( pPlayer.pev.viewmodel == "models/hl/v_357.mdl" ) ammoName1 = "357";
-		if ( pPlayer.pev.viewmodel == "models/hlclassic/v_9mmAR.mdl" ) {ammoName1 = "9mm"; ammoName2 = "ARgrenades";}
-		if ( pPlayer.pev.viewmodel == "models/hlclassic/v_shotgun.mdl" ) ammoName1 = "buckshot";
-		if ( pPlayer.pev.viewmodel == "models/hlclassic/v_crossbow.mdl" ) ammoName1 = "bolts";
-		if ( pPlayer.pev.viewmodel == "models/hlclassic/v_rpg.mdl" ) ammoName1 = "rockets";
-		if ( pPlayer.pev.viewmodel == "models/hlclassic/v_gauss.mdl" ) ammoName1 = "uranium";
-		if ( pPlayer.pev.viewmodel == "models/hlclassic/v_egon.mdl" ) ammoName1 = "uranium";
-		if ( pPlayer.pev.viewmodel == "models/hlclassic/v_grenade.mdl" ) ammoName1 = "Hand Grenade";
-		if ( pPlayer.pev.viewmodel == "models/hlclassic/v_satchel.mdl" ) ammoName1 = "Satchel Charge";
-		if ( pPlayer.pev.viewmodel == "models/hlclassic/v_satchel_radio.mdl" ) ammoName1 = "Satchel Charge";
-		if ( pPlayer.pev.viewmodel == "models/hlclassic/v_tripmine.mdl" ) ammoName1 = "Trip Mine";
-		if ( pPlayer.pev.viewmodel == "models/hlclassic/v_squeak.mdl" ) ammoName1 = "Snarks";
-		
-		//Blue Shift
-		if ( pPlayer.pev.viewmodel == "models/bshift/v_9mmhandgun.mdl" ) ammoName1 = "9mm";
-		if ( pPlayer.pev.viewmodel == "models/bshift/v_357.mdl" ) ammoName1 = "357";
-		if ( pPlayer.pev.viewmodel == "models/bshift/v_9mmar.mdl" ) {ammoName1 = "9mm"; ammoName2 = "ARgrenades";}
-		if ( pPlayer.pev.viewmodel == "models/bshift/v_shotgun.mdl" ) ammoName1 = "buckshot";
-		if ( pPlayer.pev.viewmodel == "models/bshift/v_crossbow.mdl" ) ammoName1 = "bolts";
-		if ( pPlayer.pev.viewmodel == "models/bshift/v_m16a2.mdl" ) {ammoName1 = "556"; ammoName2 = "ARgrenades";}
-		if ( pPlayer.pev.viewmodel == "models/bshift/v_rpg.mdl" ) ammoName1 = "rockets";
-		if ( pPlayer.pev.viewmodel == "models/bshift/v_gauss.mdl" ) ammoName1 = "uranium";
-		if ( pPlayer.pev.viewmodel == "models/bshift/v_egon.mdl" ) ammoName1 = "uranium";
-		if ( pPlayer.pev.viewmodel == "models/bshift/v_grenade.mdl" ) ammoName1 = "Hand Grenade";
-		if ( pPlayer.pev.viewmodel == "models/bshift/v_satchel.mdl" ) ammoName1 = "Satchel Charge";
-		if ( pPlayer.pev.viewmodel == "models/bshift/v_satchel_radio.mdl" ) ammoName1 = "Satchel Charge";
-		if ( pPlayer.pev.viewmodel == "models/bshift/v_tripmine.mdl" ) ammoName1 = "Trip Mine";
-		if ( pPlayer.pev.viewmodel == "models/bshift/v_squeak.mdl" ) ammoName1 = "Snarks";
-		
-		//Opposing Force
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_medkit.mdl" ) ammoName1 = "health";
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_9mmhandgun.mdl" ) ammoName1 = "9mm";
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_357.mdl" ) ammoName1 = "357";
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_desert_eagle.mdl" ) ammoName1 = "357";
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_uzi.mdl" ) ammoName1 = "9mm";
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_9mmar.mdl" ) {ammoName1 = "9mm"; ammoName2 = "ARgrenades";}
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_shotgun.mdl" ) ammoName1 = "buckshot";
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_crossbow.mdl" ) ammoName1 = "bolts";
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_m16a2.mdl" ) {ammoName1 = "556"; ammoName2 = "ARgrenades";}
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_rpg.mdl" ) ammoName1 = "rockets";
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_gauss.mdl" ) ammoName1 = "uranium";
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_egon.mdl" ) ammoName1 = "uranium";
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_grenade.mdl" ) ammoName1 = "Hand Grenade";
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_satchel.mdl" ) ammoName1 = "Satchel Charge";
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_satchel_radio.mdl" ) ammoName1 = "Satchel Charge";
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_tripmine.mdl" ) ammoName1 = "Trip Mine";
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_squeak.mdl" ) ammoName1 = "Snarks";
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_m40a1.mdl" ) ammoName1 = "m40a1";
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_saw.mdl" ) ammoName1 = "556";
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_spore_launcher.mdl" ) ammoName1 = "sporeclip";
-		if ( pPlayer.pev.viewmodel == "models/opfor/v_displacer.mdl" ) ammoName1 = "uranium";
-		
-		//They Hunger
-		if ( pPlayer.pev.viewmodel == "models/hunger/v_ap9.mdl" ) ammoName1 = "9mm";
-		if ( pPlayer.pev.viewmodel == "models/hunger/v_hkg36.mdl" ) ammoName1 = "9mm";
-		if ( pPlayer.pev.viewmodel == "models/hunger/v_hunger9mmar.mdl" ) ammoName1 = "9mm";
-		if ( pPlayer.pev.viewmodel == "models/hunger/v_hunger9mmhandgun.mdl" ) ammoName1 = "9mm";
-		if ( pPlayer.pev.viewmodel == "models/hunger/v_hunger357.mdl" ) ammoName1 = "357";
-		if ( pPlayer.pev.viewmodel == "models/hunger/v_hungercrossbow.mdl" ) ammoName1 = "bolts";
-		if ( pPlayer.pev.viewmodel == "models/hunger/v_hungergrenade.mdl" ) ammoName1 = "Hand Grenade";
-		if ( pPlayer.pev.viewmodel == "models/hunger/v_hungersatchel.mdl" ) ammoName1 = "Satchel Charge";
-		if ( pPlayer.pev.viewmodel == "models/hunger/v_hungersatchel_radio.mdl" ) ammoName1 = "Satchel Charge";
-		if ( pPlayer.pev.viewmodel == "models/hunger/v_hungershotgun.mdl" ) ammoName1 = "buckshot";
-		if ( pPlayer.pev.viewmodel == "models/hunger/v_syringe.mdl" ) ammoName1 = "health";
-		if ( pPlayer.pev.viewmodel == "models/hunger/v_taurus.mdl" ) ammoName1 = "9mm";
-		if ( pPlayer.pev.viewmodel == "models/hunger/v_tnt.mdl" ) ammoName1 = "Hand Grenade";
-		if ( pPlayer.pev.viewmodel == "models/hunger/weapons/colt/v_1911.mdl" ) ammoName1 = "9mm";
-		if ( pPlayer.pev.viewmodel == "models/hunger/weapons/dbarrel/v_dbarrel.mdl" ) ammoName1 = "buckshot";
-		if ( pPlayer.pev.viewmodel == "models/hunger/weapons/greasegun/v_greasegun.mdl" ) ammoName1 = "9mm";
-		if ( pPlayer.pev.viewmodel == "models/hunger/weapons/m14/v_m14.mdl" ) ammoName1 = "m40a1";
-		if ( pPlayer.pev.viewmodel == "models/hunger/weapons/m16a1/v_m16.mdl" ) ammoName1 = "556";
-		if ( pPlayer.pev.viewmodel == "models/hunger/weapons/tesla/v_tesla.mdl" ) ammoName1 = "uranium";
-		if ( pPlayer.pev.viewmodel == "models/hunger/weapons/tommygun/v_tommygun.mdl" ) ammoName1 = "9mm";
+		if( pPlayer.m_hActiveItem.GetEntity() !is null ) {
+			CBasePlayerWeapon@ pWeapon = cast<CBasePlayerWeapon@>( pPlayer.m_hActiveItem.GetEntity() );
+			if( pWeapon !is null ){
+				ammoName1 = pWeapon.pszAmmo1();
+				ammoName2 = pWeapon.pszAmmo2();
+			}
+		}
 		
 		int ammoInv = 0;
 		int ammoInv2 = 0;
@@ -136,7 +43,7 @@ HookReturnCode ClientSayDropper(SayParameters@ pParams){
 		int customDrop = atoi(pArguments[1]);
 		int customDrop2 = atoi(pArguments[2]);
 		
-		if (ammoName1 != "" && g_PlayerFuncs.GetAmmoIndex(ammoName1) == 16){
+		if (ammoName1 == "Snarks"){
 			if(customDrop<1){
 				ammoInv = 1;
 			}else{
@@ -170,7 +77,7 @@ HookReturnCode ClientSayDropper(SayParameters@ pParams){
 				if ( dropper_weapon_box_counter >= dropper_weapon_box_counter_max ) dropper_weapon_box_counter = 0;
 			}
 			
-		}else if(ammoName1 != "" && g_PlayerFuncs.GetAmmoIndex(ammoName1) > 0){
+		}else if(ammoName1 != "" && ammoName1 != "Hornets" && g_PlayerFuncs.GetAmmoIndex(ammoName1) > 0){
 			if(customDrop<1){
 				ammoInv = pPlayer.AmmoInventory(g_PlayerFuncs.GetAmmoIndex(ammoName1));
 				ammoInv = ammoInv-ammoInv*9/10;
