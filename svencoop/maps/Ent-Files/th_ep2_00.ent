@@ -1,7 +1,7 @@
 {
 "compiler" "ZHLT 3.4 VL34 (Mar  2 2016)"
 "wad" "halflife.wad;liquids.wad;xeno.wad;decals.wad;neilm2.wad;neilm4.wad;cs_bdog.wad;neilm_sc.wad;"
-"scversion2" "510"
+"scversion2" "515"
 "newunit" "1"
 "globalsoundlist" "../hunger/hungerglobal.txt"
 "sounds" "1"
@@ -98,6 +98,7 @@
 }
 {
 "model" "*4"
+"use_type" "3"
 "angles" "0 0 0"
 "wait" "5"
 "lip" "2"
@@ -295,6 +296,7 @@
 }
 {
 "model" "*20"
+"use_type" "3"
 "angles" "0 90 0"
 "wait" "5"
 "lip" "2"
@@ -768,6 +770,7 @@
 }
 {
 "model" "*41"
+"use_type" "3"
 "angles" "0 0 0"
 "wait" "-1"
 "lip" "2"
@@ -2512,7 +2515,6 @@
 }
 {
 "model" "*116"
-"target" "key_1_train"
 "explosion" "1"
 "weapon" "1"
 "rendercolor" "0 0 0"
@@ -2521,6 +2523,7 @@
 "health" "40"
 "spawnflags" "128"
 "classname" "func_breakable"
+"target" "key_1_train"
 }
 {
 "model" "*117"
@@ -4333,9 +4336,9 @@
 "weapon" "1"
 "rendercolor" "0 0 0"
 "health" "40"
+"classname" "func_breakable"
 "targetname" "blocker_wall_3"
 "spawnflags" "1"
-"classname" "func_breakable"
 }
 {
 "model" "*225"
@@ -4343,9 +4346,9 @@
 "weapon" "1"
 "rendercolor" "0 0 0"
 "health" "40"
+"classname" "func_breakable"
 "targetname" "blocker_wall_3"
 "spawnflags" "1"
-"classname" "func_breakable"
 }
 {
 "origin" "-560 1163 265"
@@ -4837,11 +4840,12 @@
 }
 {
 "origin" "-1362 200 34"
-"rendercolor" "0 0 0"
 "m_flCustomRespawnTime" "0.0"
 "IsNotAmmoItem" "1"
+"dmg" "0"
 "angles" "0 315 0"
-"classname" "weapon_crowbar"
+"delay" "0"
+"classname" "weapon_spanner"
 }
 {
 "model" "*249"
@@ -5064,6 +5068,7 @@
 }
 {
 "model" "*263"
+"use_type" "3"
 "master" "percent_lock_1_door_ms"
 "angles" "0 0 0"
 "target" "security_control_mngr"
@@ -5078,12 +5083,13 @@
 "origin" "2928 -152 82"
 "cop_reinfrcmnts" "0"
 "maingt_swth_mstr" "0"
-"percent_lock_2_show" "0"
 "targetname" "security_control_mngr"
 "classname" "multi_manager"
+"percent_lock_2_show" "0"
 }
 {
 "model" "*264"
+"use_type" "3"
 "angles" "0 0 0"
 "master" "percent_lock_2_door_ms"
 "target" "bigmutha_gate"
@@ -5118,13 +5124,6 @@
 "speed" "150"
 "spawnflags" "545"
 "classname" "func_door"
-}
-{
-"model" "*265"
-"origin" "0 0 64"
-"rendermode" "1"
-"targetname" "bigmutha_gate"
-"classname" "func_wall_toggle"
 }
 {
 "model" "*266"
@@ -6731,11 +6730,18 @@
 }
 {
 "origin" "-356 2056 -120"
+"exclusivehold" "0"
+"delay" "0"
 "IsNotAmmoItem" "1"
+"dmg" "0"
 "m_flCustomRespawnTime" "0.0"
+"movetype" "0"
 "rendercolor" "0 0 0"
+"renderamt" "0"
+"rendermode" "0"
+"renderfx" "0"
 "angles" "0 0 0"
-"classname" "weapon_pipewrench"
+"classname" "weapon_spanner"
 }
 {
 "model" "*325"
@@ -8716,13 +8722,6 @@
 "classname" "func_breakable"
 }
 {
-"model" "*416"
-"origin" "0 0 -16"
-"speed" "150"
-"angles" "-90 0 0"
-"classname" "trigger_push"
-}
-{
 "model" "*417"
 "rendercolor" "0 0 0"
 "skin" "-1"
@@ -10001,6 +10000,7 @@
 }
 {
 "model" "*475"
+"use_type" "3"
 "angles" "0 0 0"
 "_minlight" ".1"
 "rendercolor" "0 0 0"
@@ -10587,14 +10587,9 @@
 "keep_inventory" "1"
 "landmark" "campfire_mark"
 "map" "th_ep2_01"
+"classname" "trigger_changelevel"
 "spawnflags" "2"
 "targetname" "change_level_please"
-"classname" "trigger_changelevel"
-}
-{
-"model" "*510"
-"rendermode" "1"
-"classname" "func_wall"
 }
 {
 "model" "*511"
@@ -11431,9 +11426,9 @@
 {
 "origin" "121 330 76"
 "angles" "0 270 0"
+"classname" "point_checkpoint"
 "minhullsize" "-16 -122 -60"
 "maxhullsize" "119 134 140"
-"classname" "point_checkpoint"
 }
 {
 "model" "*551"
@@ -11479,6 +11474,43 @@
 "angles" "0 0 0"
 "rendercolor" "0 0 0"
 "classname" "func_wall_toggle"
+}
+{
+"origin" "-1378 200 44"
+"weapon_spanner" "1"
+"master" "equip_spanner_ms"
+"inventorymode" "1"
+"spawnflags" "8"
+"classname" "game_player_equip"
+}
+{
+"origin" "-1371 184 32"
+"targetname" "equip_spanner_ms"
+"classname" "multisource"
+}
+{
+"model" "*554"
+"target" "equip_spanner_ms"
+"classname" "trigger_once"
+}
+{
+"model" "*265"
+"origin" "0 0 64"
+"rendermode" "1"
+"targetname" "bigmutha_gate"
+"classname" "func_wall_toggle"
+}
+{
+"model" "*416"
+"origin" "0 0 -16"
+"speed" "150"
+"angles" "-90 0 0"
+"classname" "trigger_push"
+}
+{
+"model" "*510"
+"rendermode" "1"
+"classname" "func_wall"
 }
 {
 "origin" "2945 -126 122"
@@ -11639,7 +11671,7 @@
 "model" "*264"
 "wheels" "32"
 "height" "0"
-"speed" "32"
+"speed" "256"
 "rendermode" "1"
 "targetname" "key_1_train"
 "target" "key_1_path_0"
@@ -11860,4 +11892,3 @@
 "target" "percent_lock_last"
 "classname" "trigger_once_mp"
 }
- 

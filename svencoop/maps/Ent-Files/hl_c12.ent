@@ -11224,7 +11224,7 @@
 "model" "*255"
 "wheels" "32"
 "height" "0"
-"speed" "32"
+"speed" "256"
 "rendermode" "1"
 "targetname" "key_1_train"
 "target" "key_1_path_0"
