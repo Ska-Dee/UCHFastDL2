@@ -1,6 +1,6 @@
 /*
 *	Network-Banhammer
-*	Enter in Chat: admin_netban <Name or SteamID> <Time in minutes>
+*	Enter in Chat: admin_netban <Name or SteamID> <Time in minutes> <Optional Reason>
 *	To Ban and Network-Ban the Target
 *	If time is empty then the duration is permanent
 *	
@@ -10,31 +10,57 @@
 
 final class IPAddressPlayerData {
 	private string address;
-	private CBasePlayer@ pPlayer;
+	private edict_t@ pPlayerEdict;
+	private int lifeTime;
 	
-	IPAddressPlayerData( string network_address ){
+	IPAddressPlayerData( string network_address, edict_t@ ply ){
 		address = network_address;
-	}
-	
-	IPAddressPlayerData( CBasePlayer@ ply, string network_address ){
-		address = network_address;
-		@pPlayer = ply;
-	}
-	
-	CBasePlayer@ Player{
-		get const { return pPlayer; }
-	}
-	
-	void setBasePlayer(CBasePlayer@ ply){
-		@pPlayer = ply;
+		@pPlayerEdict = @ply;
+		lifeTime = 5;
 	}
 	
 	string getIPAddress(){
 		return address;
 	}
+	
+	edict_t@ getPlayerEdict(){
+		return pPlayerEdict;
+	}
+	
+	bool shouldGiveUpEntry(){
+		CBasePlayer@ pPlayer = null;
+		
+		//In case the plugin is being reloaded, fill in the list manually to account for it. Saves a lot of console output.
+		for( int iPlayer = 1; iPlayer <= g_Engine.maxClients; ++iPlayer ){
+			@pPlayer = g_PlayerFuncs.FindPlayerByIndex( iPlayer );
+		   
+			if( pPlayer is null || !pPlayer.IsConnected() || @pPlayer.edict() != @pPlayerEdict)
+				continue;
+			
+			lifeTime = 5;
+			return false;
+		}
+		
+		lifeTime--;
+		
+		if(lifeTime < 1) return true;
+		
+		return false;
+	}
 }
 
 array<IPAddressPlayerData@> g_IPAddressPlayerData;
+int plyDataSize;
+
+//Are people still on the Server?
+void ExistenceCheck(){
+	for(int i = 0; i < plyDataSize; i++){
+		if(g_IPAddressPlayerData[i].shouldGiveUpEntry()){
+			delOneToArray(i);
+			i--;
+		}
+	}
+}
 
 void PluginInit() {
 	g_Module.ScriptInfo.SetAuthor( "CubeMath" );
@@ -43,29 +69,56 @@ void PluginInit() {
 	//Only admins can use this
 	g_Module.ScriptInfo.SetMinimumAdminLevel( ADMIN_YES );
 	
-	g_IPAddressPlayerData.resize( g_Engine.maxClients );
+	plyDataSize = 0;
+	g_IPAddressPlayerData.resize( plyDataSize );
 	
 	g_Hooks.RegisterHook( Hooks::Player::ClientConnected, @ClientConnected );
 	g_Hooks.RegisterHook( Hooks::Player::ClientDisconnect, @ClientDisconnect );
 	g_Hooks.RegisterHook( Hooks::Player::ClientSay, @ClientSayBanHam );
 	
-	CBasePlayer@ pPlayer = null;
+	//There are currently no ways to get IP-Addresses from already Joined People!
 	
-	//In case the plugin is being reloaded, fill in the list manually to account for it. Saves a lot of console output.
-	for( int iPlayer = 1; iPlayer <= g_Engine.maxClients; ++iPlayer ){
-		@pPlayer = g_PlayerFuncs.FindPlayerByIndex( iPlayer );
-	   
-		if( pPlayer is null || !pPlayer.IsConnected() )
-			continue;
-		
-		IPAddressPlayerData data( pPlayer, "" );
-		@g_IPAddressPlayerData[ pPlayer.entindex() - 1 ] = @data;
-	}
+	//Activate Polling to check if People are still on the Server.
+	g_Scheduler.SetInterval( "ExistenceCheck", 60.0f, g_Scheduler.REPEAT_INFINITE_TIMES );
 }
 
 void MapInit() {
 }
 
+void addOneToArray(string network_address, edict_t@ ply){
+	plyDataSize++;
+	g_IPAddressPlayerData.resize( plyDataSize );
+	
+	IPAddressPlayerData data( network_address, ply );
+	@g_IPAddressPlayerData[ plyDataSize-1 ] = @data;
+	
+}
+
+bool arrayContainsIPAddress(string network_address){
+	for(int i = 0; i < plyDataSize; i++){
+		if(g_IPAddressPlayerData[i].getIPAddress() == network_address){
+			return true;
+		}
+	}
+	return false;
+}
+
+void delOneToArray(int idx){
+	plyDataSize--;
+	for(int i = idx; i < plyDataSize; i++){
+		@g_IPAddressPlayerData[ i ] = @g_IPAddressPlayerData[ i+1 ];
+	}
+	g_IPAddressPlayerData.resize( plyDataSize );
+}
+
+int getArrayIdxUsingPlyEdict(edict_t@ ply){
+	for(int i = 0; i < plyDataSize; i++){
+		if(@g_IPAddressPlayerData[i].getPlayerEdict() == @ply){
+			return i;
+		}
+	}
+	return -1;
+}
 
 /*
 * Gets the formatted Time in the console
@@ -162,6 +215,18 @@ string getFormattedMinutes(float minutes){
 	return "Permanent";
 }
 
+/*
+* Helper function to get a player either by name or Steam Id
+* Stolen by CubeMath from PlayerManagement
+*/
+CBasePlayer@ GetTargetPlayer( const string& in szNameOrSteamId ) {
+	CBasePlayer@ pTarget = g_PlayerFuncs.FindPlayerByName( szNameOrSteamId, false );
+		
+	if( pTarget !is null )
+		return pTarget;
+		
+	return GetPlayerBySteamId( szNameOrSteamId );
+}
 
 bool adminNetBan( SayParameters@ pParams ) {
 	
@@ -173,7 +238,7 @@ bool adminNetBan( SayParameters@ pParams ) {
 		string s2 = "Breaking Rules";
 		float flBanTime = 0.0f;
 		
-		if( args.ArgC() == 3 ) {
+		if( args.ArgC() >= 3 ) {
 			flBanTime = atof( args[ 2 ] );
 			s = getFormattedMinutes(flBanTime);
 			
@@ -188,9 +253,10 @@ bool adminNetBan( SayParameters@ pParams ) {
 			}
 		}
 		
-		CBasePlayer@ ply1 = GetTargetPlayer( args[ 1 ] );
+		CBasePlayer@ ply1 = null;
+		if( args.ArgC() > 1 ) @ply1 = GetTargetPlayer( args[ 1 ] );
 		
-		if( g_PlayerFuncs.AdminLevel( ply1 ) >= ADMIN_YES ) {
+		if( ply1 !is null && g_PlayerFuncs.AdminLevel( ply1 ) >= ADMIN_YES ) {
 			g_PlayerFuncs.ClientPrint( pParams.GetPlayer(), HUD_PRINTTALK, "Can not Network-Ban Admins!\n" ); 
 			
 			return true;
@@ -201,7 +267,12 @@ bool adminNetBan( SayParameters@ pParams ) {
 			string aStr = g_EngineFuncs.GetPlayerUserId( ply1.edict() );
 			string cStr = ply1.pev.netname;
 			
-			IPAddressPlayerData@ ipPly = g_IPAddressPlayerData[ ply1.entindex() - 1 ];
+			int targetIndex = getArrayIdxUsingPlyEdict( ply1.edict() );
+			
+			IPAddressPlayerData@ ipPly = null;
+			if(targetIndex != -1){
+				@ipPly = @g_IPAddressPlayerData[ targetIndex ];
+			}
 			
 			string bStr = "";
 			if(ipPly !is null){
@@ -216,14 +287,15 @@ bool adminNetBan( SayParameters@ pParams ) {
 			
 			if(bStr.Length()>6){
 				string ipStr = "addip "+flBanTime+" "+bStr+"\n";
+				// g_PlayerFuncs.ClientPrintAll( HUD_PRINTTALK, ipStr );
 				g_EngineFuncs.ServerCommand(ipStr);
 			}else{
-				g_PlayerFuncs.ClientPrint( pParams.GetPlayer(), HUD_PRINTTALK, "WARNING: Invalid IP-Address!\n" ); 
+				g_PlayerFuncs.ClientPrint( pParams.GetPlayer(), HUD_PRINTTALK, "WARNING: Invalid IP-Address!\n" );
 			}
 			
 			g_EngineFuncs.ServerExecute();
 		}else{
-			g_PlayerFuncs.ClientPrint( pParams.GetPlayer(), HUD_PRINTTALK, "Usage: admin_netban <name or steamID> <time in minutes> <ban reason>.\n" ); 
+			g_PlayerFuncs.ClientPrint( pParams.GetPlayer(), HUD_PRINTTALK, "Usage: admin_netban <name or steamID> <time in minutes> <ban reason>.\n" );
 		}
 		return true;
 	}
@@ -252,30 +324,27 @@ CBasePlayer@ GetPlayerBySteamId( const string& in szTargetSteamId ) {
 	return null;
 }
 
-/*
-* Helper function to get a player either by name or Steam Id
-* Stolen by CubeMath from PlayerManagement
-*/
-CBasePlayer@ GetTargetPlayer( const string& in szNameOrSteamId ) {
-	CBasePlayer@ pTarget = g_PlayerFuncs.FindPlayerByName( szNameOrSteamId, false );
-		
-	if( pTarget !is null )
-		return pTarget;
-		
-	return GetPlayerBySteamId( szNameOrSteamId );
-}
-
 HookReturnCode ClientConnected( edict_t@ pEntity, const string& in szPlayerName, const string& in szIPAddress, bool& out bDisallowJoin, string& out szRejectReason ) {
 	
-	IPAddressPlayerData data( szIPAddress );
-	@g_IPAddressPlayerData[ g_EntityFuncs.Instance(pEntity).entindex() - 1 ] = @data;
+	IPAddressPlayerData data( szIPAddress, pEntity );
+	
+	//AppendEntry, but first check if Entry already exists.
+	if(!arrayContainsIPAddress(szIPAddress)){
+		addOneToArray(szIPAddress, pEntity);
+	}
 	
 	return HOOK_CONTINUE;
 }
 
 HookReturnCode ClientDisconnect( CBasePlayer@ pPlayer ){
-
-	@g_IPAddressPlayerData[ pPlayer.entindex() - 1 ] = null;
+	
+	//Find and Delete Entry
+	int targetIndex = getArrayIdxUsingPlyEdict(pPlayer.edict());
+	if(targetIndex != -1){
+		delOneToArray(targetIndex);
+	}
+	
+	//SOLVED: People might disconnect while on a MapChange and avoid calling this Hook.
 	
 	return HOOK_CONTINUE;
 }
