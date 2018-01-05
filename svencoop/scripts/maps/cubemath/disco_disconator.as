@@ -101,19 +101,26 @@ class disco_aim_cross {
 			ThinkResizeArray();
 		}else{
 			CBasePlayer@ pPlayer = null;
+			
+			string aStr = "for-loop start\n";
+			g_PlayerFuncs.ClientPrintAll( HUD_PRINTCONSOLE, aStr );
+			
 			for( int iPlayer = 1; iPlayer <= g_Engine.maxClients; ++iPlayer ){
 				@pPlayer = g_PlayerFuncs.FindPlayerByIndex( iPlayer );
 				
 				if( pPlayer is null || !pPlayer.IsConnected() || !pPlayer.IsAlive() )
 					continue;
 				
-				g_disco_player[ pPlayer.entindex() - 1 ].updatePos( pPlayer );
-				
 				if(g_disco_player[ pPlayer.entindex() - 1 ] is null || g_disco_player[ pPlayer.entindex() - 1 ].m_pPlayer is null){
 					disco_player data( pPlayer );
 					@g_disco_player[ pPlayer.entindex() - 1 ] = @data;
+				}else{
+					g_disco_player[ pPlayer.entindex() - 1 ].updatePos( pPlayer );
 				}
 			}
+			
+			aStr = "for-loop end\n";
+			g_PlayerFuncs.ClientPrintAll( HUD_PRINTCONSOLE, aStr );
 			
 			if( pTargetPlayer is null || !pTargetPlayer.IsConnected() || !pTargetPlayer.IsAlive() ){
 				targetPos.x = 0.0f;
@@ -465,7 +472,7 @@ class disco_disconator : ScriptBaseAnimating {
 		SetAnim(DISCONATOR_IDLE);
 		
 		SetThink( ThinkFunction( this.ThinkPrepareBattle ) );
-		self.pev.nextthink = g_Engine.time + 10.0f;
+		self.pev.nextthink = g_Engine.time + 1.0f;
 	}
 	
 	void ThinkPrepareBattle(){
