@@ -315,6 +315,7 @@ class disco_floor_system : ScriptBaseEntity {
 			if( healthPercentage <= 25.0f ){
 				phaseBeginTime = g_musicBeginTime + 1.69019608f;
 				SetThink( ThinkFunction( this.Think05 ) );
+				self.pev.dmg = 30.0f;
 			}
 		}
 		
@@ -404,7 +405,6 @@ class disco_floor_system : ScriptBaseEntity {
 			}
 			
 			float healthPercentage = gloVariables.GetCustomKeyvalues().GetKeyvalue("$f_health_percentage").GetFloat();
-			self.pev.dmg = 40.0f - healthPercentage * 0.4f;
 		}
 		
 		//RenderFloor
