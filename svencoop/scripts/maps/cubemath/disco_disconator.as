@@ -102,9 +102,6 @@ class disco_aim_cross {
 		}else{
 			CBasePlayer@ pPlayer = null;
 			
-			string aStr = "for-loop start\n";
-			g_PlayerFuncs.ClientPrintAll( HUD_PRINTCONSOLE, aStr );
-			
 			for( int iPlayer = 1; iPlayer <= g_Engine.maxClients; ++iPlayer ){
 				@pPlayer = g_PlayerFuncs.FindPlayerByIndex( iPlayer );
 				
@@ -118,9 +115,6 @@ class disco_aim_cross {
 					g_disco_player[ pPlayer.entindex() - 1 ].updatePos( pPlayer );
 				}
 			}
-			
-			aStr = "for-loop end\n";
-			g_PlayerFuncs.ClientPrintAll( HUD_PRINTCONSOLE, aStr );
 			
 			if( pTargetPlayer is null || !pTargetPlayer.IsConnected() || !pTargetPlayer.IsAlive() ){
 				targetPos.x = 0.0f;
