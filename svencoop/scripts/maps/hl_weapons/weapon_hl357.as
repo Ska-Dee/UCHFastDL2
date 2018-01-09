@@ -90,7 +90,9 @@ class weapon_hl357 : ScriptBasePlayerWeaponEntity
 	bool GetItemInfo( ItemInfo& out info )
 	{
 		info.iMaxAmmo1 	= _357_MAX_CARRY;
+		info.iAmmo1Drop = PYTHON_MAX_CLIP;
 		info.iMaxAmmo2	= -1;
+		info.iAmmo2Drop	= -1;
 		info.iMaxClip 	= PYTHON_MAX_CLIP;
 		info.iSlot 		= 1;
 		info.iPosition 	= 4;
@@ -138,8 +140,16 @@ class weapon_hl357 : ScriptBasePlayerWeaponEntity
 		
 		self.SendWeaponAnim( PYTHON_FIRE1, 0, 0 );
 		
-		g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_WEAPON, "hl/weapons/357_shot1.wav", 1.0, ATTN_NORM, 0, 95 + Math.RandomLong( 0, 10 ) );
-
+		switch( Math.RandomLong( 0, 1 ) ){
+		case 0:
+			g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_WEAPON, "hl/weapons/357_shot1.wav", 1.0, ATTN_NORM, 0, 95 + Math.RandomLong( 0, 10 ) );
+			break;
+		case 1:
+			g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_WEAPON, "hl/weapons/357_shot2.wav", 1.0, ATTN_NORM, 0, 95 + Math.RandomLong( 0, 10 ) );
+			break;
+		}
+		
+		
 		m_pPlayer.m_iWeaponVolume = LOUD_GUN_VOLUME;
 		m_pPlayer.m_iWeaponFlash = BRIGHT_GUN_FLASH;
 
@@ -262,5 +272,5 @@ string GetHLPYTHONName()
 void RegisterHLPYTHON()
 {
 	g_CustomEntityFuncs.RegisterCustomEntity( "weapon_hl357", GetHLPYTHONName() );
-	g_ItemRegistry.RegisterWeapon( GetHLPYTHONName(), "hl_weapons", "357" );
+	g_ItemRegistry.RegisterWeapon( GetHLPYTHONName(), "hl_weapons", "357", "", "ammo_357", "" );
 }
