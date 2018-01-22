@@ -1243,23 +1243,8 @@
 "classname" "func_wall"
 }
 {
-"model" "*89"
-"angles" "0 0 0"
-"style" "32"
-"target" "solved"
-"classname" "trigger_once"
-}
-{
-"model" "*90"
-"angles" "0 0 0"
-"targetname" "solved"
-"master" "solved"
-"dmg" "10000"
-"classname" "trigger_hurt"
-}
-{
 "model" "*92"
-"origin" "-972 -1264 416"
+"origin" "-972 -1264 5000"
 "m_iObeyTriggerMode" "1"
 "maxspeed" "20"
 "rendercolor" "255 255 255"
@@ -1268,8 +1253,36 @@
 "fanfriction" "20"
 "volume" "10"
 "speed" "20"
+"targetname" "levelfinish_plat"
 "spawnflags" "513"
 "classname" "func_rotating"
+}
+{
+"$v_origin2" "-972 -1264 416"
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_FloatConversion" "0"
+"m_iszValueType" "0"
+"targetname" "enable_levelfinish"
+"netname" "enable_levelfinish"
+"m_iszSrcValueName" "$v_origin2"
+"target" "levelfinish_plat"
+"m_iszDstValueName" "origin"
+"classname" "trigger_copyvalue"
+}
+{
+"enable_levelfinish" "1"
+"laser_111_222" "3"
+"percent_lock_2_enablecolor" "3.2"
+"111" "1.8"
+"222" "2.2"
+"levelfinish_ms" "3#1"
+"targetname" "enable_levelfinish_mm"
+"classname" "multi_manager"
+}
+{
+"targetname" "levelfinish_ms"
+"classname" "multisource"
 }
 {
 "model" "*93"
@@ -3733,7 +3746,6 @@
 "targetname" "111"
 "scale" ".7"
 "model" "sprites/flare3.spr"
-"spawnflags" "1"
 "classname" "env_sprite"
 }
 {
@@ -3747,7 +3759,6 @@
 "targetname" "222"
 "scale" ".7"
 "model" "sprites/flare3.spr"
-"spawnflags" "1"
 "classname" "env_sprite"
 }
 {
@@ -3764,7 +3775,8 @@
 "TextureScroll" "35"
 "StrikeTime" "1"
 "texture" "sprites/laserbeam.spr"
-"spawnflags" "1"
+"spawnflags" "2"
+"targetname" "laser_111_222"
 "classname" "env_beam"
 }
 {
@@ -3781,7 +3793,8 @@
 "TextureScroll" "35"
 "StrikeTime" "1"
 "texture" "sprites/laserbeam.spr"
-"spawnflags" "1"
+"spawnflags" "2"
+"targetname" "laser_111_222"
 "classname" "env_beam"
 }
 {
@@ -5502,6 +5515,7 @@
 "angles" "0 0 0"
 "rendercolor" "0 0 0"
 "model" "sprites/level_change.spr"
+"targetname" "111"
 "classname" "env_sprite"
 }
 {
@@ -5714,6 +5728,7 @@
 "snd_cavetele_enable" "4"
 "cavetele_sprites" "4"
 "toggle_arrow" "0"
+"enable_levelfinish_mm" "10"
 "targetname" "cavetele_enable_mm"
 "classname" "multi_manager"
 }
@@ -6374,7 +6389,7 @@
 {
 "origin" "-1155 -1279 506"
 "targetname" "percent_lock_2_digits"
-"renderamt" "255"
+"renderamt" "0"
 "spawnflags" "384"
 "angles" "0 0 0"
 "renderfx" "0"
@@ -6395,7 +6410,7 @@
 {
 "origin" "-1155 -1271 506"
 "targetname" "percent_lock_2_digits"
-"renderamt" "255"
+"renderamt" "0"
 "spawnflags" "384"
 "angles" "0 0 0"
 "renderfx" "0"
@@ -6416,7 +6431,7 @@
 {
 "origin" "-1155 -1261 506"
 "targetname" "percent_lock_2_digits"
-"renderamt" "255"
+"renderamt" "0"
 "spawnflags" "384"
 "angles" "0 0 0"
 "renderfx" "0"
@@ -6449,6 +6464,20 @@
 "classname" "trigger_copyvalue"
 }
 {
+"$i_skin" "255"
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_FloatConversion" "0"
+"m_iszValueType" "0"
+"targetname" "percent_lock_2_enablecolor"
+"netname" "percent_lock_2_enablecolor"
+"m_iszSrcValueName" "$i_skin"
+"target" "percent_lock_2_digits"
+"m_iszDstValueName" "renderamt"
+"spawnflags" "128"
+"classname" "trigger_copyvalue"
+}
+{
 "origin" "-1155 -1271 506"
 "linearmax" "5"
 "linearmin" "2"
@@ -6473,6 +6502,7 @@
 "minhullsize" "-1298 -1550 405"
 "maxhullsize" "-695 -971 872"
 "target" "percent_lock_2"
+"master" "levelfinish_ms"
 "classname" "trigger_once_mp"
 }
 {

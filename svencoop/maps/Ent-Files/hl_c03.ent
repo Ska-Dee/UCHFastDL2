@@ -18253,49 +18253,6 @@
 "classname" "trigger_once_mp"
 }
 {
-"origin" "1 0 0"
-"model" "*191"
-"targetname" "rusher_trap_ladder"
-"classname" "func_wall_toggle"
-}
-{
-"origin" "2 0 0"
-"model" "*191"
-"target" "troll_message"
-"targetname" "troll_message_trigger"
-"classname" "trigger_once"
-}
-{
-"target" "rusher_trap_ladder_relay"
-"targetname" "rusher_trap_ladder_ms"
-"classname" "multisource"
-}
-{
-"target" "rusher_trap_ladder"
-"killtarget" "troll_message_trigger"
-"targetname" "rusher_trap_ladder_relay"
-"triggerstate" "2"
-"classname" "trigger_relay"
-}
-{
-"target" "rusher_trap_ladder_ms"
-"targetname" "rusher_trap_ladder_1"
-"triggerstate" "1"
-"classname" "trigger_relay"
-}
-{
-"target" "rusher_trap_ladder_ms"
-"targetname" "rusher_trap_ladder_2"
-"triggerstate" "1"
-"classname" "trigger_relay"
-}
-{
-"target" "rusher_trap_ladder_ms"
-"targetname" "rusher_trap_ladder_3"
-"triggerstate" "1"
-"classname" "trigger_relay"
-}
-{
 "channel" "1"
 "fxtime" "0.25"
 "holdtime" "6.0"
@@ -18789,4 +18746,288 @@
 "origin" "-472 -240 -480"
 "targetname" "key_1_path_16"
 "classname" "path_track"
+}
+{
+"model" "*284"
+"origin" "-248 0 -134"
+"rendermode" "1"
+"targetname" "blocker_wall_1"
+"classname" "func_wall_toggle"
+}
+{
+"target" "rusher_trap_ladder_relay"
+"targetname" "rusher_trap_ladder_ms"
+"classname" "multisource"
+}
+{
+"target" "rusher_trap_ladder_ms"
+"targetname" "rusher_trap_ladder_1"
+"triggerstate" "1"
+"classname" "trigger_relay"
+}
+{
+"target" "rusher_trap_ladder_ms"
+"targetname" "rusher_trap_ladder_2"
+"triggerstate" "1"
+"classname" "trigger_relay"
+}
+{
+"target" "rusher_trap_ladder_ms"
+"targetname" "rusher_trap_ladder_3"
+"triggerstate" "1"
+"classname" "trigger_relay"
+}
+{
+"origin" "-777 -640 482"
+"targetname" "percent_lock_4_digits"
+"renderamt" "255"
+"spawnflags" "384"
+"angles" "0 0 0"
+"renderfx" "0"
+"rendermode" "5"
+"rendercolor" "255 255 255"
+"movetype" "5"
+"model" "models/cubemath/chars/d6.mdl"
+"skin" "0"
+"body" "0"
+"sequencename" "idle"
+"sequence" "0"
+"scale" "1"
+"minhullsize" "0 0 0"
+"maxhullsize" "0 0 0"
+"delay" "0"
+"classname" "item_generic"
+}
+{
+"origin" "-777 -632 482"
+"targetname" "percent_lock_4_digits"
+"renderamt" "255"
+"spawnflags" "384"
+"angles" "0 0 0"
+"renderfx" "0"
+"rendermode" "5"
+"rendercolor" "255 255 255"
+"movetype" "5"
+"model" "models/cubemath/chars/d6.mdl"
+"skin" "0"
+"body" "0"
+"sequencename" "idle"
+"sequence" "0"
+"scale" "1"
+"minhullsize" "0 0 0"
+"maxhullsize" "0 0 0"
+"delay" "0"
+"classname" "item_generic"
+}
+{
+"origin" "-777 -622 482"
+"targetname" "percent_lock_4_digits"
+"renderamt" "255"
+"spawnflags" "384"
+"angles" "0 0 0"
+"renderfx" "0"
+"rendermode" "5"
+"rendercolor" "255 255 255"
+"movetype" "5"
+"model" "models/cubemath/chars/percent.mdl"
+"skin" "0"
+"body" "0"
+"sequencename" "idle"
+"sequence" "0"
+"scale" "1"
+"minhullsize" "0 0 0"
+"maxhullsize" "0 0 0"
+"delay" "0"
+"classname" "item_generic"
+}
+{
+"$i_skin" "1"
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_FloatConversion" "0"
+"m_iszValueType" "0"
+"targetname" "percent_lock_4_changecolor"
+"netname" "percent_lock_4_changecolor"
+"m_iszSrcValueName" "$i_skin"
+"target" "percent_lock_4_digits"
+"m_iszDstValueName" "skin"
+"spawnflags" "128"
+"classname" "trigger_copyvalue"
+}
+{
+"origin" "-777 -632 482"
+"linearmax" "5"
+"linearmin" "2"
+"pitchstart" "100"
+"pitch" "100"
+"angles" "0 0 0"
+"health" "10"
+"message" "buttons/bell1.wav"
+"spawnflags" "52"
+"targetname" "percent_lock_4_sound"
+"classname" "ambient_generic"
+}
+{
+"percent_lock_4_sound" "1"
+"percent_lock_4_changecolor" "1"
+"blocker_wall_1" "1"
+"blocker_wall_1_lasers" "1"
+"targetname" "percent_lock_4"
+"classname" "multi_manager"
+}
+{
+"m_flPercentage" "0.66"
+"minhullsize" "-778 -1008 384"
+"maxhullsize" "160 -496 640"
+"target" "percent_lock_4"
+"master" "rusher_trap_ladder_ms"
+"classname" "trigger_once_mp"
+}
+{
+"origin" "-778 -569 385"
+"targetname" "blocker_wall_1_lasers_corner_1"
+"classname" "info_target"
+}
+{
+"origin" "-778 -569 479"
+"targetname" "blocker_wall_1_lasers_corner_2"
+"classname" "info_target"
+}
+{
+"origin" "-778 -695 479"
+"targetname" "blocker_wall_1_lasers_corner_3"
+"classname" "info_target"
+}
+{
+"origin" "-778 -695 385"
+"targetname" "blocker_wall_1_lasers_corner_4"
+"classname" "info_target"
+}
+{
+"LightningStart" "blocker_wall_1_lasers_corner_1"
+"LightningEnd" "blocker_wall_1_lasers_corner_2"
+"targetname" "blocker_wall_1_lasers"
+"spawnflags" "3"
+"renderamt" "128"
+"rendercolor" "255 0 0"
+"TextureScroll" "100"
+"NoiseAmplitude" "0"
+"BoltWidth" "7"
+"life" "0"
+"Radius" "256"
+"renderfx" "0"
+"texture" "sprites/laserbeam.spr"
+"classname" "env_beam"
+}
+{
+"LightningStart" "blocker_wall_1_lasers_corner_1"
+"LightningEnd" "blocker_wall_1_lasers_corner_2"
+"targetname" "blocker_wall_1_lasers"
+"spawnflags" "2"
+"renderamt" "128"
+"rendercolor" "0 255 0"
+"TextureScroll" "100"
+"NoiseAmplitude" "0"
+"BoltWidth" "7"
+"life" "0"
+"Radius" "256"
+"renderfx" "0"
+"texture" "sprites/laserbeam.spr"
+"classname" "env_beam"
+}
+{
+"LightningStart" "blocker_wall_1_lasers_corner_2"
+"LightningEnd" "blocker_wall_1_lasers_corner_3"
+"targetname" "blocker_wall_1_lasers"
+"spawnflags" "3"
+"renderamt" "128"
+"rendercolor" "255 0 0"
+"TextureScroll" "100"
+"NoiseAmplitude" "0"
+"BoltWidth" "7"
+"life" "0"
+"Radius" "256"
+"renderfx" "0"
+"texture" "sprites/laserbeam.spr"
+"classname" "env_beam"
+}
+{
+"LightningStart" "blocker_wall_1_lasers_corner_2"
+"LightningEnd" "blocker_wall_1_lasers_corner_3"
+"targetname" "blocker_wall_1_lasers"
+"spawnflags" "2"
+"renderamt" "128"
+"rendercolor" "0 255 0"
+"TextureScroll" "100"
+"NoiseAmplitude" "0"
+"BoltWidth" "7"
+"life" "0"
+"Radius" "256"
+"renderfx" "0"
+"texture" "sprites/laserbeam.spr"
+"classname" "env_beam"
+}
+{
+"LightningStart" "blocker_wall_1_lasers_corner_3"
+"LightningEnd" "blocker_wall_1_lasers_corner_4"
+"targetname" "blocker_wall_1_lasers"
+"spawnflags" "3"
+"renderamt" "128"
+"rendercolor" "255 0 0"
+"TextureScroll" "100"
+"NoiseAmplitude" "0"
+"BoltWidth" "7"
+"life" "0"
+"Radius" "256"
+"renderfx" "0"
+"texture" "sprites/laserbeam.spr"
+"classname" "env_beam"
+}
+{
+"LightningStart" "blocker_wall_1_lasers_corner_3"
+"LightningEnd" "blocker_wall_1_lasers_corner_4"
+"targetname" "blocker_wall_1_lasers"
+"spawnflags" "2"
+"renderamt" "128"
+"rendercolor" "0 255 0"
+"TextureScroll" "100"
+"NoiseAmplitude" "0"
+"BoltWidth" "7"
+"life" "0"
+"Radius" "256"
+"renderfx" "0"
+"texture" "sprites/laserbeam.spr"
+"classname" "env_beam"
+}
+{
+"LightningStart" "blocker_wall_1_lasers_corner_4"
+"LightningEnd" "blocker_wall_1_lasers_corner_1"
+"targetname" "blocker_wall_1_lasers"
+"spawnflags" "3"
+"renderamt" "128"
+"rendercolor" "255 0 0"
+"TextureScroll" "100"
+"NoiseAmplitude" "0"
+"BoltWidth" "7"
+"life" "0"
+"Radius" "256"
+"renderfx" "0"
+"texture" "sprites/laserbeam.spr"
+"classname" "env_beam"
+}
+{
+"LightningStart" "blocker_wall_1_lasers_corner_4"
+"LightningEnd" "blocker_wall_1_lasers_corner_1"
+"targetname" "blocker_wall_1_lasers"
+"spawnflags" "2"
+"renderamt" "128"
+"rendercolor" "0 255 0"
+"TextureScroll" "100"
+"NoiseAmplitude" "0"
+"BoltWidth" "7"
+"life" "0"
+"Radius" "256"
+"renderfx" "0"
+"texture" "sprites/laserbeam.spr"
+"classname" "env_beam"
 }

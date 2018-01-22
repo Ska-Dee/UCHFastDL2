@@ -1061,7 +1061,6 @@
 "movesnd" "0"
 "speed" "100"
 "targetname" "fubar1"
-"spawnflags" "416"
 "classname" "func_door_rotating"
 }
 {
@@ -1086,7 +1085,6 @@
 "movesnd" "0"
 "speed" "100"
 "targetname" "fubar2"
-"spawnflags" "288"
 "classname" "func_door_rotating"
 }
 {
@@ -1111,7 +1109,6 @@
 "movesnd" "0"
 "speed" "100"
 "targetname" "fubar3"
-"spawnflags" "296"
 "classname" "func_door_rotating"
 }
 {
@@ -1152,7 +1149,6 @@
 "movesnd" "0"
 "speed" "100"
 "targetname" "fubar4"
-"spawnflags" "288"
 "classname" "func_door_rotating"
 }
 {
@@ -1177,7 +1173,6 @@
 "movesnd" "0"
 "speed" "100"
 "targetname" "fubar4"
-"spawnflags" "288"
 "classname" "func_door_rotating"
 }
 {
@@ -1210,7 +1205,6 @@
 "movesnd" "0"
 "speed" "100"
 "targetname" "fubar4"
-"spawnflags" "288"
 "classname" "func_door_rotating"
 }
 {
@@ -1235,7 +1229,6 @@
 "movesnd" "0"
 "speed" "100"
 "targetname" "fubar4"
-"spawnflags" "288"
 "classname" "func_door_rotating"
 }
 {
