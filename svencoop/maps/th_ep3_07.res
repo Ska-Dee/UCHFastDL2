@@ -7,3 +7,5 @@ models/hl/w_357t.mdl
 sound/hl/weapons/357_reload1.wav
 sound/hl/weapons/357_shot1.wav
 sound/hl/weapons/357_shot2.wav
+models/player/nsmbw_iggy/nsmbw_iggy.bmp
+models/player/nsmbw_iggy/nsmbw_iggy.mdl

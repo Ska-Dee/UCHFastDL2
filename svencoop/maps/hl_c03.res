@@ -1,6 +1,3 @@
-models/player/jarjar/jarjar.bmp
-models/player/jarjar/jarjar.mdl
-models/player/jarjar/jarjarT.mdl
 sound/ambience/liftmuzak.wav
 models/cubemath/chars/d6.mdl
 models/cubemath/chars/percent.mdl
@@ -14,4 +11,5 @@ sound/hl/weapons/357_shot1.wav
 sound/hl/weapons/357_shot2.wav
 models/cubemath/key.mdl
 models/cubemath/padlock.mdl
-models/cubemath/arrow2d.mdl
+models/player/nsmbw_ludwig/nsmbw_ludwig.bmp
+models/player/nsmbw_ludwig/nsmbw_ludwig.mdl

@@ -1,6 +1,3 @@
-models/player/teemo_a1/teemo_a1.bmp
-models/player/teemo_a1/teemo_a1.mdl
-sound/player/playersounds/teemo_hut.wav
 sound/ambience/liftmuzak.wav
 models/cubemath/chars/d6.mdl
 models/cubemath/chars/percent.mdl
@@ -14,3 +11,5 @@ sound/hl/weapons/357_shot1.wav
 sound/hl/weapons/357_shot2.wav
 models/cubemath/key.mdl
 models/cubemath/padlock.mdl
+models/player/nsmbw_morton/nsmbw_morton.bmp
+models/player/nsmbw_morton/nsmbw_morton.mdl

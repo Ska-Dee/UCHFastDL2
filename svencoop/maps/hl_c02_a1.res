@@ -1,5 +1,3 @@
-models/player/nsmbw_iggy/nsmbw_iggy.bmp
-models/player/nsmbw_iggy/nsmbw_iggy.mdl
 sound/ambience/liftmuzak.wav
 models/cubemath/chars/d6.mdl
 models/cubemath/chars/percent.mdl
@@ -12,3 +10,6 @@ sound/hl/weapons/357_reload1.wav
 sound/hl/weapons/357_shot1.wav
 sound/hl/weapons/357_shot2.wav
 models/cubemath/arrow2d.mdl
+models/player/jarjar/jarjar.bmp
+models/player/jarjar/jarjar.mdl
+models/player/jarjar/jarjarT.mdl

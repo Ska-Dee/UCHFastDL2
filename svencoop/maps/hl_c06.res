@@ -1,6 +1,3 @@
-models/player/jarjar/jarjar.bmp
-models/player/jarjar/jarjar.mdl
-models/player/jarjar/jarjarT.mdl
 models/cubemath/chars/d6.mdl
 models/cubemath/chars/percent.mdl
 sprites/hl_weapons/weapon_hl357.txt
@@ -11,4 +8,5 @@ models/hl/w_357t.mdl
 sound/hl/weapons/357_reload1.wav
 sound/hl/weapons/357_shot1.wav
 sound/hl/weapons/357_shot2.wav
-sound/gta2/wasted.wav
+models/player/ugandan_knuckles/ugandan_knuckles.bmp
+models/player/ugandan_knuckles/ugandan_knuckles.mdl
