@@ -11,16 +11,16 @@ final class Diffy {
 			0.80 , //3
 			0.85 , //4
 			0.9  , //5
-			0.91 , //6
-			0.92 , //7
-			0.93 , //8
-			0.94 , //9
-			0.95 , //10
-			0.96 , //11
-			0.97 , //12
-			0.98 , //13
-			0.99 , //14
-			0.999, //15
+			0.92 , //6
+			0.96 , //7
+			0.98 , //8
+			0.99 , //9
+			1.000, //10
+			1.000, //11
+			1.000, //12
+			1.000, //13
+			1.000, //14
+			1.000, //15
 			1.000, //16
 			1.000, //17
 			1.000, //18
@@ -451,6 +451,9 @@ final class Diffy {
 				if(pPlayer.IsAlive()){
 					
 					if(pPlayer.pev.health > 0.0){
+						pPlayer.pev.max_health = m_fl_maxH;
+						pPlayer.pev.armortype = m_fl_maxA;
+						
 						pPlayer.pev.health += m_fl_chargeH * betweenTime;
 						pPlayer.pev.armorvalue += m_fl_chargeA * betweenTime;
 					}
@@ -1180,6 +1183,9 @@ void manipulate_difficulty(const CCommand@ pArguments){
 	if(aStr == "") return;
 	
 	double newDiff = atod(aStr);
+	
+	if(newDiff < 0.0) newDiff = 0.0;
+	if(newDiff > 100.0) newDiff = 100.0;
 	
 	g_diffy.setDifficulty(newDiff/100.0);
 }
