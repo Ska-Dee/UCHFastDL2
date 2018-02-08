@@ -93,7 +93,7 @@
 	"plugin"
 	{
 		"name" "DynamicDifficulty"
-		"script" "cubemath/DynamicDifficulty9"
+		"script" "cubemath/DynamicDifficulty10"
 		"concommandns" "dyndiff"
 	}
 	
