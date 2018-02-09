@@ -209,10 +209,10 @@ enum AccessLevels
 	ACCESS_M = 8192, // custom access 5
 	ACCESS_L = 16384, // custom access 4
 	ACCESS_K = 32768, // custom access 3
-	ACCESS_J = 65536, // trackdecals
-	ACCESS_I = 131072, //  slap, slay
+	ACCESS_J = 65536, // custom access 2
+	ACCESS_I = 131072, // custom access 1
 	ACCESS_H = 262144, // fun_ commands, say
-	ACCESS_G = 524288, // player_ commands, player quickmenu
+	ACCESS_G = 524288, // player_ commands, player quickmenu, slap, slay, trackdecals
 	ACCESS_F = 1048576, // ent_ commands
 	ACCESS_E = 2097152, // kick, changelevel, "highrisk"
 	ACCESS_D = 4194304, // ban/unban
@@ -246,7 +246,7 @@ namespace AFBase
 	
 	bool g_afbIsSafePlugin = false;
 	
-	const string g_afInfo = "AFBase 1.2.8 PUBLIC";
+	const string g_afInfo = "AFBase 1.2.9 PUBLIC";
 	
 	bool IsSafe()
 	{
@@ -2081,7 +2081,7 @@ class AFBaseBase : AFBaseClass
 		AFBaseBase::g_decaltrackers.resize(0);
 		RegisterCommand("afb_help", "!ib", "<page> <0/1 show expansion> - List available commands", ACCESS_Z, @AFBaseBase::help);
 		RegisterCommand("afb_info", "", "- Show info", ACCESS_Z, @AFBaseBase::info);
-		RegisterCommand("afb_who", "!b", "<0/1 don't shorten nicks> - Show client information", ACCESS_K, @AFBaseBase::who);
+		RegisterCommand("afb_who", "!b", "<0/1 don't shorten nicks> - Show client information", ACCESS_Z, @AFBaseBase::who);
 		RegisterCommand("afb_listextensions", "", "- List extensions", ACCESS_Z, @AFBaseBase::extlist);
 		RegisterCommand("afb_extension_stop", "s", "(\"extension SID\") - stop extension", ACCESS_B, @AFBaseBase::extstop);
 		RegisterCommand("afb_extension_start", "s", "(\"extension SID\") - start extension", ACCESS_B, @AFBaseBase::extstart);
@@ -2089,15 +2089,15 @@ class AFBaseBase : AFBaseClass
 		RegisterCommand("admin_kick", "s!s", "(target) <\"reason\"> - kicks target with reason", ACCESS_E, @AFBaseBase::kick);
 		RegisterCommand("admin_rcon", "s", "(command) - remote console", ACCESS_C, @AFBaseBase::rcon);
 		RegisterCommand("admin_changelevel", "s", "(level) - change level", ACCESS_E, @AFBaseBase::changelevel);
-		RegisterCommand("admin_slay", "s", "(target) - slay target(s)", ACCESS_I, @AFBaseBase::slay);
-		RegisterCommand("admin_slap", "s!i", "(target) <damage> - slap target(s)", ACCESS_I, @AFBaseBase::slap);
-		RegisterCommand("admin_say", "bis!isiiiff", "(0/1 showname) (0/1/2 chat/hud/middle) (\"text\") <holdtime> <target> <r> <g> <b> <x> <y> - say text", ACCESS_I, @AFBaseBase::say);
-		RegisterCommand("admin_trackdecals", "!i", "<0/1 mode> - track player sprays, don't define mode to toggle", ACCESS_J, @AFBaseBase::trackdecals);
+		RegisterCommand("admin_slay", "s", "(target) - slay target(s)", ACCESS_G, @AFBaseBase::slay);
+		RegisterCommand("admin_slap", "s!i", "(target) <damage> - slap target(s)", ACCESS_G, @AFBaseBase::slap);
+		RegisterCommand("admin_say", "bis!isiiiff", "(0/1 showname) (0/1/2 chat/hud/middle) (\"text\") <holdtime> <target> <r> <g> <b> <x> <y> - say text", ACCESS_H, @AFBaseBase::say);
+		RegisterCommand("admin_trackdecals", "!i", "<0/1 mode> - track player sprays, don't define mode to toggle", ACCESS_G, @AFBaseBase::trackdecals);
 		RegisterCommand("admin_ban", "s!sib", "(\"steamid\") <\"reason\"> <duration in minutes, 0 for infinite> <0/1 ban ip instead of steamid> - ban target", ACCESS_D, @AFBaseBase::ban);
 		RegisterCommand("admin_unban", "s", "(\"steamid or ip\") - unban target", ACCESS_D, @AFBaseBase::unban);
 		RegisterCommand("afb_setlast", "s", "(target) - sets last target, use if you only want to select somebody without running a command on them", ACCESS_G, @AFBaseBase::selectlast);
 		RegisterCommand("admin_banlate", "s!i", "(\"steamid/ip\") <duration in minutes, 0 for inifnite> - late ban target, basically adds to ban list. Doesn't validate player like admin_ban does.", ACCESS_D, @AFBaseBase::banlate);
-		RegisterCommand("admin_blockdecals", "sb", "(target) (0/1 unban/ban) - Ban target from spraying", ACCESS_J, @AFBaseBase::bandecals);
+		RegisterCommand("admin_blockdecals", "sb", "(target) (0/1 unban/ban) - Ban target from spraying", ACCESS_G, @AFBaseBase::bandecals);
 		
 		g_Hooks.RegisterHook(Hooks::Player::PlayerDecal, @AFBaseBase::PlayerDecalHook);
 		g_Hooks.RegisterHook(Hooks::Player::PlayerSpawn, @AFBaseBase::PlayerSpawn);
@@ -2187,11 +2187,11 @@ namespace AFBaseBase
 				
 				if(bMode)
 				{
-					// afbasebase.tellall("Admin "+AFArgs.User.pev.netname+" banned player \""+AFArgs.GetString(0)+"\" from spraying decals", HUD_PRINTTALK);
+					afbasebase.TellAll("Admin "+AFArgs.User.pev.netname+" banned player \""+AFArgs.GetString(0)+"\" from spraying decals", HUD_PRINTTALK);
 					afbasebase.Tell("Banned \""+AFArgs.GetString(0)+"\" from spraying decals", AFArgs.User, HUD_PRINTCONSOLE);
 					afbasebase.Log("Admin "+AFArgs.User.pev.netname+" banned \""+AFArgs.GetString(0)+"\" from spraying decals");
 				}else{
-					// afbasebase.tellall("Admin "+AFArgs.User.pev.netname+" unbanned player \""+AFArgs.GetString(0)+"\" from spraying decals", HUD_PRINTTALK);
+					afbasebase.TellAll("Admin "+AFArgs.User.pev.netname+" unbanned player \""+AFArgs.GetString(0)+"\" from spraying decals", HUD_PRINTTALK);
 					afbasebase.Tell("Unbanned \""+AFArgs.GetString(0)+"\" from spraying decals", AFArgs.User, HUD_PRINTCONSOLE);
 					afbasebase.Log("Admin "+AFArgs.User.pev.netname+" unbanned \""+AFArgs.GetString(0)+"\" from spraying decals");
 				}
@@ -2210,11 +2210,11 @@ namespace AFBaseBase
 		{
 			if(iMinutes > 0)
 			{
-				// afbasebase.tellall("Admin "+AFArgs.User.pev.netname+" banned \""+AFArgs.GetString(0)+"\" for "+string(iMinutes)+" minutes", HUD_PRINTTALK);
+				afbasebase.TellAll("Admin "+AFArgs.User.pev.netname+" banned \""+AFArgs.GetString(0)+"\" for "+string(iMinutes)+" minutes", HUD_PRINTTALK);
 				afbasebase.Tell("Banned \""+AFArgs.GetString(0)+"\" for "+string(iMinutes)+" minutes", AFArgs.User, HUD_PRINTCONSOLE);
 				afbasebase.Log("Admin "+AFArgs.User.pev.netname+" banned \""+AFArgs.GetString(0)+"\" for "+string(iMinutes)+" minutes");
 			}else{
-				// afbasebase.tellall("Admin "+AFArgs.User.pev.netname+" banned player \""+AFArgs.GetString(0)+"\" permanently", HUD_PRINTTALK);
+				afbasebase.TellAll("Admin "+AFArgs.User.pev.netname+" banned player \""+AFArgs.GetString(0)+"\" permanently", HUD_PRINTTALK);
 				afbasebase.Tell("Banned \""+AFArgs.GetString(0)+"\" permanently", AFArgs.User, HUD_PRINTCONSOLE);
 				afbasebase.Log("Admin "+AFArgs.User.pev.netname+" banned \""+AFArgs.GetString(0)+"\" permanently");
 			}
@@ -2231,11 +2231,11 @@ namespace AFBaseBase
 			
 			if(iMinutes > 0)
 			{
-				// afbasebase.tellall("Admin "+AFArgs.User.pev.netname+" banned \""+AFArgs.GetString(0)+"\" for "+string(iMinutes)+" minutes", HUD_PRINTTALK);
+				afbasebase.TellAll("Admin "+AFArgs.User.pev.netname+" banned \""+AFArgs.GetString(0)+"\" for "+string(iMinutes)+" minutes", HUD_PRINTTALK);
 				afbasebase.Tell("Banned player \""+AFArgs.GetString(0)+"\" for "+string(iMinutes)+" minutes", AFArgs.User, HUD_PRINTCONSOLE);
 				afbasebase.Log("Admin "+AFArgs.User.pev.netname+" banned \""+AFArgs.GetString(0)+"\" for "+string(iMinutes)+" minutes");
 			}else{
-				// afbasebase.tellall("Admin "+AFArgs.User.pev.netname+" banned player \""+AFArgs.GetString(0)+"\" permanently", HUD_PRINTTALK);
+				afbasebase.TellAll("Admin "+AFArgs.User.pev.netname+" banned player \""+AFArgs.GetString(0)+"\" permanently", HUD_PRINTTALK);
 				afbasebase.Tell("Banned player \""+AFArgs.GetString(0)+"\" permanently", AFArgs.User, HUD_PRINTCONSOLE);
 				afbasebase.Log("Admin "+AFArgs.User.pev.netname+" banned \""+AFArgs.GetString(0)+"\" permanently");
 			}
@@ -2302,11 +2302,11 @@ namespace AFBaseBase
 					string sFill = bBanIp ? "ip: "+sIp : "steamid: "+sId;
 					if(iMinutes > 0)
 					{
-						// afbasebase.tellall("Admin "+AFArgs.User.pev.netname+" banned player "+pTarget.pev.netname+" ("+sFill+") for "+string(iMinutes)+" minutes (reason: "+sReason+")", HUD_PRINTTALK);
+						afbasebase.TellAll("Admin "+AFArgs.User.pev.netname+" banned player "+pTarget.pev.netname+" ("+sFill+") for "+string(iMinutes)+" minutes (reason: "+sReason+")", HUD_PRINTTALK);
 						afbasebase.Tell("Banned player "+pTarget.pev.netname+" ("+sFill+") for "+string(iMinutes)+" minutes with reason \""+sReason+"\"", AFArgs.User, HUD_PRINTCONSOLE);
 						afbasebase.Log("Admin "+AFArgs.User.pev.netname+" banned player "+pTarget.pev.netname+" ("+sFill+") for "+string(iMinutes)+" minutes with reason \""+sReason+"\"");
 					}else{
-						// afbasebase.tellall("Admin "+AFArgs.User.pev.netname+" banned player "+pTarget.pev.netname+" ("+sFill+") permanently (reason: "+sReason+")", HUD_PRINTTALK);
+						afbasebase.TellAll("Admin "+AFArgs.User.pev.netname+" banned player "+pTarget.pev.netname+" ("+sFill+") permanently (reason: "+sReason+")", HUD_PRINTTALK);
 						afbasebase.Tell("Banned player "+pTarget.pev.netname+" ("+sFill+") permanently with reason \""+sReason+"\"", AFArgs.User, HUD_PRINTCONSOLE);
 						afbasebase.Log("Admin "+AFArgs.User.pev.netname+" banned player "+pTarget.pev.netname+" ("+sFill+") permanently with reason \""+sReason+"\"");
 					}
@@ -2335,13 +2335,13 @@ namespace AFBaseBase
 		string sHold = AFArgs.GetString(0);
 		if(sHold.SubString(0,6).ToLowercase() == "steam_")
 		{
-			// afbasebase.tellall("Admin "+AFArgs.User.pev.netname+" unbanned "+sHold, HUD_PRINTTALK);
+			afbasebase.TellAll("Admin "+AFArgs.User.pev.netname+" unbanned "+sHold, HUD_PRINTTALK);
 			afbasebase.Tell("Unbanned "+sHold, AFArgs.User, HUD_PRINTCONSOLE);
 			afbasebase.Log("Admin "+AFArgs.User.pev.netname+" unbanned "+sHold);
 			g_EngineFuncs.ServerCommand("removeid "+sHold+"\n");
 			g_EngineFuncs.ServerCommand("writeid\n");
 		}else{
-			// afbasebase.tellall("Admin "+AFArgs.User.pev.netname+" unbanned "+sHold, HUD_PRINTTALK);
+			afbasebase.TellAll("Admin "+AFArgs.User.pev.netname+" unbanned "+sHold, HUD_PRINTTALK);
 			afbasebase.Tell("Unbanned "+sHold, AFArgs.User, HUD_PRINTCONSOLE);
 			afbasebase.Log("Admin "+AFArgs.User.pev.netname+" unbanned "+sHold);
 			g_EngineFuncs.ServerCommand("removeip "+sHold+"\n");
@@ -2434,14 +2434,12 @@ namespace AFBaseBase
 		PlayerDecalTracker()
 		{
 			m_PlayerDecals.resize( g_uiMaxDecals );
-			for( uint uiIndex = 0; uiIndex < m_PlayerDecals.length(); ++uiIndex ){
-				PlayerDecal plyDec();
-				@m_PlayerDecals[ uiIndex ] = @plyDec;
-			}
+			for( uint uiIndex = 0; uiIndex < m_PlayerDecals.length(); ++uiIndex )
+				@m_PlayerDecals[ uiIndex ] = @PlayerDecal();
+				
 			m_iWasLooking.resize( g_Engine.maxClients );
-			for( uint uiIndex = 0; uiIndex < m_iWasLooking.length(); ++uiIndex ){
+			for( uint uiIndex = 0; uiIndex < m_iWasLooking.length(); ++uiIndex )
 				m_iWasLooking[ uiIndex ] = 0;
-			}
 		}
 		
 		void Reset()
@@ -2502,7 +2500,7 @@ namespace AFBaseBase
 			return pNearest;
 		}
 		
-		void PlayerDecal( CBasePlayer@ pPlayer, const TraceResult& in trace )
+		void PlayerDecalInit( CBasePlayer@ pPlayer, const TraceResult& in trace )
 		{
 			if( pPlayer is null )
 				return;
@@ -2570,7 +2568,7 @@ namespace AFBaseBase
 	
 	HookReturnCode PlayerDecalHook(CBasePlayer@ pPlayer, const TraceResult& in trace)
 	{
-		g_PlayerDecalTracker.PlayerDecal(pPlayer, trace);
+		g_PlayerDecalTracker.PlayerDecalInit(pPlayer, trace);
 		return HOOK_CONTINUE;
 	}
 
@@ -2665,7 +2663,7 @@ namespace AFBaseBase
 			for(uint i = 0; i < pTargets.length(); i++)
 			{
 				@pTarget = pTargets[i];
-				// afbasebase.tellall("Admin "+AFArgs.User.pev.netname+" slapped player "+pTarget.pev.netname+" with "+string(iDamage)+" damage", HUD_PRINTTALK);
+				afbasebase.TellAll("Admin "+AFArgs.User.pev.netname+" slapped player "+pTarget.pev.netname+" with "+string(iDamage)+" damage", HUD_PRINTTALK);
 				afbasebase.Tell("Slapped player "+pTarget.pev.netname+" with "+string(iDamage)+" damage", AFArgs.User, HUD_PRINTCONSOLE);
 				entvars_t@ world = g_EntityFuncs.Instance(0).pev;
 				pTarget.TakeDamage(world, world, iDamage, DMG_GENERIC);
@@ -2688,7 +2686,7 @@ namespace AFBaseBase
 			for(uint i = 0; i < pTargets.length(); i++)
 			{
 				@pTarget = pTargets[i];
-				// afbasebase.tellall("Admin "+AFArgs.User.pev.netname+" slayed player "+pTarget.pev.netname, HUD_PRINTTALK);
+				afbasebase.TellAll("Admin "+AFArgs.User.pev.netname+" slayed player "+pTarget.pev.netname, HUD_PRINTTALK);
 				afbasebase.Tell("Slayed player "+pTarget.pev.netname, AFArgs.User, HUD_PRINTCONSOLE);
 				afbasebase.Log("Admin "+AFArgs.User.pev.netname+" slayed player "+pTarget.pev.netname);
 				entvars_t@ world = g_EntityFuncs.Instance(0).pev;
@@ -2746,7 +2744,7 @@ namespace AFBaseBase
 		}
 		
 		afbasebase.Tell("Changed level to: "+sMap, AFArgs.User, HUD_PRINTCONSOLE);
-		// afbasebase.tellall("Admin "+AFArgs.User.pev.netname+" changed level to "+sMap, HUD_PRINTTALK);
+		afbasebase.TellAll("Admin "+AFArgs.User.pev.netname+" changed level to "+sMap, HUD_PRINTTALK);
 		afbasebase.Log("Admin "+AFArgs.User.pev.netname+" changed level to "+sMap);
 		NetworkMessage message(MSG_ALL, NetworkMessages::SVC_INTERMISSION, null);
 		message.End();
@@ -2807,7 +2805,7 @@ namespace AFBaseBase
 			for(uint i = 0; i < pTargets.length(); i++)
 			{
 				@pTarget = pTargets[i];
-				// afbasebase.tellall("Admin "+AFArgs.User.pev.netname+" kicked player "+pTarget.pev.netname+" (reason: "+sReason+")", HUD_PRINTTALK);
+				afbasebase.TellAll("Admin "+AFArgs.User.pev.netname+" kicked player "+pTarget.pev.netname+" (reason: "+sReason+")", HUD_PRINTTALK);
 				afbasebase.Tell("Kicked player "+pTarget.pev.netname+" with reason \""+sReason+"\"", AFArgs.User, HUD_PRINTCONSOLE);
 				afbasebase.Log("Admin "+AFArgs.User.pev.netname+" kicked player "+pTarget.pev.netname+" with reason \""+sReason+"\"");
 				g_EngineFuncs.ServerCommand("kick #"+string(g_EngineFuncs.GetPlayerUserId(pTarget.edict()))+" \""+sReason+"\"\n");
@@ -2879,7 +2877,7 @@ namespace AFBaseBase
 					AFBase::g_afbUserList[pTarget.entindex()] = afbUser;
 					afbasebase.Log(string(AFArgs.User.pev.netname)+" updated "+string(pTarget.pev.netname)+" access to "+sNewAccess+"z");
 					afbasebase.Tell("updated "+string(pTarget.pev.netname)+" access to "+sNewAccess+"z", AFArgs.User, HUD_PRINTCONSOLE);
-					// afbasebase.tellall("Admin "+AFArgs.User.pev.netname+" updated "+pTarget.pev.netname+" access to \""+sNewAccess+"z\"", HUD_PRINTTALK);
+					afbasebase.TellAll("Admin "+AFArgs.User.pev.netname+" updated "+pTarget.pev.netname+" access to \""+sNewAccess+"z\"", HUD_PRINTTALK);
 					AFBase::UpdateAccessFile(sFixId, sNewAccess);
 				}else if(sFlags.SubString(0,1) == "-")
 				{
@@ -2923,7 +2921,7 @@ namespace AFBaseBase
 					AFBase::g_afbUserList[pTarget.entindex()] = afbUser;
 					afbasebase.Log(string(AFArgs.User.pev.netname)+" updated "+string(pTarget.pev.netname)+" access to "+sNewAccess+"z");
 					afbasebase.Tell("updated "+string(pTarget.pev.netname)+" access to "+sNewAccess+"z", AFArgs.User, HUD_PRINTCONSOLE);
-					// afbasebase.tellall("Admin "+AFArgs.User.pev.netname+" updated "+pTarget.pev.netname+" access to \""+sNewAccess+"z\"", HUD_PRINTTALK);
+					afbasebase.TellAll("Admin "+AFArgs.User.pev.netname+" updated "+pTarget.pev.netname+" access to \""+sNewAccess+"z\"", HUD_PRINTTALK);
 					AFBase::UpdateAccessFile(sFixId, sNewAccess);
 				}else if(sFlags != "!")
 				{
@@ -2951,7 +2949,7 @@ namespace AFBaseBase
 					AFBase::g_afbUserList[pTarget.entindex()] = afbUser;
 					afbasebase.Log(string(AFArgs.User.pev.netname)+" updated "+string(pTarget.pev.netname)+" access to "+sNewAcc);
 					afbasebase.Tell("updated "+string(pTarget.pev.netname)+" access to "+sNewAcc+"z", AFArgs.User, HUD_PRINTCONSOLE);
-					// afbasebase.tellall("Admin "+AFArgs.User.pev.netname+" updated "+pTarget.pev.netname+" access to \""+sNewAcc+"\"", HUD_PRINTTALK);
+					afbasebase.TellAll("Admin "+AFArgs.User.pev.netname+" updated "+pTarget.pev.netname+" access to \""+sNewAcc+"\"", HUD_PRINTTALK);
 					AFBase::UpdateAccessFile(sFixId, sNewAcc);
 				}else{
 					AFBase::AFBaseUser@ afbUser = AFBase::GetUser(pTarget);
@@ -3048,9 +3046,9 @@ namespace AFBaseBase
 		string sVIMM = "Imm  ";
 		string sVACCESS = "Access";
 		if(bShowAll)
-			TellLongCustom(sVID+sVNICK+sVOLDNICK+sVAUTH+sVIP+"\n", AFArgs.User, HUD_PRINTCONSOLE);
+			TellLongCustom(sVID+sVNICK+sVOLDNICK+sVAUTH+sVIP+sVIMM+sVACCESS+"\n", AFArgs.User, HUD_PRINTCONSOLE);
 		else
-			TellLongCustom(sVID+sVNICK+sVAUTH+"\n", AFArgs.User, HUD_PRINTCONSOLE);
+			TellLongCustom(sVID+sVNICK+sVAUTH+sVIMM+sVACCESS+"\n", AFArgs.User, HUD_PRINTCONSOLE);
 		for(uint i = 0; i < afbKeys.length(); i++)
 		{
 			@AFBUser = cast<AFBase::AFBaseUser@>(AFBase::g_afbUserList[afbKeys[i]]);
@@ -3091,9 +3089,9 @@ namespace AFBaseBase
 				sVIMM = AFBase::CheckAccess(atoi(afbKeys[i]), ACCESS_A) ? "Yes  " : "No   ";
 				sVACCESS = AFBUser.sAccess+sSpace.SubString(0, iLongestAccess-AFBUser.sAccess.Length());
 				if(bShowAll)
-					TellLongCustom(sVID+sVNICK+sVOLDNICK+sVAUTH+sVIP+"\n", AFArgs.User, HUD_PRINTCONSOLE);
+					TellLongCustom(sVID+sVNICK+sVOLDNICK+sVAUTH+sVIP+sVIMM+sVACCESS+"\n", AFArgs.User, HUD_PRINTCONSOLE);
 				else
-					TellLongCustom(sVID+sVNICK+sVAUTH+"\n", AFArgs.User, HUD_PRINTCONSOLE);
+					TellLongCustom(sVID+sVNICK+sVAUTH+sVIMM+sVACCESS+"\n", AFArgs.User, HUD_PRINTCONSOLE);
 			}
 		}
 		g_PlayerFuncs.ClientPrint(AFArgs.User, HUD_PRINTCONSOLE, "--------------------------------------------------------------------------------\n");

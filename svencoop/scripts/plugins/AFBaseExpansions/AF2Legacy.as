@@ -166,4 +166,5 @@ namespace AF2LegacyCode
 			return "§§§§N/A";
 		}
 	}
+
 }
