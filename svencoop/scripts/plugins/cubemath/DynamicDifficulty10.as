@@ -909,22 +909,22 @@ final class Diffy {
 	void multiplySpeed(CBaseEntity@ pEntity, double factor){
 		CustomKeyvalues@ cKeyValues = pEntity.GetCustomKeyvalues();
 		
-		if(!cKeyValues.HasKeyvalue("originalSpeed")){
-			cKeyValues.SetKeyvalue("originalSpeed", pEntity.pev.speed);
+		if(!cKeyValues.HasKeyvalue("$f_originalSpeed")){
+			cKeyValues.SetKeyvalue("$f_originalSpeed", pEntity.pev.speed);
 			pEntity.pev.speed *= factor;
 		}else{
-			pEntity.pev.speed = cKeyValues.GetKeyvalue("originalSpeed").GetFloat() * factor;
+			pEntity.pev.speed = cKeyValues.GetKeyvalue("$f_originalSpeed").GetFloat() * factor;
 		}
 	}
 	
 	void multiplyMaxSpeed(CBaseEntity@ pEntity, double factor){
 		CustomKeyvalues@ cKeyValues = pEntity.GetCustomKeyvalues();
 		
-		if(!cKeyValues.HasKeyvalue("originalMaxSpeed")){
-			cKeyValues.SetKeyvalue("originalMaxSpeed", pEntity.pev.maxspeed);
+		if(!cKeyValues.HasKeyvalue("$f_originalMaxSpeed")){
+			cKeyValues.SetKeyvalue("$f_originalMaxSpeed", pEntity.pev.maxspeed);
 			pEntity.pev.maxspeed *= factor;
 		}else{
-			pEntity.pev.maxspeed = cKeyValues.GetKeyvalue("originalSpeed").GetFloat() * factor;
+			pEntity.pev.maxspeed = cKeyValues.GetKeyvalue("$f_originalSpeed").GetFloat() * factor;
 		}
 	}
 	
@@ -1234,6 +1234,9 @@ void PluginInit() {
 	
 	Diffy dif();
 	@g_diffy = @dif;
+	
+	g_diffy.countPeople();
+	g_diffy.mapStartDiffy();
 }
 
 void MapInit() {
