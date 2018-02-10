@@ -791,18 +791,16 @@ final class Diffy {
 		}
 	}
 	
-	void changeMessage(){
+	//Mode 0 = Count people
+	//Mode 1 = Changed by Admin
+	//Mode 2 = Count people and Fails
+	//Mode 3 = Disabled
+	void changeMessage(int mode){
 		int difficultInt = int(m_fl_difficulty*1000.0+0.5);
 		string aStr = "DIFFICULTY: Current: "+(difficultInt/10)+"."+(difficultInt%10)+" percent ";
+		
 		string bStr = "";
 		string cStr = "";
-		if(m_LastPlayerNum == 0){
-			cStr = " (none were connected at Map-Begin)";
-		}else if(m_LastPlayerNum == 1){
-			cStr = " (a person were connected at Map-Begin)";
-		}else{
-			cStr = " ("+m_LastPlayerNum+" people were connected at Map-Begin)";
-		}
 		
 		if(m_fl_difficulty<0.0005)
 			bStr = "(Lowest Difficulty)";
@@ -826,6 +824,38 @@ final class Diffy {
 			bStr = "(WARNING: Impossible!)";
 		else
 			bStr = "(WARNING: MAXIMUM DIFFICULTY!)";
+			
+		switch(mode){
+		case 0:
+			if(m_LastPlayerNum == 0){
+				cStr = " (none were connected at Map-Begin)";
+			}else if(m_LastPlayerNum == 1){
+				cStr = " (a person were connected at Map-Begin)";
+			}else{
+				cStr = " ("+m_LastPlayerNum+" people were connected at Map-Begin)";
+			}
+			
+			break;
+		case 1:
+			cStr = " (changed by an Admin)";
+			break;
+		case 2:
+			if(m_Fails == 0){
+				cStr = " (First time on this map)";
+			}else if(m_Fails == 1){
+				cStr = " (Map restarted once)";
+			}else if(m_Fails == 2){
+				cStr = " (Map restarted twice)";
+			}else if(m_Fails == 3){
+				cStr = " (Map restarted thrice)";
+			}else{
+				cStr = " (Map restarted "+m_Fails+" times)";
+			}
+			break;
+		case 3:
+			cStr = " (Disabled on this map)";
+			break;
+		}
 		
 		s_message = aStr+bStr+cStr;
 	}
@@ -878,17 +908,27 @@ final class Diffy {
 		}
 	}
 	
-	void setDifficulty(double newDiff){
+	void setDifficulty(double newDiff, bool ignoreChanges, int mode){
 		
+		if(newDiff < 0.0) newDiff = 0.0;
+		if(newDiff > 1.0) newDiff = 1.0;
 		if(newDiff < 0.001 && newDiff > 0.0) newDiff = 0.001;
 		if(newDiff > 0.999 && newDiff < 1.0) newDiff = 0.999;
 		
+		if(ignoreChanges) {
+			newDiff = 0.5;
+			mode = 3;
+		}
+		
 		m_fl_difficulty = newDiff;
-		calculateSkills();
-		manipulateEntities();
-		changeMaxHealth();
-		changeMonsterHealth();
-		changeMessage();
+		if(!ignoreChanges) {
+			calculateSkills();
+			manipulateEntities();
+			changeMaxHealth();
+			changeMonsterHealth();
+		}
+		
+		changeMessage(mode);
 	}
 	
 	void countPeople(){
@@ -951,6 +991,11 @@ final class Diffy {
 			
 			string s_Targetname = pEntity.GetTargetname();
 			bool needsRetrigger = false;
+			
+			if((pEntity.pev.classname == "item_battery" || pEntity.pev.classname == "item_healthkit") && m_fl_difficulty == 1.0){
+				g_EntityFuncs.Remove( pEntity );
+				continue;
+			}
 			
 			if(pEntity.pev.classname == "func_recharge" || pEntity.pev.classname == "func_healthcharger"){
 				chargerValuesStr.insertLast(pEntity.pev.model);
@@ -1165,6 +1210,35 @@ final class Diffy {
 		g_Scheduler.SetTimeout( @this, "manipulateEntities2", 0.01f );
 	}
 	
+	bool shouldIgnoreDynDiff(){
+		File@ pFile = g_FileSystem.OpenFile( "scripts/plugins/store/DDX-Maplist.txt", OpenFile::READ );
+		
+		if( pFile is null || !pFile.IsOpen() ) {
+			g_PlayerFuncs.ClientPrintAll( HUD_PRINTCONSOLE, "ERROR: scripts/plugins/store/DDX-Maplist.txt failed to open\n" );
+			return false;
+		}
+		
+		string strMap = g_Engine.mapname;
+		strMap.ToLowercase();
+		
+		string line;
+		
+		while( !pFile.EOFReached() ){
+			pFile.ReadLine( line );
+			
+			if(line.Length() < 1) continue;
+			
+			line.ToLowercase();
+			
+			if(strMap == line) return false;
+			
+		}
+		
+		pFile.Close();
+		
+		return true;
+	}
+	
 	void mapStartDiffy(){
 		m_flMessageTime = 0.0;
 		m_LastPlayerNum = m_playerNum;
@@ -1180,6 +1254,7 @@ final class Diffy {
 		}
 		
 		double d = diffPerPeep[m_LastPlayerNum];
+		int mode = 0;
 		
 		if(m_Fails > 2){
 			if(d == 1.0){
@@ -1187,9 +1262,10 @@ final class Diffy {
 			}else{
 				d = d - double(m_Fails-2)*0.05;
 			}
+			mode = 2;
 		}
 		
-		setDifficulty(d);
+		setDifficulty(d, shouldIgnoreDynDiff(), mode);
 		
 		countPeople();
 	}
@@ -1212,10 +1288,7 @@ void manipulate_difficulty(const CCommand@ pArguments){
 	
 	double newDiff = atod(aStr);
 	
-	if(newDiff < 0.0) newDiff = 0.0;
-	if(newDiff > 100.0) newDiff = 100.0;
-	
-	g_diffy.setDifficulty(newDiff/100.0);
+	g_diffy.setDifficulty(newDiff/100.0, false, 1);
 }
 
 void PluginInit() {
