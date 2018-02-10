@@ -2257,21 +2257,46 @@
 }
 {
 "model" "*77"
-"classname" "func_wall"
+"maxhullsize" "0 0 0"
+"minhullsize" "0 0 0"
+"weapon" "1"
+"angles" "0 0 0"
+"spawnobject" "18"
+"buoyancy" "30"
+"friction" "220"
+"rendercolor" "255 255 255"
+"explosion" "1"
+"material" "1"
+"health" "80"
+"gibmodel" "models/mil_crategibs.mdl"
+"spawnflags" "128"
+"classname" "func_pushable"
 }
 {
 "model" "*78"
-"classname" "func_wall"
+"maxhullsize" "0 0 0"
+"minhullsize" "0 0 0"
+"weapon" "1"
+"angles" "0 0 0"
+"buoyancy" "30"
+"friction" "220"
+"rendercolor" "255 255 255"
+"explosion" "1"
+"material" "1"
+"health" "80"
+"spawnflags" "128"
+"classname" "func_pushable"
 }
 {
 "model" "*79"
-"classname" "func_wall"
-}
-{
-"origin" "960 -1200 300"
-"rendercolor" "0 0 0"
+"weapon" "1"
 "angles" "0 0 0"
-"classname" "weapon_tripmine"
+"rendercolor" "255 255 255"
+"explosion" "1"
+"material" "1"
+"health" "150"
+"spawnflags" "256"
+"classname" "func_breakable"
 }
 {
 "model" "*80"

@@ -1730,3 +1730,16 @@
 "scale" "0.5"
 "classname" "env_sprite"
 }
+{
+"targetname" "got_rosy_state"
+"triggermode" "0"
+"globalstate" "got_rosy"
+"classname" "env_global"
+}
+{
+"triggerstate" "1"
+"delay" "1"
+"classname" "trigger_auto"
+"target" "got_rosy_state"
+"globalstate" "got_rosy"
+}

@@ -3216,3 +3216,29 @@
 "scale" "0.5"
 "classname" "env_sprite"
 }
+{
+"globalstate" "generatorglobal"
+"triggermode" "0"
+"targetname" "generatorglobal_trigger"
+"classname" "env_global"
+}
+{
+"triggerstate" "1"
+"delay" "1"
+"target" "generatorglobal_trigger"
+"globalstate" "generatorglobal"
+"classname" "trigger_auto"
+}
+{
+"globalstate" "powercomplete"
+"triggermode" "0"
+"targetname" "power_complete"
+"classname" "env_global"
+}
+{
+"triggerstate" "1"
+"delay" "1"
+"target" "power_complete"
+"globalstate" "powercomplete"
+"classname" "trigger_auto"
+}

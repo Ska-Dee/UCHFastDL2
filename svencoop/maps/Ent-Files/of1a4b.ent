@@ -3221,3 +3221,31 @@
 "target" "percent_lock_2"
 "classname" "trigger_once_mp"
 }
+{
+"model" "*179"
+"origin" "902 330 -195"
+"angles" "0 135 0"
+"speed" "512"
+"classname" "trigger_push"
+}
+{
+"model" "*179"
+"origin" "1030 458 -195"
+"angles" "0 135 0"
+"speed" "512"
+"classname" "trigger_push"
+}
+{
+"model" "*179"
+"origin" "1030 330 -195"
+"angles" "0 135 0"
+"speed" "512"
+"classname" "trigger_push"
+}
+{
+"model" "*179"
+"origin" "902 458 -195"
+"angles" "0 135 0"
+"speed" "512"
+"classname" "trigger_push"
+}
