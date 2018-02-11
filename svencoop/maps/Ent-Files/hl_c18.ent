@@ -5479,6 +5479,7 @@
 "message" "Accept his offer?"
 "target" "enable_teleport_to_end"
 "netname" "start_loser_mm"
+"noise" "start_loser_mm"
 "classname" "trigger_vote"
 }
 {
