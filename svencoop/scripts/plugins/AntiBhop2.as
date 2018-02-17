@@ -137,8 +137,18 @@ void HandlePlayer( CBasePlayer@ pPlayer )
 			
 			if( pData.m_flVelocityZ < -150.0f ){
 				if( pPlayer.pev.velocity.z > pData.m_flVelocityZ ){
-					pPlayer.pev.velocity.x = pPlayer.pev.velocity.x * 0.5f;
-					pPlayer.pev.velocity.y = pPlayer.pev.velocity.y * 0.5f;
+					
+					float speed = sqrt(pPlayer.pev.velocity.x*pPlayer.pev.velocity.x+pPlayer.pev.velocity.y*pPlayer.pev.velocity.y);
+					
+					if(speed > 270.0f){
+						float slowDown = 270.0f / speed;
+						slowDown *= slowDown;
+						
+						if(slowDown < 0.5f) slowDown = 0.5f;
+						
+						pPlayer.pev.velocity.x = pPlayer.pev.velocity.x * slowDown;
+						pPlayer.pev.velocity.y = pPlayer.pev.velocity.y * slowDown;
+					}
 					
 					//g_PlayerFuncs.ClientPrintAll( HUD_PRINTTALK, "Anti-Bhop: " + sqrt(pPlayer.pev.velocity.x*pPlayer.pev.velocity.x+pPlayer.pev.velocity.y*pPlayer.pev.velocity.y) + "\n" );
 				}
