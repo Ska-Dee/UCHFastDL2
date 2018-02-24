@@ -1135,7 +1135,7 @@
 "model" "*28"
 "delay" "0"
 "sounds" "0"
-"dmg" "100"
+"dmg" "10000"
 "classname" "trigger_hurt"
 }
 {
@@ -1187,7 +1187,7 @@
 "model" "*31"
 "delay" "0"
 "sounds" "0"
-"dmg" "100"
+"dmg" "10000"
 "classname" "trigger_hurt"
 }
 {
@@ -4791,7 +4791,7 @@
 "model" "*88"
 "delay" "0"
 "sounds" "0"
-"dmg" "100"
+"dmg" "10000"
 "classname" "trigger_hurt"
 }
 {
