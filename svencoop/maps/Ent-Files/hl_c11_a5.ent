@@ -6709,7 +6709,7 @@
 "rendercolor" "0 0 0"
 "angles" "0 126 0"
 "TriggerCondition" "4"
-"TriggerTarget" "slave_spawner_3_relay"
+"TriggerTarget" "slave_spawner_mm"
 "spawnflags" "4"
 "classname" "monster_alien_slave"
 }
@@ -7366,30 +7366,6 @@
 "classname" "light"
 }
 {
-"origin" "-1468 -3882 -1520"
-"angles" "0 60 0"
-"monstercount" "5"
-"delay" "1"
-"m_imaxlivechildren" "1"
-"targetname" "slave_spawner_3"
-"monstertype" "monster_alien_slave"
-"target" "spawner_flash_3"
-"spawnflags" "8"
-"classname" "monstermaker"
-}
-{
-"origin" "-1132 -3902 -1520"
-"angles" "0 109 0"
-"monstercount" "5"
-"delay" "1"
-"m_imaxlivechildren" "1"
-"targetname" "slave_spawner_2"
-"monstertype" "monster_alien_slave"
-"target" "spawner_flash_2"
-"spawnflags" "8"
-"classname" "monstermaker"
-}
-{
 "origin" "-1388 -2924 -1639"
 "maxhullsize" "0 0 0"
 "minhullsize" "0 0 0"
@@ -7432,19 +7408,42 @@
 "classname" "monstermaker"
 }
 {
-"origin" "-1536 -3862 -1516"
-"angles" "0 0 0"
-"target" "slave_spawner_3"
-"delay" "5"
-"targetname" "slave_spawner_3_relay"
-"triggerstate" "1"
-"classname" "trigger_relay"
+"origin" "-1132 -3902 -1520"
+"angles" "0 109 0"
+"monstercount" "5"
+"delay" "1"
+"m_imaxlivechildren" "1"
+"targetname" "slave_spawner_2"
+"monstertype" "monster_alien_slave"
+"target" "spawner_flash_2"
+"spawnflags" "8"
+"classname" "monstermaker"
+}
+{
+"slave_spawner_1" "20#0"
+"slave_spawner_2" "20#0"
+"slave_spawner_3" "20#0"
+"slave_spawner_3_relay" "0"
+"targetname" "slave_spawner_mm"
+"classname" "multi_manager"
+}
+{
+"origin" "-1468 -3882 -1520"
+"angles" "0 60 0"
+"monstercount" "5"
+"delay" "1"
+"m_imaxlivechildren" "1"
+"targetname" "slave_spawner_3"
+"monstertype" "monster_alien_slave"
+"target" "spawner_flash_3"
+"spawnflags" "8"
+"classname" "monstermaker"
 }
 {
 "origin" "-1281 -3769 -1516"
 "angles" "0 0 0"
 "target" "slave_spawner_1"
-"delay" "5"
+"delay" "3"
 "targetname" "slave_spawner_1_relay"
 "triggerstate" "1"
 "classname" "trigger_relay"
@@ -7453,8 +7452,17 @@
 "origin" "-1103 -3877 -1516"
 "angles" "0 0 0"
 "target" "slave_spawner_2"
-"delay" "5"
+"delay" "3"
 "targetname" "slave_spawner_2_relay"
+"triggerstate" "1"
+"classname" "trigger_relay"
+}
+{
+"origin" "-1536 -3862 -1516"
+"angles" "0 0 0"
+"target" "slave_spawner_3"
+"delay" "3"
+"targetname" "slave_spawner_3_relay"
 "triggerstate" "1"
 "classname" "trigger_relay"
 }

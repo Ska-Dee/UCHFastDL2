@@ -3935,13 +3935,6 @@
 "classname" "multisource"
 }
 {
-"origin" "-800 -16 -400"
-"angles" "0 180 0"
-"minhullsize" "-16 -64 -100"
-"maxhullsize" "16 256 150"
-"classname" "point_checkpoint"
-}
-{
 "origin" "-2284 1681 -576"
 "angle" "200"
 "classname" "weapon_saw"

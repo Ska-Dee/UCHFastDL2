@@ -18,13 +18,13 @@ class AF2Player : AFBaseClass
 	
 	void ExpansionInit()
 	{
-		RegisterCommand("player_teleportaim", "s", "(targets) - teleport target(s) to where you are aiming at", ACCESS_G, @AF2Player::teleportaim);
-		RegisterCommand("say !tpaim", "s", "(targets) - teleport target(s) to where you are aiming at", ACCESS_G, @AF2Player::teleportaim, false, true);
-		RegisterCommand("player_teleportmeto", "s", "(target) - teleport you to target", ACCESS_G, @AF2Player::teleportmeto);
-		RegisterCommand("say !tpmeto", "s", "(target) - teleport you to target", ACCESS_G, @AF2Player::teleportmeto, false, true);
-		RegisterCommand("player_teleporttome", "s", "(targets) - teleport target(s) to you", ACCESS_G, @AF2Player::teleporttome);
-		RegisterCommand("say !tptome", "s", "(targets) - teleport target(s) to you", ACCESS_G, @AF2Player::teleporttome, false, true);
-		RegisterCommand("player_teleportpos", "sv", "(targets) (vector) - teleport target(s) to position", ACCESS_G, @AF2Player::teleportpos);
+		RegisterCommand("player_teleportaim", "s", "(targets) - teleport target(s) to where you are aiming at", ACCESS_I, @AF2Player::teleportaim);
+		RegisterCommand("say !tpaim", "s", "(targets) - teleport target(s) to where you are aiming at", ACCESS_I, @AF2Player::teleportaim, false, true);
+		RegisterCommand("player_teleportmeto", "s", "(target) - teleport you to target", ACCESS_I, @AF2Player::teleportmeto);
+		RegisterCommand("say !tpmeto", "s", "(target) - teleport you to target", ACCESS_I, @AF2Player::teleportmeto, false, true);
+		RegisterCommand("player_teleporttome", "s", "(targets) - teleport target(s) to you", ACCESS_I, @AF2Player::teleporttome);
+		RegisterCommand("say !tptome", "s", "(targets) - teleport target(s) to you", ACCESS_I, @AF2Player::teleporttome, false, true);
+		RegisterCommand("player_teleportpos", "sv", "(targets) (vector) - teleport target(s) to position", ACCESS_I, @AF2Player::teleportpos);
 		RegisterCommand("player_disarm", "s", "(targets) - disarm target(s)", ACCESS_G, @AF2Player::disarm);
 		RegisterCommand("player_getmodel", "s", "(targets) - return target(s) playermodel", ACCESS_Z, @AF2Player::getmodel);
 		RegisterCommand("player_give", "ss", "(targets) (weapon/ammo/item) - give target(s) stuff", ACCESS_G, @AF2Player::give);

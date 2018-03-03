@@ -1630,36 +1630,36 @@ namespace AFBase
 	
 	void BaseTell(string sMsg, CBasePlayer@ pUser, HUD hudTarget)
 	{
-		if(hudTarget == HUD_PRINTTALK)
-			g_PlayerFuncs.ClientPrint(pUser, hudTarget, "[AFB] "+sMsg+"\n");
-		else
-			g_PlayerFuncs.ClientPrint(pUser, hudTarget, "[AFB] "+sMsg+"\n");
+		// if(hudTarget == HUD_PRINTTALK)
+			// g_PlayerFuncs.ClientPrint(pUser, hudTarget, "[AFB] "+sMsg+"\n");
+		// else
+			// g_PlayerFuncs.ClientPrint(pUser, hudTarget, "[AFB] "+sMsg+"\n");
 	}
 	
 	void BaseTellLong(string sMsg, CBasePlayer@ pUser, HUD targetHud)
 	{
-		string sHoldIn;
-		if(targetHud == HUD_PRINTTALK)
-			sHoldIn = "[AFB] "+sMsg+"\n";
-		else
-			sHoldIn = "[AFB] "+sMsg+"\n";
+		// string sHoldIn;
+		// if(targetHud == HUD_PRINTTALK)
+			// sHoldIn = "[AFB] "+sMsg+"\n";
+		// else
+			// sHoldIn = "[AFB] "+sMsg+"\n";
 			
-		while(sHoldIn.Length() > 128)
-		{
-			g_PlayerFuncs.ClientPrint(pUser, targetHud, sHoldIn.SubString(0, 128));
-			sHoldIn = sHoldIn.SubString(127, sHoldIn.Length()-127);
-		}
+		// while(sHoldIn.Length() > 128)
+		// {
+			// g_PlayerFuncs.ClientPrint(pUser, targetHud, sHoldIn.SubString(0, 128));
+			// sHoldIn = sHoldIn.SubString(127, sHoldIn.Length()-127);
+		// }
 		
-		if(sHoldIn.Length() > 0)
-			g_PlayerFuncs.ClientPrint(pUser, targetHud, sHoldIn);
+		// if(sHoldIn.Length() > 0)
+			// g_PlayerFuncs.ClientPrint(pUser, targetHud, sHoldIn);
 	}
 	
 	void BaseTellAll(string sMsg, HUD hudTarget)
 	{
-		if(hudTarget == HUD_PRINTTALK)
-			g_PlayerFuncs.ClientPrintAll(hudTarget, "[AFB] "+sMsg+"\n");
-		else
-			g_PlayerFuncs.ClientPrintAll(hudTarget, "[AFB] "+sMsg+"\n");
+		// if(hudTarget == HUD_PRINTTALK)
+			// g_PlayerFuncs.ClientPrintAll(hudTarget, "[AFB] "+sMsg+"\n");
+		// else
+			// g_PlayerFuncs.ClientPrintAll(hudTarget, "[AFB] "+sMsg+"\n");
 	}
 	
 	bool GetTargetPlayers(CBasePlayer@ &in pSelf, HUD &in hudTarget, string &in sInput, int &in iFlags, array<CBasePlayer@> &out pTargets)
@@ -2462,15 +2462,15 @@ class AFBaseBase : AFBaseClass
 		RegisterCommand("admin_kick", "s!s", "(target) <\"reason\"> - kicks target with reason", ACCESS_E, @AFBaseBase::kick);
 		RegisterCommand("admin_rcon", "s", "(command) - remote console", ACCESS_C, @AFBaseBase::rcon);
 		RegisterCommand("admin_changelevel", "s", "(level) - change level", ACCESS_E, @AFBaseBase::changelevel);
-		RegisterCommand("admin_slay", "s", "(target) - slay target(s)", ACCESS_G, @AFBaseBase::slay);
-		RegisterCommand("admin_slap", "s!i", "(target) <damage> - slap target(s)", ACCESS_G, @AFBaseBase::slap);
+		RegisterCommand("admin_slay", "s", "(target) - slay target(s)", ACCESS_I, @AFBaseBase::slay);
+		RegisterCommand("admin_slap", "s!i", "(target) <damage> - slap target(s)", ACCESS_I, @AFBaseBase::slap);
 		RegisterCommand("admin_say", "bis!isiiiff", "(0/1 showname) (0/1/2 chat/hud/middle) (\"text\") <holdtime> <target> <r> <g> <b> <x> <y> - say text", ACCESS_H, @AFBaseBase::say);
-		RegisterCommand("admin_trackdecals", "!i", "<0/1 mode> - track player sprays, don't define mode to toggle", ACCESS_G, @AFBaseBase::trackdecals);
+		RegisterCommand("admin_trackdecals", "!i", "<0/1 mode> - track player sprays, don't define mode to toggle", ACCESS_I, @AFBaseBase::trackdecals);
 		RegisterCommand("admin_ban", "s!sib", "(\"steamid\") <\"reason\"> <duration in minutes, 0 for infinite> <0/1 ban ip instead of steamid> - ban target", ACCESS_D, @AFBaseBase::ban);
 		RegisterCommand("admin_unban", "s", "(\"steamid or ip\") - unban target", ACCESS_D, @AFBaseBase::unban);
 		RegisterCommand("afb_setlast", "s", "(target) - sets last target, use if you only want to select somebody without running a command on them", ACCESS_G, @AFBaseBase::selectlast);
 		RegisterCommand("admin_banlate", "s!si", "(\"steamid/ip\") <\"reason\"> <duration in minutes, 0 for infinite> - late ban target, basically adds to ban list. Doesn't validate player like admin_ban does.", ACCESS_D, @AFBaseBase::banlate);
-		RegisterCommand("admin_blockdecals", "sb", "(target) (0/1 unban/ban) - Ban target from spraying", ACCESS_G, @AFBaseBase::bandecals);
+		RegisterCommand("admin_blockdecals", "sb", "(target) (0/1 unban/ban) - Ban target from spraying", ACCESS_I, @AFBaseBase::bandecals);
 		RegisterCommand("admin_gag", "ss", "(targets) (mode a/c/v) - gag player, a = all, c = chat, v = voice", ACCESS_G, @AFBaseBase::gag);
 		RegisterCommand("admin_ungag", "s", "(targets) - ungag player", ACCESS_G, @AFBaseBase::ungag);
 		
