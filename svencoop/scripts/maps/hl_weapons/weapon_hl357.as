@@ -31,7 +31,7 @@ class weapon_hl357 : ScriptBasePlayerWeaponEntity
 	void Spawn()
 	{
 		Precache();
-		g_EntityFuncs.SetModel( self, "models/hl/w_357.mdl" );
+		g_EntityFuncs.SetModel( self, "models/hlclassic/w_357.mdl" );
 
 		self.m_iDefaultAmmo = PYTHON_DEFAULT_GIVE;
 
@@ -41,9 +41,9 @@ class weapon_hl357 : ScriptBasePlayerWeaponEntity
 	void Precache()
 	{
 		self.PrecacheCustomModels();
-		g_Game.PrecacheModel( "models/hl/v_357.mdl" );
-		g_Game.PrecacheModel( "models/hl/w_357.mdl" );
-		g_Game.PrecacheModel( "models/hl/p_357.mdl" );
+		g_Game.PrecacheModel( "models/hlclassic/v_357.mdl" );
+		g_Game.PrecacheModel( "models/hlclassic/w_357.mdl" );
+		g_Game.PrecacheModel( "models/hlclassic/p_357.mdl" );
 
 		m_iShell = g_Game.PrecacheModel( "models/shell.mdl" );
 
@@ -51,14 +51,14 @@ class weapon_hl357 : ScriptBasePlayerWeaponEntity
 		g_SoundSystem.PrecacheSound( "items/9mmclip1.wav" );              
 
 		//These are played by the model, needs changing there
-		g_SoundSystem.PrecacheSound( "hl/items/clipinsert1.wav" );
-		g_SoundSystem.PrecacheSound( "hl/items/cliprelease1.wav" );
-		g_SoundSystem.PrecacheSound( "hl/items/guncock1.wav" );
+		g_SoundSystem.PrecacheSound( "hlclassic/items/clipinsert1.wav" );
+		g_SoundSystem.PrecacheSound( "hlclassic/items/cliprelease1.wav" );
+		g_SoundSystem.PrecacheSound( "hlclassic/items/guncock1.wav" );
 
-		g_SoundSystem.PrecacheSound( "hl/weapons/357_reload1.wav" );
-		g_SoundSystem.PrecacheSound( "hl/weapons/357_cock1.wav" );
-		g_SoundSystem.PrecacheSound( "hl/weapons/357_shot1.wav" );
-		g_SoundSystem.PrecacheSound( "hl/weapons/357_shot2.wav" );
+		g_SoundSystem.PrecacheSound( "hlclassic/weapons/357_reload1.wav" );
+		g_SoundSystem.PrecacheSound( "hlclassic/weapons/357_cock1.wav" );
+		g_SoundSystem.PrecacheSound( "hlclassic/weapons/357_shot1.wav" );
+		g_SoundSystem.PrecacheSound( "hlclassic/weapons/357_shot2.wav" );
 	}
 
 	bool AddToPlayer( CBasePlayer@ pPlayer )
@@ -81,7 +81,7 @@ class weapon_hl357 : ScriptBasePlayerWeaponEntity
 		{
 			self.m_bPlayEmptySound = false;
 			
-			g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_WEAPON, "hl/weapons/357_cock1.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
+			g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_WEAPON, "hlclassic/weapons/357_cock1.wav", 0.8, ATTN_NORM, 0, PITCH_NORM );
 		}
 		
 		return false;
@@ -104,7 +104,7 @@ class weapon_hl357 : ScriptBasePlayerWeaponEntity
 
 	bool Deploy()
 	{
-		return self.DefaultDeploy( self.GetV_Model( "models/hl/v_357.mdl" ), self.GetP_Model( "models/hl/p_357.mdl" ), PYTHON_DRAW, "python" );
+		return self.DefaultDeploy( self.GetV_Model( "models/hlclassic/v_357.mdl" ), self.GetP_Model( "models/hlclassic/p_357.mdl" ), PYTHON_DRAW, "python" );
 	}
 
 	void Holster(int skiplocal){
@@ -142,10 +142,10 @@ class weapon_hl357 : ScriptBasePlayerWeaponEntity
 		
 		switch( Math.RandomLong( 0, 1 ) ){
 		case 0:
-			g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_WEAPON, "hl/weapons/357_shot1.wav", 1.0, ATTN_NORM, 0, 95 + Math.RandomLong( 0, 10 ) );
+			g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_WEAPON, "hlclassic/weapons/357_shot1.wav", 1.0, ATTN_NORM, 0, 95 + Math.RandomLong( 0, 10 ) );
 			break;
 		case 1:
-			g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_WEAPON, "hl/weapons/357_shot2.wav", 1.0, ATTN_NORM, 0, 95 + Math.RandomLong( 0, 10 ) );
+			g_SoundSystem.EmitSoundDyn( m_pPlayer.edict(), CHAN_WEAPON, "hlclassic/weapons/357_shot2.wav", 1.0, ATTN_NORM, 0, 95 + Math.RandomLong( 0, 10 ) );
 			break;
 		}
 		

@@ -5,39 +5,39 @@ final class Diffy {
 	*	Difficulty choosed using number of People connected
 	*/
 	private array<double> diffPerPeep = {
-			0.7  , //0
-			0.7  , //1
-			0.75 , //2
-			0.80 , //3
-			0.85 , //4
-			0.9  , //5
-			0.92 , //6
-			0.96 , //7
-			0.98 , //8
-			0.99 , //9
-			1.000, //10
-			1.000, //11
-			1.000, //12
-			1.000, //13
-			1.000, //14
-			1.000, //15
-			1.000, //16
-			1.000, //17
-			1.000, //18
-			1.000, //19
-			1.000, //20
-			1.000, //21
-			1.000, //22
-			1.000, //23
-			1.000, //24
-			1.000, //25
-			1.000, //26
-			1.000, //27
-			1.000, //28
-			1.000, //29
-			1.000, //30
-			1.000, //31
-			1.000  //32
+			0.300, //0
+			0.300, //1
+			0.300, //2
+			0.350, //3
+			0.400, //4
+			0.450, //5
+			0.500, //6
+			0.520, //7
+			0.540, //8
+			0.560, //9
+			0.580, //10
+			0.600, //11
+			0.620, //12
+			0.640, //13
+			0.660, //14
+			0.680, //15
+			0.700, //16
+			0.700, //17
+			0.700, //18
+			0.700, //19
+			0.700, //20
+			0.700, //21
+			0.700, //22
+			0.700, //23
+			0.700, //24
+			0.700, //25
+			0.700, //26
+			0.700, //27
+			0.700, //28
+			0.700, //29
+			0.700, //30
+			0.700, //31
+			0.700  //32
 	};
 	
 	/**
@@ -421,6 +421,8 @@ final class Diffy {
 	double m_oldEngineTime = 0.0;
 	
 	array<string> chargerValuesStr;
+	
+	CScheduledFunction@ countPeopleScheduler;
 	
 	Diffy(){
 		m_fl_difficulty = 0.5;
@@ -932,6 +934,13 @@ final class Diffy {
 	}
 	
 	void countPeople(){
+		if(g_Engine.time < 30.0f){
+			if(countPeopleScheduler is null){
+				@countPeopleScheduler = g_Scheduler.SetTimeout( @this, "countPeople", 30.0f-g_Engine.time);
+			}
+			return;
+		}
+		
 		m_playerNum = 0;
 		
 		CBasePlayer@ pPlayer;
@@ -973,7 +982,8 @@ final class Diffy {
 			dictionary keyvalues = {
 					{ "model", chargerValuesStr[i] },
 					{ "origin", chargerValuesStr[i+2] },
-					{ "angles", chargerValuesStr[i+3] }
+					{ "angles", chargerValuesStr[i+3] },
+					{ "CustomRechargeTime", "86400" }
 			};
 			g_EntityFuncs.CreateEntity(chargerValuesStr[i+1], keyvalues, true);
 		}
@@ -1256,11 +1266,11 @@ final class Diffy {
 		double d = diffPerPeep[m_LastPlayerNum];
 		int mode = 0;
 		
-		if(m_Fails > 2){
+		if(m_Fails > 0){
 			if(d == 1.0){
-				d = d - double(m_Fails-3)*0.05 - 0.001;
+				d = d - double(m_Fails-1)*0.04 - 0.001;
 			}else{
-				d = d - double(m_Fails-2)*0.05;
+				d = d - double(m_Fails-0)*0.04;
 			}
 			mode = 2;
 		}
