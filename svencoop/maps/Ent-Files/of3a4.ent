@@ -984,7 +984,7 @@
 "sciwarpin" "8"
 "movesci2" "14"
 "wat_door87" "10.5"
-"impsci_ss1_copy" "100"
+"impsci_ss1_copy_relay" "100"
 "h2olabdoor21" "120#1"
 "targetname" "wat_telemm"
 "classname" "multi_manager"
@@ -1694,6 +1694,8 @@
 "movesnd" "2"
 "speed" "100"
 "angle" "270"
+"fireonopen" "impsci_ss1_copy_kill"
+"netname" "impsci_ss1_copy_kill"
 "classname" "func_door"
 }
 {
@@ -4594,6 +4596,18 @@
 {
 "origin" "-2460 -2800 -336"
 "classname" "point_checkpoint"
+}
+{
+"target" "impsci_ss1_copy"
+"targetname" "impsci_ss1_copy_relay"
+"triggerstate" "1"
+"classname" "trigger_relay"
+}
+{
+"killtarget" "impsci_ss1_copy_relay"
+"targetname" "impsci_ss1_copy_kill"
+"triggerstate" "1"
+"classname" "trigger_relay"
 }
 {
 "m_iAppendSpaces" "0"

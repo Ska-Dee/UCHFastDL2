@@ -1219,6 +1219,7 @@
 "mst_rose_enter" "4"
 "seq_rose_turn" "1"
 "security_door" "3"
+"wd_set_p1" "0"
 "targetname" "mgr_scanner_door"
 "classname" "multi_manager"
 }
@@ -2907,6 +2908,7 @@
 {
 "origin" "-760 -216 40"
 "mst_walter_talk" "0"
+"wd_set_p2" "0"
 "targetname" "mgr_player_is_in"
 "classname" "multi_manager"
 }
@@ -2990,6 +2992,7 @@
 "seq_rose_gotr" "3"
 "seq_makeitstop" "0"
 "tele_room_doors" "1"
+"wd_set_p1" "0"
 "targetname" "mgr_open_trd"
 "classname" "multi_manager"
 }
@@ -3213,6 +3216,7 @@
 {
 "origin" "-72 -456 56"
 "mst_fire_it_up" "0"
+"wd_set_p4" "0"
 "targetname" "mgr_mygodman"
 "classname" "multi_manager"
 }
@@ -3262,6 +3266,7 @@
 "seq_setup1a" "2"
 "seq_rose_ponder" "2"
 "sent_looksbetter" "0"
+"wd_set_p4" "0"
 "targetname" "mgr_fire_it_up"
 "classname" "multi_manager"
 }
@@ -3621,6 +3626,7 @@
 "origin" "-56 296 48"
 "sent_setup4" "2"
 "seq_setup4b" "0"
+"wd_set_p5" "0"
 "targetname" "mgr_setup4"
 "classname" "multi_manager"
 }
@@ -3920,6 +3926,7 @@
 "seq_simmons_wait" "0"
 "mgr_stage2" "2"
 "main_power_switch" "0"
+"wd_set_p3" "0"
 "targetname" "mgr_main_power_p"
 "classname" "multi_manager"
 }
@@ -5973,4 +5980,184 @@
 "spawnflags" "2"
 "displayname" "Dr. Rosenberg"
 "classname" "monster_scientist"
+}
+{
+"watchdog_mm" "1"
+"seq_use_scanner_call_rosey" "30"
+"targetname" "start_watchdog"
+"classname" "multi_manager"
+}
+{
+"target" "start_watchdog"
+"triggerstate" "1"
+"spawnflags" "1"
+"classname" "trigger_auto"
+}
+{
+"origin" "-772 -898 0"
+"m_fMoveTo" "2"
+"m_flRepeat" "0"
+"m_flRadius" "1536"
+"m_iszEntity" "dr_rosenberg"
+"delay" "0"
+"targetname" "seq_use_scanner_call_rosey"
+"spawnflags" "224"
+"angle" "90"
+"classname" "scripted_sequence"
+}
+{
+"$i_timer" "50"
+"$s_text" "Dr.Rosenberg stuck! Next map in:"
+"$s_buffer" "a"
+"targetname" "watchdog"
+"classname" "info_target"
+}
+{
+"wd_decrease_timer" "0"
+"watchdog_mm" "1"
+"targetname" "watchdog_mm"
+"spawnflags" "1"
+"classname" "multi_manager"
+}
+{
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_iszValueType" "3"
+"targetname" "wd_decrease_timer"
+"target" "watchdog"
+"m_iszValueName" "$i_timer"
+"m_iszNewValue" "1"
+"message" "wd_checkskip"
+"classname" "trigger_changevalue"
+}
+{
+"m_fCheckInterval" "0.1"
+"m_iCheckBehavior" "0"
+"m_iCheckType" "2"
+"targetname" "wd_checkskip"
+"target" "watchdog"
+"m_iszValueName" "$i_timer"
+"m_iszCheckValue" "1"
+"netname" "goto_xen"
+"message" "wd_checkmessage"
+"spawnflags" "32"
+"classname" "trigger_condition"
+}
+{
+"m_fCheckInterval" "0.1"
+"m_iCheckBehavior" "0"
+"m_iCheckType" "2"
+"targetname" "wd_checkskip"
+"target" "watchdog"
+"m_iszValueName" "$i_timer"
+"m_iszCheckValue" "11"
+"netname" "wd_create_message_1"
+"spawnflags" "32"
+"classname" "trigger_condition"
+}
+{
+"m_iAppendSpaces" "1"
+"m_trigonometricBehaviour" "0"
+"m_FloatConversion" "0"
+"m_iszValueType" "0"
+"targetname" "wd_create_message_1"
+"netname" "watchdog"
+"m_iszSrcValueName" "$s_text"
+"target" "watchdog"
+"m_iszDstValueName" "$s_buffer"
+"message" "wd_create_message_2"
+"classname" "trigger_copyvalue"
+}
+{
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_FloatConversion" "0"
+"m_iszValueType" "11"
+"targetname" "wd_create_message_2"
+"netname" "watchdog"
+"m_iszSrcValueName" "$i_timer"
+"target" "watchdog"
+"m_iszDstValueName" "$s_buffer"
+"message" "wd_create_message_3"
+"classname" "trigger_copyvalue"
+}
+{
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_FloatConversion" "0"
+"m_iszValueType" "0"
+"targetname" "wd_create_message_3"
+"netname" "watchdog"
+"m_iszSrcValueName" "$s_buffer"
+"target" "wd_message"
+"m_iszDstValueName" "message"
+"message" "wd_message"
+"classname" "trigger_copyvalue"
+}
+{
+"channel" "1"
+"fxtime" "0.25"
+"holdtime" "1.5"
+"fadein" "0.01"
+"fadeout" "1.5"
+"color" "255 0 0"
+"color2" "255 255 255"
+"effect" "0"
+"x" "-1"
+"y" "0.33"
+"delay" "0"
+"message" "Elevator stuck message"
+"spawnflags" "3"
+"targetname" "wd_message"
+"classname" "game_text"
+}
+{
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_iszValueType" "0"
+"targetname" "wd_set_p1"
+"target" "watchdog"
+"m_iszValueName" "$i_timer"
+"m_iszNewValue" "30"
+"classname" "trigger_changevalue"
+}
+{
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_iszValueType" "0"
+"targetname" "wd_set_p2"
+"target" "watchdog"
+"m_iszValueName" "$i_timer"
+"m_iszNewValue" "50"
+"classname" "trigger_changevalue"
+}
+{
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_iszValueType" "0"
+"targetname" "wd_set_p3"
+"target" "watchdog"
+"m_iszValueName" "$i_timer"
+"m_iszNewValue" "300"
+"classname" "trigger_changevalue"
+}
+{
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_iszValueType" "0"
+"targetname" "wd_set_p4"
+"target" "watchdog"
+"m_iszValueName" "$i_timer"
+"m_iszNewValue" "90"
+"classname" "trigger_changevalue"
+}
+{
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_iszValueType" "0"
+"targetname" "wd_set_p5"
+"target" "watchdog"
+"m_iszValueName" "$i_timer"
+"m_iszNewValue" "70"
+"classname" "trigger_changevalue"
 }
