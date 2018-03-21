@@ -2411,7 +2411,20 @@
 "floor_grate_spark4#1" "4.6"
 "floor_grate_spark5" "4.6"
 "floor_grate_spark5#1" "5"
+"teleport_engineer1" "14.3"
 "classname" "multi_manager"
+}
+{
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_FloatConversion" "0"
+"m_iszValueType" "0"
+"targetname" "teleport_engineer1"
+"m_iszNewValue" "-712 -824 80"
+"target" "engineer1"
+"m_iszValueName" "origin"
+"spawnflags" "128"
+"classname" "trigger_changevalue"
 }
 {
 "origin" "-712 -960 80"
