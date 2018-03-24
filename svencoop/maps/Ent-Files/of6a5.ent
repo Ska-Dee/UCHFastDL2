@@ -872,26 +872,29 @@
 {
 "model" "*54"
 "delay" "0"
+"dmg" "150"
 "targetname" "GeneWormLeftSlash"
 "spawnflags" "2"
 "angle" "270"
-"classname" "trigger_geneworm_hit"
+"classname" "trigger_hurt"
 }
 {
 "model" "*55"
 "delay" "0"
+"dmg" "150"
 "targetname" "GeneWormCenterSlash"
 "spawnflags" "2"
 "angle" "270"
-"classname" "trigger_geneworm_hit"
+"classname" "trigger_hurt"
 }
 {
 "model" "*56"
 "delay" "0"
+"dmg" "150"
 "targetname" "GeneWormRightSlash"
 "spawnflags" "2"
 "angle" "270"
-"classname" "trigger_geneworm_hit"
+"classname" "trigger_hurt"
 }
 {
 "model" "*57"
@@ -4859,4 +4862,21 @@
 "_light" "36 223 163 120"
 "style" "0"
 "classname" "light"
+}
+{
+"origin" "150 -1020 128"
+"angles" "0 0 0"
+"targetname" "teleport_beam_chaos"
+"LightningStart" "teleport_beam_chaos"
+"Radius" "256"
+"renderamt" "150"
+"rendercolor" "0 255 0"
+"life" ".5"
+"BoltWidth" "18"
+"NoiseAmplitude" "65"
+"TextureScroll" "35"
+"StrikeTime" "-.5"
+"texture" "sprites/lgtning.spr"
+"spawnflags" "34"
+"classname" "env_beam"
 }

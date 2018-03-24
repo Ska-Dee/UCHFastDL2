@@ -180,6 +180,8 @@ class monster_geneworm : ScriptBaseMonsterEntity {
 		g_SoundSystem.PrecacheSound( "zombie/claw_strike2.wav" );
 		g_SoundSystem.PrecacheSound( "zombie/claw_strike3.wav" );
 		g_SoundSystem.PrecacheSound( "debris/beamstart1.wav" );
+		g_SoundSystem.PrecacheSound( "debris/beamstart2.wav" );
+		g_SoundSystem.PrecacheSound( "debris/beamstart7.wav" );
 		g_SoundSystem.PrecacheSound( "debris/zap4.wav" );
 		g_SoundSystem.PrecacheSound( "debris/zap5.wav" );
 		g_SoundSystem.PrecacheSound( "debris/zap6.wav" );
@@ -655,9 +657,24 @@ class monster_geneworm : ScriptBaseMonsterEntity {
 		}
 		if(g_Engine.time - time1 > 6.64f){
 			self.pev.skin = 0;
-			gotoIdle();
-			g_EyeStatusR = 0;
-			g_EyeStatusL = 0;
+			switch(g_Phase){
+			case 1:
+				gotoIdle();
+				g_EyeStatusR = 0;
+				g_EyeStatusL = 0;
+				break;
+			case 2:
+				startAttack(0);
+				g_EyeStatusR = -1;
+				g_EyeStatusL = -1;
+				break;
+			default:
+				SetAnim(GENEWORM_MAD);
+				g_EntityFuncs.FireTargets("GeneWormWallHit", null, null, USE_TOGGLE, 0.0f, 1.0f);
+				ThinkMad();
+				g_EyeStatusR = -1;
+				g_EyeStatusL = -1;
+			}
 		}
 		self.pev.nextthink = g_Engine.time + 0.01f;
 	}
@@ -672,6 +689,8 @@ class monster_geneworm : ScriptBaseMonsterEntity {
 }
 
 class geneworm_acid : ScriptBaseEntity {
+	
+	private array<CBaseEntity@> playerWhiteList;
 	
 	bool KeyValue( const string& in szKey, const string& in szValue ) {
 		return BaseClass.KeyValue( szKey, szValue );
@@ -694,17 +713,44 @@ class geneworm_acid : ScriptBaseEntity {
 		
 		g_EntityFuncs.SetModel( self, "sprites/ballsmoke.spr" );
 		
-		self.pev.nextthink = g_Engine.time + 0.5f;
+		self.pev.nextthink = g_Engine.time + 0.01f;
 		SetThink( ThinkFunction( SolidThink ) );
 		SetTouch( TouchFunction( DetoTouch ) );
 	}
 	
 	void SolidThink(){
-		self.pev.movetype = MOVETYPE_FLY;
+		// self.pev.movetype = MOVETYPE_FLY;
 		self.pev.solid = SOLID_TRIGGER;
 		g_EntityFuncs.SetSize( self.pev, Vector( -16,-16,-16 ), Vector( 16,16,16 ) );
+		float bestDist = 1.0f;
 		
-		self.pev.nextthink = g_Engine.time + 10.0f;
+		string aStr = "";
+		
+		for(int i1 = 0; i1 < 2; i1++){
+			for(int i2 = 0; i2 < 2; i2++){
+				for(int i3 = 0; i3 < 2; i3++){
+					Vector startPos = self.pev.origin - Vector(-16, -16, -16) + Vector( 32*i1, 32*i2, 32*i3);
+					Vector endPos = startPos + 8.0 * self.pev.velocity;
+					TraceResult tr;
+					
+					g_Utility.TraceLine( startPos, endPos, ignore_monsters, self.edict(), tr );
+					
+					Vector endPosOff = tr.vecEndPos - startPos;
+					float endPosOffDist = sqrt(endPosOff.x * endPosOff.x + endPosOff.y * endPosOff.y + endPosOff.z * endPosOff.z);
+					
+					if(bestDist < endPosOffDist) bestDist = endPosOffDist;
+				}
+			}
+		}
+		
+		float aveVelo = sqrt(self.pev.velocity.x * self.pev.velocity.x + self.pev.velocity.y * self.pev.velocity.y + self.pev.velocity.z * self.pev.velocity.z);
+		
+		if(aveVelo < 0.1f){
+			self.pev.nextthink = g_Engine.time + 0.01f;
+		}else{
+			self.pev.nextthink = g_Engine.time + bestDist / aveVelo + 0.01f;
+		}
+		
 		SetThink( ThinkFunction( DetoThink ) );
 	}
 	
@@ -715,14 +761,19 @@ class geneworm_acid : ScriptBaseEntity {
 	}
 	
 	void DetoTouch( CBaseEntity@ pOther ){
+		float flDamage = 10.0f;
 		
-		float flDamage = 5.0f;
+		if(pOther.IsPlayer()){
+			if(playerWhiteList.find(pOther) > -1) return;
+		}
 		
 		g_WeaponFuncs.ClearMultiDamage();
 		pOther.TakeDamage( self.pev, self.pev, flDamage, DMG_ACID);
 		g_WeaponFuncs.ApplyMultiDamage( self.pev, self.pev );
 		
-		DetoThink();
+		if(pOther.IsPlayer()){
+			playerWhiteList.insertLast(pOther);
+		}
 	}
 }
 
@@ -894,11 +945,11 @@ class geneworm_heart1 : ScriptBaseEntity {
 		self.pev.renderamt      = 255.0f;
 		self.pev.scale          = 1.0f;
 		self.pev.frame          = 0;
-		self.pev.health         = 200.0f;
+		self.pev.health         = 300.0f;
 		g_EntityFuncs.SetModel( self, "sprites/boss_glow.spr" );
 		
 		self.pev.nextthink = g_Engine.time + 0.01f;
-		g_EntityFuncs.SetSize( self.pev, Vector(-40, 0, -40 ), Vector(40, 4, 40 ) );
+		g_EntityFuncs.SetSize( self.pev, Vector(-40, 16, -40 ), Vector(40, 20, 40 ) );
 		
 		SetThink( ThinkFunction( MoveThink ) );
 	}
@@ -929,7 +980,7 @@ class geneworm_heart1 : ScriptBaseEntity {
 			
 			if(self.pev.health <= 0.0f) {
 				g_openHeart = -1;
-				self.pev.health = 200.0f;
+				self.pev.health = 300.0f;
 			}
 		}
 		
@@ -953,7 +1004,7 @@ class geneworm_heart2 : ScriptBaseEntity {
 		self.pev.solid          = SOLID_BBOX;
 		
 		self.pev.nextthink = g_Engine.time + 0.01f;
-		g_EntityFuncs.SetSize( self.pev, Vector(-80, -64, 40 ), Vector(80, 4, 80 ) );
+		g_EntityFuncs.SetSize( self.pev, Vector(-80, -64, 40 ), Vector(80, 20, 80 ) );
 		
 		SetThink( ThinkFunction( MoveThink ) );
 	}
@@ -981,7 +1032,7 @@ class geneworm_heart3 : ScriptBaseEntity {
 		self.pev.solid          = SOLID_BBOX;
 		
 		self.pev.nextthink = g_Engine.time + 0.01f;
-		g_EntityFuncs.SetSize( self.pev, Vector(40, -64, -40 ), Vector(80, 4, 40 ) );
+		g_EntityFuncs.SetSize( self.pev, Vector(40, -64, -40 ), Vector(80, 20, 40 ) );
 		
 		SetThink( ThinkFunction( MoveThink ) );
 	}
@@ -1009,7 +1060,7 @@ class geneworm_heart4 : ScriptBaseEntity {
 		self.pev.solid          = SOLID_BBOX;
 		
 		self.pev.nextthink = g_Engine.time + 0.01f;
-		g_EntityFuncs.SetSize( self.pev, Vector(-80, -64, -40 ), Vector(-40, 4, 40 ) );
+		g_EntityFuncs.SetSize( self.pev, Vector(-80, -64, -40 ), Vector(-40, 20, 40 ) );
 		
 		SetThink( ThinkFunction( MoveThink ) );
 	}
@@ -1037,7 +1088,7 @@ class geneworm_heart5 : ScriptBaseEntity {
 		self.pev.solid          = SOLID_BBOX;
 		
 		self.pev.nextthink = g_Engine.time + 0.01f;
-		g_EntityFuncs.SetSize( self.pev, Vector(-80, -64, -80 ), Vector(80, 4, -40 ) );
+		g_EntityFuncs.SetSize( self.pev, Vector(-80, -64, -80 ), Vector(80, 20, -40 ) );
 		
 		SetThink( ThinkFunction( MoveThink ) );
 	}
@@ -1065,7 +1116,7 @@ class geneworm_heart6 : ScriptBaseEntity {
 		self.pev.solid          = SOLID_BBOX;
 		
 		self.pev.nextthink = g_Engine.time + 0.01f;
-		g_EntityFuncs.SetSize( self.pev, Vector(-80, 4, -80 ), Vector(80, 16, 80 ) );
+		g_EntityFuncs.SetSize( self.pev, Vector(-80, 20, -80 ), Vector(80, 32, 80 ) );
 		
 		SetThink( ThinkFunction( MoveThink ) );
 	}
@@ -1200,6 +1251,7 @@ class shockie_maker : ScriptBaseEntity {
 		switch(state){
 			case 0:
 				if(g_animTime + 5.0f > g_Engine.time) {
+					g_SoundSystem.EmitSoundDyn( self.edict(), CHAN_STATIC, "debris/beamstart7.wav", 1.0f, ATTN_NONE, 0, 100 );
 					state = 1;
 					self.pev.scale = 0.5f;
 					self.pev.origin = g_posGeneHeart;
@@ -1208,6 +1260,9 @@ class shockie_maker : ScriptBaseEntity {
 				break;
 			case 1:
 				if(g_animTime + 2.0f < g_Engine.time) {
+					g_EntityFuncs.FireTargets("teleport_beam_chaos", null, null, USE_ON, 0.0f, 0.0f);
+					g_EntityFuncs.FireTargets("teleport_beam_chaos", null, null, USE_OFF, 0.0f, 1.0f);
+					g_SoundSystem.EmitSoundDyn( self.edict(), CHAN_STATIC, "debris/beamstart2.wav", 1.0f, ATTN_NONE, 0, 100 );
 					state = 2;
 					self.pev.velocity = Vector(0.0f, 0.0f, 0.0f);
 					self.pev.origin = Vector(150.0f, -1020.0f, 128.0f);
