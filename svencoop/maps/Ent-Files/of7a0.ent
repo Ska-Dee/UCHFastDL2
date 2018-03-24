@@ -2450,78 +2450,128 @@
 "classname" "multi_manager"
 }
 {
-"origin" "136 -136 456"
-"messageattenuation" "0"
-"messagevolume" "10"
-"message" "GAMETITLE"
-"targetname" "game_title"
-"spawnflags" "2"
-"classname" "env_message"
-}
-{
-"origin" "152 -136 456"
-"messageattenuation" "0"
-"messagevolume" "10"
-"message" "GEARBOXIS"
-"targetname" "gearboxis"
-"spawnflags" "2"
-"classname" "env_message"
-}
-{
-"origin" "168 -136 456"
-"messageattenuation" "0"
-"messagevolume" "10"
-"message" "END1"
-"targetname" "credits1"
-"spawnflags" "2"
-"classname" "env_message"
-}
-{
-"origin" "120 -136 456"
-"messageattenuation" "0"
-"messagevolume" "10"
-"message" "GAMEOVER"
-"targetname" "gameover"
-"spawnflags" "2"
-"classname" "env_message"
-}
-{
 "origin" "3600 -2064 688"
 "targetname" "strip_it"
 "classname" "player_weaponstrip"
 }
 {
-"model" "*87"
+"message" "../media/opfor/OpposingForce19.mp3"
+"volume" "10"
+"spawnflags" "1"
 "targetname" "cue_music"
-"health" "20"
-"classname" "trigger_cdaudio"
+"classname" "ambient_music"
 }
 {
-"origin" "152 -152 456"
-"messageattenuation" "0"
-"messagevolume" "10"
-"message" "THANKSTO"
-"targetname" "thanksto"
-"spawnflags" "2"
-"classname" "env_message"
-}
-{
-"origin" "168 -152 456"
-"messageattenuation" "0"
-"messagevolume" "10"
-"message" "END2"
-"targetname" "credits2"
-"spawnflags" "2"
-"classname" "env_message"
-}
-{
-"origin" "168 -168 456"
-"messageattenuation" "0"
-"messagevolume" "10"
-"message" "END3"
+"x" "-1"
+"y" "-1"
+"effect" "0"
+"color" "128 128 128"
+"color2" "0 0 0"
+"fadein" "0.5"
+"fxtime" "0.25"
+"holdtime" "10"
+"fadeout" "0.5"
+"channel" "1"
+"message" "Dustin Porter\nDanny Richardson\nHarry S. Robins\nDavid Sawyer\nJohn Shaffstall\nMike Shapiro\nJon St. John\nValve Software\nSierra Studios"
+"spawnflags" "3"
 "targetname" "credits3"
-"spawnflags" "2"
-"classname" "env_message"
+"classname" "game_text"
+}
+{
+"x" "-1"
+"y" "-1"
+"effect" "0"
+"color" "128 128 128"
+"color2" "0 0 0"
+"fadein" "0.5"
+"fxtime" "0.25"
+"holdtime" "10"
+"fadeout" "0.5"
+"channel" "1"
+"message" "Matt Armstrong\nKristy Junio\nJoe Kennebec\nDoug Lombardi\nEli Luna\nGabe Newell\nFrank Nuccio\nGenevieve Ostergard\nStephen Palmer\nJeff Pobst"
+"spawnflags" "3"
+"targetname" "credits2"
+"classname" "game_text"
+}
+{
+"x" "-1"
+"y" "-1"
+"effect" "0"
+"color" "128 128 128"
+"color2" "0 0 0"
+"fadein" "0.5"
+"fxtime" "0.25"
+"holdtime" "4"
+"fadeout" "0.5"
+"channel" "1"
+"message" "Special thanks to:"
+"spawnflags" "3"
+"targetname" "thanksto"
+"classname" "game_text"
+}
+{
+"x" "-1"
+"y" "-1"
+"effect" "0"
+"color" "128 128 128"
+"color2" "0 0 0"
+"fadein" "0.5"
+"fxtime" "0.25"
+"holdtime" "10"
+"fadeout" "0.5"
+"channel" "1"
+"message" "Stephen Bahl\nPatrick Deupree\nJohn Faulkenbury\nRob Heironimus\nSteve Jones\nBrian Martel\nDavid Mertz\nLandon Montgomery\nRandy Pitchford\nSean Reardon\nMike Wardwell"
+"spawnflags" "3"
+"targetname" "credits1"
+"classname" "game_text"
+}
+{
+"x" "-1"
+"y" "-1"
+"effect" "0"
+"color" "180 180 180"
+"color2" "0 0 0"
+"fadein" "1.0"
+"fxtime" "0.25"
+"holdtime" "3.0"
+"fadeout" "1.5"
+"channel" "1"
+"message" "Half-Life: Opposing Force"
+"spawnflags" "3"
+"targetname" "game_title"
+"classname" "game_text"
+}
+{
+"x" "-1"
+"y" "-1"
+"effect" "0"
+"color" "128 128 128"
+"color2" "0 0 0"
+"fadein" "0.5"
+"fxtime" "0.25"
+"holdtime" "4"
+"fadeout" "0.5"
+"channel" "1"
+"message" "Gearbox is:"
+"spawnflags" "3"
+"targetname" "gearboxis"
+"classname" "game_text"
+}
+{
+"x" "-1"
+"y" "-1"
+"effect" "2"
+"color" "100 100 100"
+"color2" "0 250 0"
+"fadein" "0.03"
+"fxtime" "0.25"
+"holdtime" "9"
+"fadeout" "1.5"
+"channel" "1"
+"message" "SUBJECT:  SHEPHARD\n\nSTATUS:  DETAINED\n\nFURTHER EVALUATION PENDING"
+"spawnflags" "3"
+"targetname" "gameover"
+"classname" "game_text"
 }
 {
 "targetname" "game_end_trigger"
@@ -2551,6 +2601,7 @@
 "peak02" "2.5"
 "peak01" "2"
 "horizon01" "0"
+"omg_invisible_people_mm" "1"
 "targetname" "start_end1"
 "classname" "multi_manager"
 }
@@ -2617,5 +2668,45 @@
 {
 "targetname" "forcespawn_01"
 "classname" "player_respawn_zone"
+}
+{
+"target" "!activator"
+"m_iszValueName" "solid"
+"m_iszNewValue" "0"
+"m_iszValueType" "0"
+"targetname" "game_playerspawn1"
+"classname" "trigger_changevalue"
+}
+{
+"target" "!activator"
+"m_iszValueName" "rendermode"
+"m_iszNewValue" "2"
+"m_iszValueType" "0"
+"targetname" "game_playerspawn2"
+"classname" "trigger_changevalue"
+}
+{
+"run_mode" "1"
+"triggerstate" "1"
+"target" "game_playerspawn1"
+"classname_filter" "player"
+"targetname" "omg_invisible_people1"
+"classname" "trigger_entity_iterator"
+}
+{
+"run_mode" "1"
+"triggerstate" "1"
+"target" "game_playerspawn2"
+"classname_filter" "player"
+"targetname" "omg_invisible_people2"
+"classname" "trigger_entity_iterator"
+}
+{
+"omg_invisible_people1" "0"
+"omg_invisible_people2" "0"
+"omg_invisible_people_mm" "1"
+"spawnflags" "1"
+"targetname" "omg_invisible_people_mm"
+"classname" "multi_manager"
 }
  
