@@ -2251,7 +2251,7 @@
 "model" "*95"
 "damagetype" "32"
 "delay" "0"
-"dmg" "10000"
+"dmg" "100000"
 "angle" "270"
 "classname" "trigger_hurt"
 }
@@ -4676,11 +4676,9 @@
 }
 {
 "model" "*113"
-"delay" "0"
-"sounds" "0"
-"style" "32"
-"target" "fallblack"
-"classname" "trigger_once"
+"dmg" "100000"
+"damagetype" "32"
+"classname" "trigger_hurt"
 }
 {
 "model" "*114"
@@ -4816,17 +4814,6 @@
 "renderamt" "200"
 "spawnflags" "1"
 "classname" "env_sprite"
-}
-{
-"origin" "-2960 -2928 -1032"
-"loadtime" "3"
-"messagetime" "0"
-"targetname" "fallblack"
-"rendercolor" "0 0 0"
-"renderamt" "255"
-"holdtime" "2"
-"duration" "1.5"
-"classname" "player_loadsaved"
 }
 {
 "model" "*116"

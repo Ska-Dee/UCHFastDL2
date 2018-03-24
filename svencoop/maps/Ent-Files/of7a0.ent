@@ -2451,6 +2451,7 @@
 }
 {
 "origin" "3600 -2064 688"
+"m_iAffected" "1"
 "targetname" "strip_it"
 "classname" "player_weaponstrip"
 }
@@ -2592,7 +2593,6 @@
 "spawn00" "0.5#2"
 "spawn01" "0.5#1"
 "lock_player" ".2"
-"strip_it" ".1"
 "nuke" "42"
 "end1_fade_in" "1"
 "end1_speech1" "6"
@@ -2601,6 +2601,7 @@
 "peak02" "2.5"
 "peak01" "2"
 "horizon01" "0"
+"strip_it" "1"
 "omg_invisible_people_mm" "1"
 "targetname" "start_end1"
 "classname" "multi_manager"
