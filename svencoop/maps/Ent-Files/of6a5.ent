@@ -2432,7 +2432,6 @@
 {
 "map" "of7a0"
 "targetname" "change_to_of7a0"
-"keep_inventory" "1"
 "spawnflags" "2"
 "classname" "trigger_changelevel"
 }

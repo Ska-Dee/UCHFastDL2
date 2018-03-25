@@ -2450,12 +2450,6 @@
 "classname" "multi_manager"
 }
 {
-"origin" "3600 -2064 688"
-"m_iAffected" "1"
-"targetname" "strip_it"
-"classname" "player_weaponstrip"
-}
-{
 "message" "../media/opfor/OpposingForce19.mp3"
 "volume" "10"
 "spawnflags" "1"
@@ -2601,7 +2595,6 @@
 "peak02" "2.5"
 "peak01" "2"
 "horizon01" "0"
-"strip_it" "1"
 "omg_invisible_people_mm" "1"
 "targetname" "start_end1"
 "classname" "multi_manager"
