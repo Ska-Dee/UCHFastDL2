@@ -9,6 +9,7 @@
 "newunit" "1"
 "message" "FRIENDLY FIRE"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "origin" "-1264 480 112"

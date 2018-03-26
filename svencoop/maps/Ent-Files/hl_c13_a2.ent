@@ -7,6 +7,7 @@
 "MaxRange" "32768"
 "sounds" "1"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"

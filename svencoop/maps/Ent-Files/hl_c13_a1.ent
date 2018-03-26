@@ -8,6 +8,7 @@
 "angles" "0 0 0"
 "MaxRange" "32768"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"

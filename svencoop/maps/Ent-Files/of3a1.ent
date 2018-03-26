@@ -7,6 +7,7 @@
 "sounds" "0"
 "message" "WE ARE NOT ALONE"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "origin" "-1337 -449 564"

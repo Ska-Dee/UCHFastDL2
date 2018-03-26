@@ -9,6 +9,7 @@
 "MaxRange" "4096"
 "message" "On A Rail"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "origin" "-66 -2459 296"

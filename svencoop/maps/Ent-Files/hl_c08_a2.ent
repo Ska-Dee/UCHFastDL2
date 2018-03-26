@@ -10,6 +10,7 @@
 "MaxRange" "8192"
 "message" "Apprehension"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"
@@ -27,7 +28,7 @@
 "stopsnd" "6"
 "movesnd" "4"
 "angles" "0 0 0"
-"target" "suspense2"
+"target" "suspense2_once"
 "targetname" "freezerdoor"
 "wait" "4"
 "speed" "10"
@@ -35,6 +36,11 @@
 "lip" "-4"
 "spawnflags" "512"
 "classname" "func_door"
+}
+{
+"target" "suspense2"
+"targetname" "suspense2_once"
+"classname" "trigger_once"
 }
 {
 "model" "*3"

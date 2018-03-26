@@ -9,6 +9,7 @@
 "message" "'We've Got Hostiles'"
 "MaxRange" "8096"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"
@@ -4575,6 +4576,7 @@
 {
 "model" "*168"
 "target" "rushmusic"
+"origin" "0 0 -512"
 "classname" "trigger_once"
 }
 {

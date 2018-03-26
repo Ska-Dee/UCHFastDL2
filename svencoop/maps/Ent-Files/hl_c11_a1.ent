@@ -10,6 +10,7 @@
 "skyname" "desert"
 "message" "Surface Tension"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"

@@ -2,6 +2,7 @@
 "wad" "\half-life\valve\liquids.wad;\half-life\gearbox\opfor.wad;\half-life\valve\xeno.wad;\half-life\valve\halflife.wad;\half-life\valve\decals.wad;"
 "message" "WELCOME TO BLACK MESA"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "origin" "-896 640 36"

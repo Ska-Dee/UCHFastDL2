@@ -3,6 +3,7 @@
 "wad" "\hl\valve\halflife.wad;\hl\valve\decals.wad;\hl\valve\liquids.wad;\hl\valve\xeno.wad;\hl\gearbox\opfor.wad;"
 "radfile" "\hl\gearbox\maps\of2a1b.rad"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "origin" "1860 1310 -1412"

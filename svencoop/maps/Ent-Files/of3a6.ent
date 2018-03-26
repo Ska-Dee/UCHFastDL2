@@ -8,6 +8,7 @@
 "mapteams" "hgrunt;scientist"
 "message" "CRUSH DEPTH"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"

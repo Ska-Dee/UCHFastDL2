@@ -6,6 +6,7 @@
 "radfile" "\hl\gearbox\maps\OF6A1.rad"
 "chaptertitle" "OF6A1TITLE"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "origin" "-3115 2298 21"

@@ -2,6 +2,7 @@
 "wad" "\half-life\valve\liquids.wad;\half-life\gearbox\opfor.wad;\half-life\valve\xeno.wad;\half-life\valve\halflife.wad;\half-life\valve\decals.wad;"
 "message" "WELCOME TO BLACK MESA"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "classname" "info_player_deathmatch"
@@ -96,7 +97,7 @@
 "kill_stupid" ".6"
 "rail_1" ".45"
 "catwalk_1_mgr" ".45"
-"ladder_1_mgr" "1.4"
+"ladder_1" "1.4"
 "floor_2_mgr" "1.1"
 "floor_1_mgr" ".9"
 "big_pipe_mgr" "0"
@@ -228,7 +229,6 @@
 }
 {
 "origin" "944 1064 80"
-"ladder_hurt" "5"
 "beam_ladder_2#1" "5"
 "beam_ladder_2" ".2"
 "large_beam_4_mgr" "4.7"
@@ -2625,8 +2625,6 @@
 }
 {
 "origin" "1056 1048 80"
-"kill_ladder_hurts" "0"
-"kill_ladder_beams" "0"
 "break_m" "0"
 "break_p" "0"
 "break_t" "0"
@@ -3236,7 +3234,7 @@
 "locked_sound" "2"
 "health" "0"
 "delay" "0"
-"dmg" "0"
+"dmg" "100000"
 "lip" "20"
 "wait" "4"
 "stopsnd" "0"
@@ -3484,7 +3482,7 @@
 "health" "0"
 "delay" "0"
 "dmg" "0"
-"lip" "208"
+"lip" "192"
 "wait" "-1"
 "stopsnd" "0"
 "movesnd" "0"
@@ -3593,15 +3591,6 @@
 "origin" "376 172 352"
 "targetname" "ladder_top"
 "classname" "info_target"
-}
-{
-"model" "*60"
-"damagetype" "256"
-"delay" "0"
-"dmg" "60"
-"targetname" "ladder_hurt"
-"spawnflags" "1"
-"classname" "trigger_hurt"
 }
 {
 "model" "*61"
@@ -7565,84 +7554,15 @@
 "classname" "func_door"
 }
 {
-"model" "*160"
-"targetname" "ladder_1_func"
-"classname" "func_ladder"
-}
-{
 "model" "*161"
 "origin" "376 176 192"
-"damp" "0"
-"distance" "20"
-"dmg" "300"
-"angles" "0 0 0"
-"speed" "50"
 "rendercolor" "0 0 0"
 "targetname" "ladder_1"
 "renderamt" "255"
 "rendermode" "4"
-"spawnflags" "64"
-"classname" "func_pendulum"
-}
-{
-"origin" "368 168 168"
-"cspinup" "0"
-"lfomodvol" "0"
-"lfomodpitch" "0"
-"lforate" "0"
-"lfotype" "0"
-"spindown" "0"
-"spinup" "0"
-"pitchstart" "100"
-"pitch" "100"
-"fadeout" "0"
-"fadein" "0"
-"volstart" "10"
-"preset" "0"
-"health" "10"
-"message" "debris/metal1.wav"
-"targetname" "snd_ladder_break"
-"spawnflags" "52"
-"classname" "ambient_generic"
-}
-{
-"model" "*162"
-"origin" "376 188 112"
-"angles" "0 0 0"
-"rotation" "-1060"
-"height" "4000"
-"speed" "500"
-"volume" "0.85"
-"stopsnd" "0"
-"movesnd" "0"
-"rendercolor" "0 0 0"
-"targetname" "ladder_1_fall"
-"renderamt" "0"
-"rendermode" "1"
-"spawnflags" "65"
-"classname" "func_platrot"
-}
-{
-"origin" "408 184 48"
-"rendercolor" "0 0 0"
-"target" "ladder_1_fall"
-"targetname" "vis_ladder_1_fall"
-"renderamt" "255"
-"rendermode" "4"
-"renderfx" "0"
-"classname" "env_render"
-}
-{
-"origin" "408 216 48"
-"kill_ladder_1_func" "0"
-"snd_ladder_break" "3.7"
-"ladder_1_fall" "3.7"
-"kill_ladder_1_fall" "7"
-"kill_ladder_1" "3.7"
-"ladder_1" "0"
-"vis_ladder_1_fall" "3.7"
-"targetname" "ladder_1_mgr"
-"classname" "multi_manager"
+"material" "2"
+"spawnflags" "2"
+"classname" "func_breakable"
 }
 {
 "origin" "-32 476 48"
@@ -7650,24 +7570,6 @@
 "triggerstate" "0"
 "targetname" "kill_bridge_2_fall"
 "killtarget" "bridge_2_fall"
-"spawnflags" "1"
-"classname" "trigger_relay"
-}
-{
-"origin" "440 184 48"
-"delay" "0"
-"triggerstate" "0"
-"targetname" "kill_ladder_1"
-"killtarget" "ladder_1"
-"spawnflags" "1"
-"classname" "trigger_relay"
-}
-{
-"origin" "440 160 48"
-"delay" "0"
-"triggerstate" "0"
-"targetname" "kill_ladder_1_func"
-"killtarget" "ladder_1_func"
 "spawnflags" "1"
 "classname" "trigger_relay"
 }
@@ -7760,7 +7662,7 @@
 "health" "0"
 "delay" "0"
 "dmg" "0"
-"lip" "156"
+"lip" "140"
 "wait" "-1"
 "stopsnd" "0"
 "movesnd" "0"
@@ -7784,7 +7686,7 @@
 "health" "0"
 "delay" "0"
 "dmg" "0"
-"lip" "156"
+"lip" "140"
 "wait" "-1"
 "stopsnd" "0"
 "movesnd" "0"
@@ -7966,6 +7868,7 @@
 "snd_door_unlock2" "2"
 "snd_door_unlock1" ".7"
 "exit_door" "3.2"
+"exit_door" "12.0#0"
 "gman_push_button" "0"
 "targetname" "saveme_door"
 "classname" "multi_manager"

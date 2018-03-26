@@ -2,12 +2,13 @@
 "compiler" "ZHLT 3.4 VL34 (Mar  2 2016)"
 "wad" "halflife.wad;liquids.wad;xeno.wad;decals.wad;neilm2.wad;neilm4.wad;neilm5.wad;cs_bdog.wad;neilm_sc.wad;"
 "mapversion" "220"
-"scversion2" "510"
+"scversion2" "515"
 "newunit" "1"
 "MaxRange" "32768"
 "sounds" "1"
 "skyname" "thn"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"
@@ -1726,6 +1727,7 @@
 }
 {
 "model" "*115"
+"use_type" "3"
 "master" "lever_atpic_mstr"
 "angles" "90 0 0"
 "_minlight" ".3"
@@ -2921,6 +2923,8 @@
 }
 {
 "origin" "-9414 6084 -322"
+"maxspeed" "-1"
+"newspeed" "-1"
 "angles" "0 0 0"
 "target" "truck01a"
 "targetname" "truck01"
@@ -2928,6 +2932,8 @@
 }
 {
 "origin" "-9414 6083 -322"
+"maxspeed" "-1"
+"newspeed" "-1"
 "angles" "0 0 0"
 "message" "oldtruck_dr"
 "target" "truck02"
@@ -4426,14 +4432,9 @@
 "model" "*247"
 "keep_inventory" "1"
 "map" "th_ep3_02"
+"classname" "trigger_changelevel"
 "targetname" "change_level_please"
 "spawnflags" "2"
-"classname" "trigger_changelevel"
-}
-{
-"model" "*247"
-"rendermode" "1"
-"classname" "func_wall"
 }
 {
 "origin" "616 1324 -128"
@@ -5926,6 +5927,7 @@
 }
 {
 "model" "*307"
+"use_type" "3"
 "_minlight" "1"
 "angles" "0 0 0"
 "rendercolor" "0 0 0"
@@ -6186,6 +6188,7 @@
 }
 {
 "model" "*319"
+"use_type" "3"
 "angles" "0 180 0"
 "target" "generator_mngr"
 "rendermode" "2"
@@ -6955,6 +6958,8 @@
 }
 {
 "origin" "1020 976 -208"
+"maxspeed" "-1"
+"newspeed" "-1"
 "angles" "0 0 0"
 "message" "chopper_mngr"
 "target" "st_03"
@@ -6963,6 +6968,8 @@
 }
 {
 "origin" "744 1000 -208"
+"maxspeed" "-1"
+"newspeed" "-1"
 "angles" "0 0 0"
 "speed" "400"
 "message" "bridge_brks"
@@ -6972,6 +6979,8 @@
 }
 {
 "origin" "2184 1312 -208"
+"maxspeed" "-1"
+"newspeed" "-1"
 "angles" "0 0 0"
 "target" "st_01aa"
 "targetname" "st_01"
@@ -6991,6 +7000,8 @@
 }
 {
 "origin" "560 1104 -208"
+"maxspeed" "-1"
+"newspeed" "-1"
 "angles" "0 0 0"
 "message" "wind_over_bridge"
 "target" "st_05"
@@ -6999,6 +7010,8 @@
 }
 {
 "origin" "400 1216 -352"
+"maxspeed" "-1"
+"newspeed" "-1"
 "angles" "0 0 0"
 "target" "st_05a"
 "targetname" "st_05"
@@ -7006,6 +7019,8 @@
 }
 {
 "origin" "320 1376 -688"
+"maxspeed" "-1"
+"newspeed" "-1"
 "angles" "0 0 0"
 "message" "train_land_mm"
 "target" "st_07"
@@ -7014,6 +7029,8 @@
 }
 {
 "origin" "310 1376 -688"
+"maxspeed" "-1"
+"newspeed" "-1"
 "angles" "0 0 0"
 "target" "st_08"
 "targetname" "st_07"
@@ -7209,6 +7226,8 @@
 }
 {
 "origin" "440 1264 -488"
+"maxspeed" "-1"
+"newspeed" "-1"
 "angles" "0 0 0"
 "message" "train_splash_snd"
 "target" "st_06"
@@ -7324,6 +7343,8 @@
 }
 {
 "origin" "1496 976 -208"
+"maxspeed" "-1"
+"newspeed" "-1"
 "angles" "0 0 0"
 "target" "st_02"
 "targetname" "st_01b"
@@ -7331,6 +7352,8 @@
 }
 {
 "origin" "1704 1008 -208"
+"maxspeed" "-1"
+"newspeed" "-1"
 "angles" "0 0 0"
 "target" "st_01b"
 "targetname" "st_01a"
@@ -7394,6 +7417,7 @@
 {
 "model" "*361"
 "origin" "2 -225 -525"
+"use_type" "3"
 "_minlight" ".1"
 "angles" "0 0 0"
 "distance" "90"
@@ -7511,6 +7535,8 @@
 }
 {
 "origin" "294 1376 -672"
+"maxspeed" "-1"
+"newspeed" "-1"
 "angles" "0 0 0"
 "target" "st_09"
 "targetname" "st_08"
@@ -8094,6 +8120,8 @@
 }
 {
 "origin" "1942 1162 -208"
+"maxspeed" "-1"
+"newspeed" "-1"
 "angles" "0 0 0"
 "message" "train_whistle"
 "target" "st_01a"
@@ -9571,6 +9599,7 @@
 {
 "model" "*444"
 "origin" "245 2307 -505"
+"use_type" "3"
 "_minlight" ".1"
 "angles" "0 0 0"
 "distance" "90"
@@ -9691,6 +9720,29 @@
 "zhlt_lightflags" "2"
 "angles" "0 0 0"
 "rendercolor" "0 0 0"
+"classname" "func_wall"
+}
+{
+"origin" "-8480 8656 -272"
+"weapon_spanner" "1"
+"master" "spanner_equip_ms"
+"inventorymode" "1"
+"spawnflags" "8"
+"classname" "game_player_equip"
+}
+{
+"origin" "-8463 8647 -272"
+"targetname" "spanner_equip_ms"
+"classname" "multisource"
+}
+{
+"model" "*451"
+"target" "spanner_equip_ms"
+"classname" "trigger_once"
+}
+{
+"model" "*247"
+"rendermode" "1"
 "classname" "func_wall"
 }
 {

@@ -11,6 +11,7 @@
 "worldtype" "0"
 "mapversion" "220"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"

@@ -10,6 +10,7 @@
 "sounds" "1"
 "message" "Anomalous Materials"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "origin" "-2149 1217 -191"

@@ -9,6 +9,7 @@
 "sounds" "1"
 "message" "MISSING IN ACTION"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "origin" "-3328 -2744 256"

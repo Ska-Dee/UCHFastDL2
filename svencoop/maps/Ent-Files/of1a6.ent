@@ -1,5 +1,6 @@
 {
 "classname" "worldspawn"
+"WaveHeight" "0"
 "skyname" "dusk"
 "MaxRange" "8192"
 "radfile" "\hl\gearbox\maps\of1a6.rad"

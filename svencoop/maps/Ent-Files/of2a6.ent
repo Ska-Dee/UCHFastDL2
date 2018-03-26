@@ -3,6 +3,7 @@
 "message" "FRIENDLY FIRE"
 "MaxRange" "4096"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "origin" "-1944 1244 -524"

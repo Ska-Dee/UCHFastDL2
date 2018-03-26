@@ -10,6 +10,7 @@
 "MaxRange" "16000"
 "message" "LIVING QUARTERS OUTBOUND"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"

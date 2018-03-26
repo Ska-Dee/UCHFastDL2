@@ -9,6 +9,7 @@
 "MaxRange" "4096"
 "message" "Power Up"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"

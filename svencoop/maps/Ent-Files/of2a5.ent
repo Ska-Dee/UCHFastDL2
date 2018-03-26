@@ -9,6 +9,7 @@
 "message" "of2a5"
 "newunit" "0"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*106"

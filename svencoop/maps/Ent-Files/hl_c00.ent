@@ -12,6 +12,7 @@
 "MaxRange" "10300"
 "gametitle" "1"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"
@@ -11467,3 +11468,4 @@
 "spawnflags" "3"
 "classname" "ambient_music"
 }
+ 

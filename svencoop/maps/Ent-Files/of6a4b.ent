@@ -5,6 +5,7 @@
 "skyname" "xen9"
 "chaptertitle" "OF6A4TITLE"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"
@@ -3620,18 +3621,6 @@
 "master" "percent_lock_2_ms"
 }
 {
-"origin" "-2460 -1424 -582"
-"targetname" "of6a5"
-"classname" "info_landmark"
-}
-{
-"model" "*11"
-"landmark" "of6a5"
-"map" "of6a5"
-"keep_inventory" "1"
-"classname" "trigger_changelevel"
-}
-{
 "model" "*104"
 "volume" "0.85"
 "skin" "0"
@@ -3646,6 +3635,18 @@
 "rendermode" "0"
 "renderfx" "0"
 "classname" "func_train"
+}
+{
+"origin" "-2460 -1424 -582"
+"targetname" "of6a5"
+"classname" "info_landmark"
+}
+{
+"model" "*11"
+"landmark" "of6a5"
+"map" "of6a5"
+"keep_inventory" "1"
+"classname" "trigger_changelevel"
 }
 {
 "model" "*105"

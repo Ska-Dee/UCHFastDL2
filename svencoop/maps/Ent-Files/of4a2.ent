@@ -6,6 +6,7 @@
 "MaxRange" "4096"
 "skyname" "neb7"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "origin" "-1867 559 421"

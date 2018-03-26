@@ -10,6 +10,7 @@
 "MaxRange" "8000"
 "skyname" "xen8"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "origin" "-608 -908 -1228"
@@ -1924,9 +1925,11 @@
 "classname" "trigger_once"
 }
 {
-"targetname" "cue_music"
 "message" "../media/opfor/OpposingForce11.mp3"
-"classname" "trigger_mediaplayer"
+"volume" "10"
+"spawnflags" "1"
+"targetname" "cue_music"
+"classname" "ambient_music"
 }
 {
 "origin" "1960 -1736 -8"

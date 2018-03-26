@@ -11,6 +11,7 @@
 "skyname" "theyh3"
 "MaxRange" "12000"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"

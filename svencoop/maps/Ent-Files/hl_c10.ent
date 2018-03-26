@@ -10,6 +10,7 @@
 "MaxRange" "4096"
 "message" "Questionable Ethics"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"

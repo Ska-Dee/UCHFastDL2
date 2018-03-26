@@ -8,6 +8,7 @@
 "skyname" "xen8"
 "message" "CRUSH DEPTH"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "origin" "-2304 2048 -256"

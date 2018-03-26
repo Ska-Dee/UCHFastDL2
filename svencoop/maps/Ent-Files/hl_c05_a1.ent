@@ -9,6 +9,7 @@
 "MaxRange" "8000"
 "message" "Blast Pit"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"

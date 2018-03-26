@@ -8,6 +8,7 @@
 "gametitle" "1"
 "MaxRange" "9000"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"
@@ -2791,8 +2792,10 @@
 }
 {
 "message" "../media/opfor/OpposingForce10.mp3"
+"volume" "10"
+"spawnflags" "1"
 "targetname" "play_soundtrack"
-"classname" "trigger_mediaplayer"
+"classname" "ambient_music"
 }
 {
 "origin" "-1195 28 151"

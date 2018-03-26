@@ -8,6 +8,7 @@
 "MaxRange" "4096"
 "light" "0"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"

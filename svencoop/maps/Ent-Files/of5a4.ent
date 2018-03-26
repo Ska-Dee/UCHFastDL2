@@ -1,5 +1,6 @@
 {
 "classname" "worldspawn"
+"WaveHeight" "0"
 "message" "FOXTROT UNIFORM"
 "skyname" "desert"
 "MaxRange" "12000"

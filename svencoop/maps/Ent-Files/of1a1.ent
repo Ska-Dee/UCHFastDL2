@@ -1,5 +1,6 @@
 {
 "classname" "worldspawn"
+"WaveHeight" "0"
 "radfile" "\hl\gearbox\maps\of1a1.rad"
 "startdark" "1"
 "wad" "\hl\valve\halflife.wad;\hl\valve\decals.wad;\hl\valve\liquids.wad;\hl\valve\xeno.wad;\hl\gearbox\opfor.wad;"

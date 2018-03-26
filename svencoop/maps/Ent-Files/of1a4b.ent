@@ -6,6 +6,7 @@
 "light" "0"
 "sounds" "0"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "origin" "-560 500 40"

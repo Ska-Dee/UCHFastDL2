@@ -8,6 +8,7 @@
 "sounds" "1"
 "radfile" "\hl\barney\maps\ba_teleport.rad"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"

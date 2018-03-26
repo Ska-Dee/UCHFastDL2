@@ -10,6 +10,7 @@
 "skyname" "desert"
 "mapversion" "220"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"

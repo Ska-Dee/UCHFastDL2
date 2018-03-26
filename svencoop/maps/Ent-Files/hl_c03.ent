@@ -8,6 +8,7 @@
 "MaxRange" "32768"
 "message" "Office Complex"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"

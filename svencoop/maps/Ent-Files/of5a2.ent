@@ -1,6 +1,7 @@
 {
 "message" "FOXTROT UNIFORM"
 "classname" "worldspawn"
+"WaveHeight" "0"
 "radfile" "\hl\gearbox\maps\of5a2.rad"
 "wad" "\hl\valve\halflife.wad;\hl\valve\decals.wad;\hl\valve\liquids.wad;\hl\gearbox\opfor.wad;\hl\valve\xeno.wad;"
 "skyname" "xen9"

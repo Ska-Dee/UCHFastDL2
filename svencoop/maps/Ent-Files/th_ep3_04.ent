@@ -2,13 +2,14 @@
 "compiler" "ZHLT 3.4 VL34 (Mar  2 2016)"
 "wad" "halflife.wad;liquids.wad;xeno.wad;decals.wad;neilm2.wad;neilm4.wad;neilm5.wad;cs_bdog.wad;neilm_sc.wad;"
 "mapversion" "220"
-"scversion2" "510"
+"scversion2" "515"
 "newunit" "1"
 "MaxRange" "32768"
 "sounds" "1"
 "sentence_file" "sound/hunger/hunger_sentences.txt"
 "skyname" "cgs"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "origin" "516 142 -960"
@@ -21,13 +22,13 @@
 "classify" "7"
 "targetname" "member_03"
 "health" "5"
-"TriggerCondition" "4"
-"TriggerTarget" "checkpoint_1_cnt"
 "rendercolor" "0 0 0"
 "angles" "0 180 0"
 "body" "5"
 "spawnflags" "512"
 "classname" "monster_zombie"
+"TriggerCondition" "4"
+"TriggerTarget" "checkpoint_1_cnt"
 }
 {
 "origin" "524 270 -976"
@@ -39,13 +40,13 @@
 "classify" "7"
 "angles" "0 0 0"
 "skin" "2"
-"TriggerCondition" "4"
-"TriggerTarget" "checkpoint_1_cnt"
 "model" "models/hunger/lpzombie.mdl"
 "targetname" "member_02"
 "rendercolor" "0 0 0"
 "spawnflags" "515"
 "classname" "monster_zombie"
+"TriggerCondition" "4"
+"TriggerTarget" "checkpoint_1_cnt"
 }
 {
 "origin" "908 1046 -976"
@@ -387,12 +388,6 @@
 "classname" "monster_th_grunt_repel"
 }
 {
-"checkpoint_1_cnt" "0"
-"cart_bars" "0"
-"targetname" "cart_bars_and_cp"
-"classname" "multi_manager"
-}
-{
 "model" "*20"
 "angles" "0 0 0"
 "_minlight" ".12"
@@ -423,11 +418,11 @@
 "displayname" "Soldier"
 "rendercolor" "0 0 0"
 "angles" "0 233 0"
-"TriggerCondition" "4"
-"TriggerTarget" "checkpoint_1_cnt"
 "targetname" "repel3"
 "spawnflags" "544"
 "classname" "monster_th_grunt_repel"
+"TriggerCondition" "4"
+"TriggerTarget" "checkpoint_1_cnt"
 }
 {
 "origin" "-172 478 392"
@@ -435,13 +430,13 @@
 "classify" "4"
 "model" "models/hunger/hgrunt.mdl"
 "displayname" "Soldier"
-"TriggerTarget" "cart_bars_and_cp"
 "TriggerCondition" "4"
 "rendercolor" "0 0 0"
 "angles" "0 127 0"
 "targetname" "repel4"
 "spawnflags" "32"
 "classname" "monster_th_grunt_repel"
+"TriggerTarget" "cart_bars_and_cp"
 }
 {
 "origin" "192 -186 392"
@@ -463,8 +458,8 @@
 "classify" "4"
 "model" "models/hunger/hgrunt.mdl"
 "displayname" "Soldier"
-"TriggerCondition" "4"
 "TriggerTarget" "checkpoint_1_cnt"
+"TriggerCondition" "4"
 "rendercolor" "0 0 0"
 "angles" "0 31 0"
 "targetname" "repel5"
@@ -485,19 +480,6 @@
 "classname" "multi_manager"
 }
 {
-"origin" "124 162 -924"
-"last_cmndo_dead_r" "5"
-"audience" "1"
-"repel5" "0.4"
-"zombie_spwn_01" "2"
-"repel4" "0.3"
-"repel3" "0.2"
-"repel2" "0.1"
-"repel1" "0.0"
-"targetname" "repel2_mm"
-"classname" "multi_manager"
-}
-{
 "origin" "394 722 -654"
 "soundlist" "../hunger/hungerbarney.txt"
 "maxhullsize" "0 0 0"
@@ -506,8 +488,6 @@
 "bloodcolor" "1"
 "displayname" "Zombie Cop"
 "classify" "7"
-"TriggerCondition" "4"
-"TriggerTarget" "checkpoint_1_cnt"
 "targetname" "stoned_guard"
 "angles" "0 237 0"
 "health" "90"
@@ -515,6 +495,8 @@
 "rendercolor" "0 0 0"
 "spawnflags" "512"
 "classname" "monster_barney"
+"TriggerCondition" "4"
+"TriggerTarget" "checkpoint_1_cnt"
 }
 {
 "origin" "52 680 -654"
@@ -677,39 +659,6 @@
 "classname" "func_illusionary"
 }
 {
-"scream1" "3"
-"voteskip" "0"
-"targetname" "start_shit_mm"
-"classname" "multi_manager"
-}
-{
-"targetname" "voteskip"
-"message" "Skip Intro"
-"m_iszYesString" "Yes (skip)"
-"target" "vote_success"
-"m_iszNoString" "No (listen)"
-"netname" "vote_failed"
-"noise" "vote_failed"
-"frags" "10"
-"health" "67"
-"classname" "trigger_vote"
-}
-{
-"audience_extra2" "51"
-"audience_extra" "39"
-"scream1#1" "49"
-"scream2#1" "41"
-"speech_over_mm" "56.5"
-"crowd_roars2" "51"
-"rockwood_talk2" "40.5"
-"crowd_roars1" "37"
-"rockwood_talk1" "0"
-"pain_snd" "2"
-"scream2" "10"
-"targetname" "vote_failed"
-"classname" "multi_manager"
-}
-{
 "origin" "556 52 -976"
 "minhullsize" "0 0 0"
 "maxhullsize" "0 0 0"
@@ -718,8 +667,6 @@
 "displayname" "Zombie"
 "classify" "7"
 "skin" "3"
-"TriggerCondition" "4"
-"TriggerTarget" "checkpoint_1_cnt"
 "model" "models/hunger/lpzombie.mdl"
 "targetname" "member_04"
 "health" "5"
@@ -727,6 +674,8 @@
 "angles" "0 163 0"
 "spawnflags" "512"
 "classname" "monster_zombie"
+"TriggerCondition" "4"
+"TriggerTarget" "checkpoint_1_cnt"
 }
 {
 "origin" "500 -6 -976"
@@ -737,8 +686,6 @@
 "displayname" "Zombie"
 "classify" "7"
 "skin" "1"
-"TriggerCondition" "4"
-"TriggerTarget" "checkpoint_1_cnt"
 "model" "models/hunger/lpzombie.mdl"
 "targetname" "member_05"
 "health" "5"
@@ -747,6 +694,8 @@
 "body" "1"
 "spawnflags" "512"
 "classname" "monster_zombie"
+"TriggerCondition" "4"
+"TriggerTarget" "checkpoint_1_cnt"
 }
 {
 "model" "*23"
@@ -783,7 +732,6 @@
 {
 "origin" "228 398 -672"
 "cover_sherf_sprite" "5.2"
-"rockwood_talk3" "1.0"
 "bomb_01_sprite" "4"
 "missile_snd" "1.0"
 "big_motha_snd" "6"
@@ -797,24 +745,7 @@
 "main_rotor" "0"
 "targetname" "speech_over_mm"
 "classname" "multi_manager"
-}
-{
-"origin" "228 398 -672"
-"cover_sherf_sprite" "2.5"
 "rockwood_talk3" "1.0"
-"bomb_01_sprite" "2"
-"missile_snd" "1.0"
-"big_motha_snd" "3.5"
-"chopper_blow_spr" "3.5"
-"explo_shake" "3.5"
-"kill_sheriff" "3.5"
-"repel2_mm" "3.5"
-"burning_nurse1" "2.3"
-"nurse_gallows" "2.3"
-"bomb_01" "2"
-"main_rotor" "0"
-"targetname" "vote_success"
-"classname" "multi_manager"
 }
 {
 "origin" "-116 342 -940"
@@ -1061,14 +992,14 @@
 "displayname" "Zombie"
 "classify" "7"
 "skin" "3"
-"TriggerCondition" "4"
-"TriggerTarget" "checkpoint_1_cnt"
 "model" "models/hunger/lpzombie.mdl"
 "targetname" "member_01"
 "rendercolor" "0 0 0"
 "angles" "0 0 0"
 "spawnflags" "512"
 "classname" "monster_zombie"
+"TriggerCondition" "4"
+"TriggerTarget" "checkpoint_1_cnt"
 }
 {
 "origin" "612 190 -856"
@@ -1234,13 +1165,13 @@
 "displayname" "Zombie"
 "classify" "7"
 "skin" "2"
-"TriggerCondition" "4"
-"TriggerTarget" "checkpoint_1_cnt"
 "angles" "0 138 0"
 "model" "models/hunger/lpzombie.mdl"
 "rendercolor" "0 0 0"
 "spawnflags" "512"
 "classname" "monster_zombie"
+"TriggerCondition" "4"
+"TriggerTarget" "checkpoint_1_cnt"
 }
 {
 "origin" "404 302 -976"
@@ -1251,13 +1182,13 @@
 "displayname" "Zombie"
 "classify" "7"
 "skin" "3"
-"TriggerCondition" "4"
-"TriggerTarget" "checkpoint_1_cnt"
 "angles" "0 186 0"
 "model" "models/hunger/lpzombie.mdl"
 "rendercolor" "0 0 0"
 "spawnflags" "512"
 "classname" "monster_zombie"
+"TriggerCondition" "4"
+"TriggerTarget" "checkpoint_1_cnt"
 }
 {
 "origin" "372 78 -688"
@@ -5813,6 +5744,7 @@
 }
 {
 "model" "*260"
+"use_type" "3"
 "angles" "90 0 0"
 "_minlight" ".3"
 "sounds" "14"
@@ -6582,6 +6514,8 @@
 }
 {
 "origin" "-982 8580 -946"
+"maxspeed" "-1"
+"newspeed" "-1"
 "angles" "0 0 0"
 "target" "truck01a"
 "targetname" "truck01"
@@ -6589,6 +6523,8 @@
 }
 {
 "origin" "-982 8579 -946"
+"maxspeed" "-1"
+"newspeed" "-1"
 "angles" "0 0 0"
 "message" "oldtruck_dr"
 "target" "truck02"
@@ -9213,6 +9149,7 @@
 }
 {
 "model" "*446"
+"use_type" "3"
 "angles" "0 0 0"
 "_minlight" ".05"
 "target" "reel1_mngr"
@@ -9678,6 +9615,7 @@
 }
 {
 "model" "*476"
+"use_type" "3"
 "angles" "0 0 0"
 "_minlight" ".3"
 "wait" "-1"
@@ -10197,9 +10135,9 @@
 "train_whistle_snd#1" "10"
 "train_whistle_snd" "6"
 "cowcar_vent" "3"
-"cowcar_lit" "4"
 "targetname" "ending_mm"
 "classname" "multi_manager"
+"cowcar_lit" "4"
 }
 {
 "origin" "1184 14896 -1196"
@@ -11971,13 +11909,6 @@
 "classname" "point_checkpoint"
 }
 {
-"origin" "-5400 4820 -880"
-"angles" "0 40 0"
-"minhullsize" "-256 -16 -64"
-"maxhullsize" "256 512 256"
-"classname" "point_checkpoint"
-}
-{
 "origin" "892 12411 -908"
 "targetname" "chkptbulbtarg"
 "classname" "info_target"
@@ -12232,6 +12163,116 @@
 "classname" "trigger_once"
 }
 {
+"origin" "-3896 2438 -1056"
+"exclusivehold" "0"
+"delay" "0"
+"dmg" "0"
+"m_flCustomRespawnTime" "0.0"
+"movetype" "0"
+"renderamt" "0"
+"rendermode" "0"
+"renderfx" "0"
+"IsNotAmmoItem" "1"
+"rendercolor" "0 0 0"
+"angles" "0 0 0"
+"classname" "weapon_spanner"
+}
+{
+"origin" "-3900 2459 -1056"
+"targetname" "equip_spanner_ms"
+"classname" "multisource"
+}
+{
+"origin" "-3896 2416 -1056"
+"weapon_spanner" "1"
+"master" "equip_spanner_ms"
+"inventorymode" "1"
+"spawnflags" "8"
+"classname" "game_player_equip"
+}
+{
+"model" "*569"
+"target" "equip_spanner_ms"
+"classname" "trigger_once"
+}
+{
+"checkpoint_1_cnt" "0"
+"cart_bars" "0"
+"targetname" "cart_bars_and_cp"
+"classname" "multi_manager"
+}
+{
+"origin" "124 162 -924"
+"last_cmndo_dead_r" "5"
+"audience" "1"
+"repel5" "0.4"
+"zombie_spwn_01" "2"
+"repel4" "0.3"
+"repel3" "0.2"
+"repel2" "0.1"
+"repel1" "0.0"
+"targetname" "repel2_mm"
+"classname" "multi_manager"
+}
+{
+"scream1" "3"
+"voteskip" "0"
+"targetname" "start_shit_mm"
+"classname" "multi_manager"
+}
+{
+"targetname" "voteskip"
+"message" "Skip Intro"
+"m_iszYesString" "Yes (skip)"
+"target" "vote_success"
+"m_iszNoString" "No (listen)"
+"netname" "vote_failed"
+"noise" "vote_failed"
+"frags" "10"
+"health" "67"
+"classname" "trigger_vote"
+}
+{
+"audience_extra2" "51"
+"audience_extra" "39"
+"scream1#1" "49"
+"scream2#1" "41"
+"speech_over_mm" "56.5"
+"crowd_roars2" "51"
+"rockwood_talk2" "40.5"
+"crowd_roars1" "37"
+"rockwood_talk1" "0"
+"pain_snd" "2"
+"scream2" "10"
+"targetname" "vote_failed"
+"classname" "multi_manager"
+}
+{
+"origin" "228 398 -672"
+"cover_sherf_sprite" "2.5"
+"rockwood_talk3" "1.0"
+"bomb_01_sprite" "2"
+"missile_snd" "1.0"
+"big_motha_snd" "3.5"
+"chopper_blow_spr" "3.5"
+"explo_shake" "3.5"
+"kill_sheriff" "3.5"
+"repel2_mm" "3.5"
+"burning_nurse1" "2.3"
+"nurse_gallows" "2.3"
+"bomb_01" "2"
+"main_rotor" "0"
+"targetname" "vote_success"
+"classname" "multi_manager"
+}
+{
+"origin" "-5400 4820 -880"
+"angles" "0 40 0"
+"minhullsize" "-256 -16 -64"
+"maxhullsize" "256 512 256"
+"classname" "point_checkpoint"
+}
+{
 "origin" "1036 14092 -1010"
 "angles" "90 0 0"
 "targetname" "percent_lock_last_digits"
@@ -12378,7 +12419,6 @@
 "classname" "trigger_copyvalue"
 }
 {
-"checkpoint1_lightning" "1"
 "checkpoint1_lightning" "2#2"
 "spawn_checkie_1" "1"
 "checkpoint1_target2" "1"

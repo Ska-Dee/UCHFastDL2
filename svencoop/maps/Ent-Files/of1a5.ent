@@ -9,6 +9,7 @@
 "MaxRange" "4096"
 "newunit" "1"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "origin" "-912 1392 -176"

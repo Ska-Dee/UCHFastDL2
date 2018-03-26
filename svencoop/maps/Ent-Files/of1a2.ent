@@ -6,6 +6,7 @@
 "skyname" "dusk"
 "MaxRange" "8192"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "origin" "730 1383 -118"

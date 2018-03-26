@@ -9,6 +9,7 @@
 "message" "On A Rail"
 "skyname" "night"
 "classname" "worldspawn"
+"WaveHeight" "0"
 }
 {
 "model" "*1"
