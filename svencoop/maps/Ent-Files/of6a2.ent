@@ -5044,6 +5044,11 @@
 "classname" "info_displacer_xen_target"
 }
 {
+"origin" "2448 2680 -1032"
+"gravity" ".55"
+"classname" "trigger_gravity"
+}
+{
 "angle" "270"
 "origin" "2448 2680 -1032"
 "targetname" "displacer_global_target"
@@ -5057,10 +5062,20 @@
 "angle" "0"
 }
 {
+"origin" "-1240 -304 -24"
+"gravity" "1"
+"classname" "trigger_gravity"
+}
+{
 "angle" "0"
 "origin" "648 -816 72"
 "targetname" "t11"
 "classname" "info_displacer_earth_target"
+}
+{
+"origin" "648 -816 72"
+"gravity" "1"
+"classname" "trigger_gravity"
 }
 {
 "model" "*111"

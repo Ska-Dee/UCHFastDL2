@@ -4695,6 +4695,11 @@
 }
 {
 "origin" "-3184 -3248 -800"
+"gravity" ".55"
+"classname" "trigger_gravity"
+}
+{
+"origin" "-3184 -3248 -800"
 "angle" "49"
 "targetname" "displacer_global_target"
 "teleport_cooldown" "1"
@@ -4721,9 +4726,19 @@
 "classname" "info_displacer_earth_target"
 }
 {
+"origin" "856 -928 384"
+"gravity" "1"
+"classname" "trigger_gravity"
+}
+{
 "origin" "2640 -144 328"
 "angle" "177"
 "classname" "info_displacer_earth_target"
+}
+{
+"origin" "2640 -144 328"
+"gravity" "1"
+"classname" "trigger_gravity"
 }
 {
 "origin" "-2528 -2653 -1092"
@@ -4865,4 +4880,9 @@
 "texture" "sprites/lgtning.spr"
 "spawnflags" "34"
 "classname" "env_beam"
+}
+{
+"origin" "-3032 -2414 -1340"
+"angles" "0 160 0"
+"classname" "point_checkpoint"
 }

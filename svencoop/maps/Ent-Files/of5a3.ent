@@ -2301,6 +2301,11 @@
 "classname" "info_displacer_xen_target"
 }
 {
+"origin" "2128 2488 1080"
+"gravity" ".55"
+"classname" "trigger_gravity"
+}
+{
 "angle" "270"
 "origin" "2128 2488 1080"
 "targetname" "displacer_global_target"
@@ -2314,10 +2319,20 @@
 "angle" "270"
 }
 {
+"origin" "-992 -544 -232"
+"gravity" "1"
+"classname" "trigger_gravity"
+}
+{
 "angle" "90"
 "origin" "-704 -1040 -232"
 "targetname" "xen_displacer"
 "classname" "info_displacer_earth_target"
+}
+{
+"origin" "-704 -1040 -232"
+"gravity" "1"
+"classname" "trigger_gravity"
 }
 {
 "classname" "info_displacer_earth_target"
@@ -2326,16 +2341,31 @@
 "angle" "90"
 }
 {
+"origin" "-1328 -1768 72"
+"gravity" "1"
+"classname" "trigger_gravity"
+}
+{
 "angle" "135"
 "origin" "80 -2160 72"
 "targetname" "t8"
 "classname" "info_displacer_earth_target"
 }
 {
+"origin" "80 -2160 72"
+"gravity" "1"
+"classname" "trigger_gravity"
+}
+{
 "classname" "info_displacer_earth_target"
 "targetname" "xen_displacer"
 "origin" "-2448 -320 72"
 "angle" "270"
+}
+{
+"origin" "-2448 -320 72"
+"gravity" "1"
+"classname" "trigger_gravity"
 }
 {
 "origin" "-984 -544 -168"
@@ -2354,6 +2384,11 @@
 "targetname" "t9"
 "origin" "-608 -1008 104"
 "angle" "90"
+}
+{
+"origin" "-608 -1008 104"
+"gravity" "1"
+"classname" "trigger_gravity"
 }
 {
 "origin" "-608 -1008 168"
@@ -2413,6 +2448,8 @@
 "floor_grate_spark5" "4.6"
 "floor_grate_spark5#1" "5"
 "teleport_engineer1" "14.3"
+"teleport_medic1" "14.3"
+"teleport_unnamedgrunt1" "14.3"
 "classname" "multi_manager"
 }
 {
@@ -2423,6 +2460,30 @@
 "targetname" "teleport_engineer1"
 "m_iszNewValue" "-712 -824 80"
 "target" "engineer1"
+"m_iszValueName" "origin"
+"spawnflags" "128"
+"classname" "trigger_changevalue"
+}
+{
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_FloatConversion" "0"
+"m_iszValueType" "0"
+"targetname" "teleport_medic1"
+"m_iszNewValue" "-632 -944 80"
+"target" "medic1"
+"m_iszValueName" "origin"
+"spawnflags" "128"
+"classname" "trigger_changevalue"
+}
+{
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_FloatConversion" "0"
+"m_iszValueType" "0"
+"targetname" "teleport_unnamedgrunt1"
+"m_iszNewValue" "-816 -784 80"
+"target" "unnamedgrunt1"
 "m_iszValueName" "origin"
 "spawnflags" "128"
 "classname" "trigger_changevalue"
@@ -2543,6 +2604,7 @@
 }
 {
 "origin" "-816 -784 80"
+"targetname" "unnamedgrunt1"
 "netname" "squad1"
 "head" "4"
 "weapons" "16"

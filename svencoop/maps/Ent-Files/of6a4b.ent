@@ -3729,10 +3729,20 @@
 "classname" "info_displacer_earth_target"
 }
 {
+"origin" "-200 2104 -568"
+"gravity" "1"
+"classname" "trigger_gravity"
+}
+{
 "origin" "-320 3080 -568"
 "targetname" "t3"
 "angle" "225"
 "classname" "info_displacer_earth_target"
+}
+{
+"origin" "-320 3080 -568"
+"gravity" "1"
+"classname" "trigger_gravity"
 }
 {
 "origin" "-1616 3008 -568"
@@ -3741,15 +3751,30 @@
 "classname" "info_displacer_earth_target"
 }
 {
+"origin" "-1616 3008 -568"
+"gravity" "1"
+"classname" "trigger_gravity"
+}
+{
 "origin" "-2344 1144 -568"
 "targetname" "xen_displacer"
 "angle" "90"
 "classname" "info_displacer_earth_target"
 }
 {
+"origin" "-2344 1144 -568"
+"gravity" "1"
+"classname" "trigger_gravity"
+}
+{
 "origin" "-3440 1728 -120"
 "targetname" "xen_displacer"
 "classname" "info_displacer_earth_target"
+}
+{
+"origin" "-3440 1728 -120"
+"gravity" "1"
+"classname" "trigger_gravity"
 }
 {
 "origin" "-2008 -1096 -488"
@@ -4919,6 +4944,11 @@
 "classname" "info_displacer_xen_target"
 }
 {
+"origin" "2556 -2068 2944"
+"gravity" ".55"
+"classname" "trigger_gravity"
+}
+{
 "angle" "270"
 "origin" "2556 -2068 2944"
 "targetname" "displacer_global_target"
@@ -5125,6 +5155,11 @@
 "targetname" "t6"
 "angle" "180"
 "classname" "info_displacer_earth_target"
+}
+{
+"origin" "-24 1728 24"
+"gravity" "1"
+"classname" "trigger_gravity"
 }
 {
 "origin" "-224 1776 96"

@@ -4345,6 +4345,11 @@
 "classname" "info_displacer_earth_target"
 }
 {
+"origin" "-2024 452 390"
+"gravity" "1"
+"classname" "trigger_gravity"
+}
+{
 "model" "*234"
 "master" "biodome1_door_2_master"
 "unlocked_sentence" "0"
@@ -6316,6 +6321,11 @@
 }
 {
 "origin" "2760 2672 2621"
+"gravity" ".55"
+"classname" "trigger_gravity"
+}
+{
+"origin" "2760 2672 2621"
 "targetname" "displacer_global_target"
 "teleport_cooldown" "1"
 "angles" "0 0 0"
@@ -6501,8 +6511,18 @@
 "classname" "info_displacer_earth_target"
 }
 {
+"origin" "-1904 0 390"
+"gravity" "1"
+"classname" "trigger_gravity"
+}
+{
 "origin" "-1618 0 389"
 "classname" "info_displacer_earth_target"
+}
+{
+"origin" "-1618 0 389"
+"gravity" "1"
+"classname" "trigger_gravity"
 }
 {
 "origin" "-728 56 567"
@@ -6510,14 +6530,29 @@
 "classname" "info_displacer_earth_target"
 }
 {
+"origin" "-728 56 567"
+"gravity" "1"
+"classname" "trigger_gravity"
+}
+{
 "origin" "-1472 328 1713"
 "angle" "270"
 "classname" "info_displacer_earth_target"
 }
 {
+"origin" "-1472 328 1713"
+"gravity" "1"
+"classname" "trigger_gravity"
+}
+{
 "origin" "-1334 -1315 1716"
 "angle" "217"
 "classname" "info_displacer_earth_target"
+}
+{
+"origin" "-1334 -1315 1716"
+"gravity" "1"
+"classname" "trigger_gravity"
 }
 {
 "origin" "-1760 465 396"

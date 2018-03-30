@@ -412,9 +412,14 @@ final class Diffy {
 	private int m_Fails = 0;
 	
 	/**
-	* What was the name of the last map.
+	* What was the name of the last map?
 	*/
 	private string m_oldMap = "";
+	
+	/**
+	* Did the last map ran for over 30 seconds?
+	*/
+	private bool m_30sec_over = false;
 	
 	private string s_message = "DIFFICULTY: 50.0 Percent (Medium) (none were connected at Map-Begin)";
 	double m_flMessageTime = 0.0;
@@ -423,6 +428,7 @@ final class Diffy {
 	array<string> chargerValuesStr;
 	
 	CScheduledFunction@ countPeopleScheduler;
+	CScheduledFunction@ enable30SScheduler;
 	
 	Diffy(){
 		m_fl_difficulty = 0.5;
@@ -1249,6 +1255,10 @@ final class Diffy {
 		return true;
 	}
 	
+	void enable_m_30sec_over(){
+		m_30sec_over = true;
+	}
+	
 	void mapStartDiffy(){
 		m_flMessageTime = 0.0;
 		m_LastPlayerNum = m_playerNum;
@@ -1257,7 +1267,7 @@ final class Diffy {
 		if(m_LastPlayerNum > 32) m_LastPlayerNum = 32;
 		
 		if(m_oldMap == g_Engine.mapname){
-			m_Fails++;
+			if(m_30sec_over) m_Fails++;
 		}else{
 			m_Fails = 0;
 			m_oldMap = g_Engine.mapname;
@@ -1278,6 +1288,12 @@ final class Diffy {
 		setDifficulty(d, shouldIgnoreDynDiff(), mode);
 		
 		countPeople();
+		
+		m_30sec_over = false;
+		if(enable30SScheduler !is null){
+			g_Scheduler.RemoveTimer(enable30SScheduler);
+		}
+		@enable30SScheduler = g_Scheduler.SetTimeout( @this, "enable_m_30sec_over", 30.0f );
 	}
 	
 	string getMessage(){
