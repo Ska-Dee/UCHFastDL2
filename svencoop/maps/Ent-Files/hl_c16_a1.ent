@@ -140,7 +140,7 @@
 "angles" "90 0 0"
 "netname" "bshk"
 "rendercolor" "255 255 255"
-"targetname" "stalk_3"
+"targetname" "stalk_3_door"
 "lip" "72"
 "wait" "-1"
 "noise2" "common/null.wav"
@@ -176,11 +176,21 @@
 {
 "model" "*16"
 "angles" "0 0 0"
-"delay" "2"
-"target" "stalk_3"
-"wait" "10"
+"target" "stalk_3_mm"
+"wait" "20"
 "classname" "trigger_multiple"
 "master" "percent_lock_1_delay_ms"
+}
+{
+"stalk_3" "2"
+"laser_grid" "4#1"
+"stalk_3_door" "2#1"
+"stalk_3#1" "12"
+"laser_grid#1" "14#0"
+"laser_grid#2" "21#1"
+"stalk_3_door#1" "12#0"
+"targetname" "stalk_3_mm"
+"classname" "multi_manager"
 }
 {
 "model" "*17"
@@ -5526,13 +5536,6 @@
 "angles" "0 0 0"
 "rendercolor" "0 0 0"
 "classname" "func_wall_toggle"
-}
-{
-"target" "laser_grid"
-"targetname" "stalk_3"
-"delay" "2"
-"triggerstate" "2"
-"classname" "trigger_relay"
 }
 {
 "origin" "0 0 32"

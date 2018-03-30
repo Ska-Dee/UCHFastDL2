@@ -254,7 +254,7 @@ final class Diffy {
 			{ 0.8, 4.0, 8.0, 9.0, 10.0, 50.0, 1000.0, 1000.0 }, // sk_islave_dmg_claw 30
 			{ 2.4, 12.0, 24.0, 25.0, 25.0, 125.0, 2500.0, 2500.0 }, // sk_islave_dmg_clawrake 31
 			{ 1.0, 5.0, 10.0, 12.0, 15.0, 75.0, 1500.0, 1500.0 }, // sk_islave_dmg_zap 32
-			{ 20.0, 100.0, 200.0, 300.0, 400.0, 600.0, 800.0, 1000.0 }, // sk_ichthyosaur_health 33
+			{ 1.0, 5.0, 10.0, 50.0, 100.0, 250.0, 400.0, 500.0 }, // sk_ichthyosaur_health 33
 			{ 2.0, 10.0, 20.0, 35.0, 50.0, 250.0, 5000.0, 5000.0 }, // sk_ichthyosaur_shake 34
 			{ 1.0, 1.0, 2.0, 2.0, 3.0, 4.0, 5.0, 10.0 }, // sk_leech_health 35
 			{ 0.2, 1.0, 2.0, 3.0, 5.0, 25.0, 500.0, 5000.0 }, // sk_leech_dmg_bite 36
@@ -659,7 +659,12 @@ final class Diffy {
 				}else if ( ent.pev.classname == "monster_alien_voltigore" ){
 					ent.pev.health = getSkValue(118);
 				}else if ( ent.pev.classname == "monster_apache" ){
-					ent.pev.health = getSkValue(4);
+					if(g_Engine.mapname == "hl_c11_a2") {
+						array<double> arrD = { 15.0, 100.0, 500.0, 1000.0, 1250.0, 1500.0, 2000.0, 2000.0 };
+						ent.pev.health = getValueCustomArray(arrD);
+					}else{
+						ent.pev.health = getSkValue(4);
+					}
 				// }else if ( ent.pev.classname == "monster_assassin_repel" ){
 					// ent.pev.health = getSkValue();
 				}else if ( ent.pev.classname == "monster_babycrab" ){
@@ -733,7 +738,12 @@ final class Diffy {
 				// }else if ( ent.pev.classname == "monster_hwgrunt_repel" ){
 					// ent.pev.health = getSkValue();
 				}else if ( ent.pev.classname == "monster_ichthyosaur" ){
-					ent.pev.health = getSkValue(33);
+					if(g_Engine.mapname == "hl_c08_a1") {
+						array<double> arrD = { 5.0, 20.0, 100.0, 300.0, 500.0, 750.0, 900.0, 1000.0 };
+						ent.pev.health = getValueCustomArray(arrD);
+					}else{
+						ent.pev.health = getSkValue(33);
+					}
 				}else if ( ent.pev.classname == "monster_kingpin" ){
 					ent.pev.health = getSkValue(127);
 				}else if ( ent.pev.classname == "monster_leech" ){
@@ -872,7 +882,15 @@ final class Diffy {
 		int iMax = skillMatrix.size();
 		
 		for( int i = 0; i < iMax; ++i ){
-			g_EngineFuncs.CVarSetFloat(sk_names[i], getSkValue(i));
+			if(i == 4 && g_Engine.mapname == "hl_c11_a2") {
+				array<double> arrD = { 15.0, 100.0, 500.0, 1000.0, 1250.0, 1500.0, 2000.0, 2000.0 };
+				g_EngineFuncs.CVarSetFloat(sk_names[i], getValueCustomArray(arrD));
+			}else if(i == 33 && g_Engine.mapname == "hl_c08_a1") {
+				array<double> arrD = { 5.0, 20.0, 100.0, 300.0, 500.0, 750.0, 900.0, 1000.0 };
+				g_EngineFuncs.CVarSetFloat(sk_names[i], getValueCustomArray(arrD));
+			}else{
+				g_EngineFuncs.CVarSetFloat(sk_names[i], getSkValue(i));
+			}
 		}
 	}
 	

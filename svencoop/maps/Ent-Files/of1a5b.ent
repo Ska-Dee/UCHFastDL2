@@ -1039,6 +1039,7 @@
 }
 {
 "origin" "-1024 -1936 1754"
+"controlroom" "45"
 "killotis11" "15"
 "otis11" "13"
 "shockscream" "2.8"
@@ -4729,17 +4730,139 @@
 "classname" "ambient_generic"
 }
 {
-"percent_lock_2_sound" "1"
-"percent_lock_2_changecolor" "1"
-"percent_lock_2_blocker" "1.5"
+"percent_lock_2_sound" "0"
+"percent_lock_2_changecolor" "0"
+"percent_lock_2_blocker" "0.5"
 "targetname" "percent_lock_2"
+"classname" "multi_manager"
+}
+{
+"$f_sumArmor1" "0.0"
+"$f_sumArmor2" "0.0"
+"$i_cooldown" "5"
+"$i_maxtimer" "30"
+"$s_bufStr" "A"
+"targetname" "pl2_vars"
+"classname" "info_target"
+}
+{
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_FloatConversion" "0"
+"m_iszValueType" "1"
+"targetname" "add_one_armor"
+"netname" "!activator"
+"m_iszSrcValueName" "armorvalue"
+"target" "pl2_vars"
+"m_iszDstValueName" "$f_sumArmor1"
+"classname" "trigger_copyvalue"
+}
+{
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_iszValueType" "0"
+"targetname" "reset_armor_1_value"
+"target" "pl2_vars"
+"m_iszValueName" "$f_sumArmor1"
+"m_iszNewValue" "0.0"
+"message" "add_all_armor"
+"classname" "trigger_changevalue"
+}
+{
+"run_mode" "1"
+"triggerstate" "1"
+"target" "add_one_armor"
+"classname_filter" "player"
+"targetname" "add_all_armor"
+"trigger_after_run" "check_changed_armor"
+"classname" "trigger_entity_iterator"
+}
+{
+"m_fCheckInterval" "0.1"
+"m_iCheckBehavior" "0"
+"m_iCheckType" "0"
+"targetname" "check_changed_armor"
+"target" "pl2_vars"
+"m_iszValueName" "$f_sumArmor1"
+"m_iszSourceName" "pl2_vars"
+"m_iszSourceKey" "$f_sumArmor2"
+"netname" "decrease_cooldown"
+"message" "decrease_timer"
+"spawnflags" "33"
+"classname" "trigger_condition"
+}
+{
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_iszValueType" "3"
+"targetname" "decrease_timer"
+"target" "pl2_vars"
+"m_iszValueName" "$i_maxtimer"
+"m_iszNewValue" "1"
+"message" "check_timer"
+"classname" "trigger_changevalue"
+}
+{
+"m_fCheckInterval" "0.1"
+"m_iCheckBehavior" "0"
+"m_iCheckType" "0"
+"targetname" "check_timer"
+"target" "pl2_vars"
+"m_iszValueName" "$i_maxtimer"
+"m_iszCheckValue" "0"
+"netname" "percent_lock_2"
+"message" "copy_old_value"
+"spawnflags" "33"
+"classname" "trigger_condition"
+}
+{
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_iszValueType" "3"
+"targetname" "decrease_cooldown"
+"target" "pl2_vars"
+"m_iszValueName" "$i_cooldown"
+"m_iszNewValue" "1"
+"message" "check_cooldown"
+"classname" "trigger_changevalue"
+}
+{
+"m_fCheckInterval" "0.1"
+"m_iCheckBehavior" "0"
+"m_iCheckType" "0"
+"targetname" "check_cooldown"
+"target" "pl2_vars"
+"m_iszValueName" "$i_cooldown"
+"m_iszCheckValue" "0"
+"netname" "percent_lock_2"
+"message" "copy_old_value"
+"spawnflags" "33"
+"classname" "trigger_condition"
+}
+{
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_FloatConversion" "0"
+"m_iszValueType" "0"
+"targetname" "copy_old_value"
+"netname" "pl2_vars"
+"m_iszSrcValueName" "$f_sumArmor1"
+"target" "pl2_vars"
+"m_iszDstValueName" "$f_sumArmor2"
+"message" "percent_lock_2_mm"
+"classname" "trigger_copyvalue"
+}
+{
+"reset_armor_1_value" "1"
+"targetname" "percent_lock_2_mm"
+"spawnflags" "1"
 "classname" "multi_manager"
 }
 {
 "m_flPercentage" "0.66"
 "minhullsize" "-1508 -3296 2183"
 "maxhullsize" "-1104 -2821 2400"
-"target" "percent_lock_2"
+"target" "percent_lock_2_mm"
 "classname" "trigger_once_mp"
 }
 {

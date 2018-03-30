@@ -5941,9 +5941,11 @@
 "classname" "scripted_sequence"
 }
 {
+"secret_door_lower_2" "1.0"
+"percent_lock_ms_3_r2" "0#0"
+"percent_lock_ms_3_r2" "30#1"
 "targetname" "secret_door_lower"
 "classname" "multi_manager"
-"secret_door_lower_2" "1.0"
 }
 {
 "origin" "-1632 -32 -1856"
@@ -6108,6 +6110,7 @@
 "percent_lock_1_sound" "1"
 "percent_lock_1_changecolor" "1"
 "blocker_wall_1" "1"
+"percent_lock_ms_3_r2" "1#1"
 "targetname" "percent_lock_1"
 "classname" "multi_manager"
 }
@@ -6313,17 +6316,34 @@
 "classname" "ambient_generic"
 }
 {
-"percent_lock_3_sound" "3"
-"percent_lock_3_changecolor" "3"
-"hl_c11_a5" "3.2"
+"percent_lock_3_sound" "1"
+"percent_lock_3_changecolor" "1"
+"hl_c11_a5" "1.2"
 "targetname" "percent_lock_3"
 "classname" "multi_manager"
+}
+{
+"target" "percent_lock_3"
+"targetname" "percent_lock_ms_3"
+"classname" "multisource"
+}
+{
+"target" "percent_lock_ms_3"
+"targetname" "percent_lock_ms_3_r1"
+"triggerstate" "1"
+"classname" "trigger_relay"
+}
+{
+"target" "percent_lock_ms_3"
+"targetname" "percent_lock_ms_3_r2"
+"triggerstate" "2"
+"classname" "trigger_relay"
 }
 {
 "m_flPercentage" "0.66"
 "minhullsize" "-800 -2608 -1696"
 "maxhullsize" "-16 -1840 -1472"
-"target" "percent_lock_3"
+"target" "percent_lock_ms_3_r1"
 "classname" "trigger_once_mp"
 }
 {

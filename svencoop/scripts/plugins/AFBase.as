@@ -1630,36 +1630,36 @@ namespace AFBase
 	
 	void BaseTell(string sMsg, CBasePlayer@ pUser, HUD hudTarget)
 	{
-		// if(hudTarget == HUD_PRINTTALK)
-			// g_PlayerFuncs.ClientPrint(pUser, hudTarget, "[AFB] "+sMsg+"\n");
-		// else
-			// g_PlayerFuncs.ClientPrint(pUser, hudTarget, "[AFB] "+sMsg+"\n");
+		if(hudTarget == HUD_PRINTTALK)
+			g_PlayerFuncs.ClientPrint(pUser, hudTarget, "[AFB] "+sMsg+"\n");
+		else
+			g_PlayerFuncs.ClientPrint(pUser, hudTarget, "[AFB] "+sMsg+"\n");
 	}
 	
 	void BaseTellLong(string sMsg, CBasePlayer@ pUser, HUD targetHud)
 	{
-		// string sHoldIn;
-		// if(targetHud == HUD_PRINTTALK)
-			// sHoldIn = "[AFB] "+sMsg+"\n";
-		// else
-			// sHoldIn = "[AFB] "+sMsg+"\n";
+		string sHoldIn;
+		if(targetHud == HUD_PRINTTALK)
+			sHoldIn = "[AFB] "+sMsg+"\n";
+		else
+			sHoldIn = "[AFB] "+sMsg+"\n";
 			
-		// while(sHoldIn.Length() > 128)
-		// {
-			// g_PlayerFuncs.ClientPrint(pUser, targetHud, sHoldIn.SubString(0, 128));
-			// sHoldIn = sHoldIn.SubString(127, sHoldIn.Length()-127);
-		// }
+		while(sHoldIn.Length() > 128)
+		{
+			g_PlayerFuncs.ClientPrint(pUser, targetHud, sHoldIn.SubString(0, 128));
+			sHoldIn = sHoldIn.SubString(127, sHoldIn.Length()-127);
+		}
 		
-		// if(sHoldIn.Length() > 0)
-			// g_PlayerFuncs.ClientPrint(pUser, targetHud, sHoldIn);
+		if(sHoldIn.Length() > 0)
+			g_PlayerFuncs.ClientPrint(pUser, targetHud, sHoldIn);
 	}
 	
 	void BaseTellAll(string sMsg, HUD hudTarget)
 	{
-		// if(hudTarget == HUD_PRINTTALK)
-			// g_PlayerFuncs.ClientPrintAll(hudTarget, "[AFB] "+sMsg+"\n");
-		// else
-			// g_PlayerFuncs.ClientPrintAll(hudTarget, "[AFB] "+sMsg+"\n");
+		if(hudTarget == HUD_PRINTTALK)
+			g_PlayerFuncs.ClientPrintAll(hudTarget, "[AFB] "+sMsg+"\n");
+		else
+			g_PlayerFuncs.ClientPrintAll(hudTarget, "[AFB] "+sMsg+"\n");
 	}
 	
 	bool GetTargetPlayers(CBasePlayer@ &in pSelf, HUD &in hudTarget, string &in sInput, int &in iFlags, array<CBasePlayer@> &out pTargets)
@@ -2399,35 +2399,35 @@ abstract class AFBaseClass
 	
 	void Tell(string sMsg, CBasePlayer@ pUser, HUD hudTarget) final
 	{
-		// if(hudTarget == HUD_PRINTTALK)
-			// g_PlayerFuncs.ClientPrint(pUser, hudTarget, "["+this.ShortName+"] "+sMsg+"\n");
-		// else
-			// g_PlayerFuncs.ClientPrint(pUser, hudTarget, "["+this.ShortName+"] "+sMsg+"\n");
+		if(hudTarget == HUD_PRINTTALK)
+			g_PlayerFuncs.ClientPrint(pUser, hudTarget, "["+this.ShortName+"] "+sMsg+"\n");
+		else
+			g_PlayerFuncs.ClientPrint(pUser, hudTarget, "["+this.ShortName+"] "+sMsg+"\n");
 	}
 	
 	void TellAll(string sMsg, HUD hudTarget) final
 	{
-		// if(hudTarget == HUD_PRINTTALK)
-			// g_PlayerFuncs.ClientPrintAll(hudTarget, "["+this.ShortName+"] "+sMsg+"\n");
-		// else
-			// g_PlayerFuncs.ClientPrintAll(hudTarget, "["+this.ShortName+"] "+sMsg+"\n");
+		if(hudTarget == HUD_PRINTTALK)
+			g_PlayerFuncs.ClientPrintAll(hudTarget, "["+this.ShortName+"] "+sMsg+"\n");
+		else
+			g_PlayerFuncs.ClientPrintAll(hudTarget, "["+this.ShortName+"] "+sMsg+"\n");
 	}
 	
 	void TellLong(string sMsg, CBasePlayer@ pUser, HUD targetHud)
 	{
-		// string sHoldIn;
-		// if(targetHud == HUD_PRINTTALK)
-			// sHoldIn = "["+this.ShortName+"] "+sMsg+"\n";
-		// else
-			// sHoldIn = "["+this.ShortName+"] "+sMsg+"\n";
-		// while(sHoldIn.Length() > 128)
-		// {
-			// g_PlayerFuncs.ClientPrint(pUser, targetHud, sHoldIn.SubString(0, 128));
-			// sHoldIn = sHoldIn.SubString(127, sHoldIn.Length()-127);
-		// }
+		string sHoldIn;
+		if(targetHud == HUD_PRINTTALK)
+			sHoldIn = "["+this.ShortName+"] "+sMsg+"\n";
+		else
+			sHoldIn = "["+this.ShortName+"] "+sMsg+"\n";
+		while(sHoldIn.Length() > 128)
+		{
+			g_PlayerFuncs.ClientPrint(pUser, targetHud, sHoldIn.SubString(0, 128));
+			sHoldIn = sHoldIn.SubString(127, sHoldIn.Length()-127);
+		}
 		
-		// if(sHoldIn.Length() > 0)
-			// g_PlayerFuncs.ClientPrint(pUser, targetHud, sHoldIn);
+		if(sHoldIn.Length() > 0)
+			g_PlayerFuncs.ClientPrint(pUser, targetHud, sHoldIn);
 	}
 }
 
@@ -2474,7 +2474,7 @@ class AFBaseBase : AFBaseClass
 		RegisterCommand("admin_gag", "ss", "(targets) (mode a/c/v) - gag player, a = all, c = chat, v = voice", ACCESS_G, @AFBaseBase::gag);
 		RegisterCommand("admin_ungag", "s", "(targets) - ungag player", ACCESS_G, @AFBaseBase::ungag);
 		
-		@AFBaseBase::cvar_iBanMaxMinutes = CCVar("afb_maxban", 10080, "maximum time for bans in minutes (default: 10080)", ConCommandFlag::AdminOnly, CVarCallback(this.afb_cvar_ibanmaxminutes));
+		@AFBaseBase::cvar_iBanMaxMinutes = CCVar("afb_maxban", 20160, "maximum time for bans in minutes (default: 20160)", ConCommandFlag::AdminOnly, CVarCallback(this.afb_cvar_ibanmaxminutes));
 		
 		g_Hooks.RegisterHook(Hooks::Player::PlayerDecal, @AFBaseBase::PlayerDecalHook);
 		g_Hooks.RegisterHook(Hooks::Player::PlayerSpawn, @AFBaseBase::PlayerSpawn);

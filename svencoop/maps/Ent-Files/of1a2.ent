@@ -47,18 +47,6 @@
 "classname" "monster_furniture"
 }
 {
-"classname" "trigger_auto"
-"target" "newslave"
-"delay" "18"
-"origin" "663 -2908 99"
-}
-{
-"classname" "trigger_auto"
-"target" "newslave2"
-"delay" "21"
-"origin" "663 -2908 99"
-}
-{
 "origin" "-263 -1933 -1084"
 "monstertype" "monster_alien_slave"
 "angles" "0 45 0"
@@ -2476,8 +2464,6 @@
 {
 "origin" "-264 -1024 -896"
 "rendercolor" "0 0 0"
-"TriggerTarget" "newgrunt"
-"TriggerCondition" "4"
 "renderamt" "0"
 "rendermode" "0"
 "renderfx" "0"
@@ -2486,8 +2472,6 @@
 {
 "origin" "372 -1079 -1244"
 "rendercolor" "0 0 0"
-"TriggerTarget" "newgrunt"
-"TriggerCondition" "4"
 "renderamt" "0"
 "rendermode" "0"
 "renderfx" "0"
@@ -2498,8 +2482,6 @@
 "renderfx" "0"
 "rendermode" "0"
 "renderamt" "0"
-"TriggerTarget" "newgrunt"
-"TriggerCondition" "4"
 "rendercolor" "0 0 0"
 "classname" "monster_barnacle"
 }
@@ -4730,6 +4712,7 @@
 "percent_lock_2_sound" "1"
 "percent_lock_2_changecolor" "1"
 "percent_lock_2_blocker" "1"
+"newgrunt" "1"
 "targetname" "percent_lock_2"
 "classname" "multi_manager"
 }
@@ -4874,4 +4857,16 @@
 "origin" "1000 2360 -144"
 "angles" "0 230 0"
 "classname" "point_checkpoint"
+}
+{
+"model" "*35"
+"origin" "75 -2478 192"
+"target" "newslave_mm"
+"classname" "trigger_once"
+}
+{
+"newslave" "0"
+"newslave2" "3"
+"targetname" "newslave_mm"
+"classname" "multi_manager"
 }

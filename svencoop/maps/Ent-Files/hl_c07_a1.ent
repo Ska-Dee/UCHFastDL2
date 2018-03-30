@@ -918,6 +918,7 @@
 "health" "20"
 "gibmodel" "models/ventgibs.mdl"
 "spawnflags" "256"
+"target" "dont_change_level_yet"
 "classname" "func_breakable"
 }
 {
@@ -8219,6 +8220,7 @@
 "percent_lock_1_sound" "1"
 "percent_lock_1_changecolor" "1"
 "blocker_2" "1"
+"percent_lock_ms_3_r2" "1#1"
 "targetname" "percent_lock_1"
 "classname" "multi_manager"
 }
@@ -8320,10 +8322,33 @@
 "classname" "ambient_generic"
 }
 {
+"target" "endlevel_counter"
+"targetname" "percent_lock_ms_3"
+"classname" "multisource"
+}
+{
+"target" "percent_lock_ms_3"
+"targetname" "percent_lock_ms_3_r1"
+"triggerstate" "1"
+"classname" "trigger_relay"
+}
+{
+"target" "percent_lock_ms_3"
+"targetname" "percent_lock_ms_3_r2"
+"triggerstate" "2"
+"classname" "trigger_relay"
+}
+{
+"percent_lock_ms_3_r2" "0#0"
+"percent_lock_ms_3_r2" "20#1"
+"targetname" "dont_change_level_yet"
+"classname" "multi_manager"
+}
+{
 "m_flPercentage" "0.66"
 "minhullsize" "-471 -1920 -756"
 "maxhullsize" "96 -1200 -512"
-"target" "endlevel_counter"
+"target" "percent_lock_ms_3_r1"
 "classname" "trigger_once_mp"
 }
 {

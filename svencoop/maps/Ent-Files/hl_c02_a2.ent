@@ -326,6 +326,8 @@
 "targetname" "control_retinal1mm"
 "control_retinal2" "0"
 "retinal_scannermm" "0"
+"percent_lock_ms_1_r2" "0#0"
+"percent_lock_ms_1_r2#1" "10#1"
 "classname" "multi_manager"
 }
 {
@@ -1670,6 +1672,7 @@
 "angles" "0 0 0"
 "targetname" "block1"
 "aira" "0"
+"percent_lock_ms_1_r2" "0#1"
 "classname" "multi_manager"
 }
 {
@@ -8650,10 +8653,27 @@
 "classname" "multi_manager"
 }
 {
+"target" "percent_lock_1"
+"targetname" "percent_lock_ms_1"
+"classname" "multisource"
+}
+{
+"target" "percent_lock_ms_1"
+"targetname" "percent_lock_ms_1_r1"
+"triggerstate" "1"
+"classname" "trigger_relay"
+}
+{
+"target" "percent_lock_ms_1"
+"targetname" "percent_lock_ms_1_r2"
+"triggerstate" "2"
+"classname" "trigger_relay"
+}
+{
 "m_flPercentage" "0.66"
 "minhullsize" "1392 -3727 1280"
 "maxhullsize" "1872 -2814 1650"
-"target" "percent_lock_1"
+"target" "percent_lock_ms_1_r1"
 "classname" "trigger_once_mp"
 }
 {

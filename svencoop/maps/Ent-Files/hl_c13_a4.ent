@@ -1560,6 +1560,7 @@
 "heythere" "1"
 "gocenter" "10"
 "barneyboy" "0"
+"vote_skip_xen_story" "0"
 "classname" "multi_manager"
 }
 {
@@ -1641,13 +1642,13 @@
 "angles" "0 0 0"
 "targetname" "xentalkmm"
 "1xentalk" "0"
-"3xentalk" "5.6"
 "2xentalk" "2.5"
+"3xentalk" "5.6"
+"4xentalk" "30.6"
+"5xentalk" "33.9"
+"6xentalk" "40.6"
 "7xentalk" "44.9"
 "8xentalk" "54.4"
-"6xentalk" "40.6"
-"5xentalk" "33.9"
-"4xentalk" "30.6"
 "classname" "multi_manager"
 }
 {
@@ -2740,7 +2741,7 @@
 "angles" "0 0 0"
 "targetname" "longjump_mm"
 "longjump_door" "0"
-"longjump_light" "2"
+"longjump_light" "2#1"
 "jumpspeak" "0"
 "classname" "multi_manager"
 }
@@ -4816,12 +4817,6 @@
 "classname" "light"
 }
 {
-"model" "*84"
-"angles" "0 0 0"
-"target" "retinalscan"
-"classname" "trigger_once"
-}
-{
 "origin" "1161 -1094 -212"
 "targetname" "spawn2"
 "angles" "0 90 0"
@@ -5126,4 +5121,27 @@
 {
 "origin" "1664 24 -203"
 "classname" "point_checkpoint"
+}
+{
+"health" "67"
+"frags" "20"
+"message" "Skip dialogue?"
+"target" "skip_accepted"
+"targetname" "vote_skip_xen_story"
+"classname" "trigger_vote"
+}
+{
+"model" "*84"
+"angles" "0 0 0"
+"target" "retinalscan"
+"targetname" "retinalscan_once"
+"classname" "trigger_once"
+}
+{
+"longjump_door" "5"
+"longjump_light" "7"
+"retinal_scannermm" "0"
+"retinalscan_once" "0#2"
+"targetname" "skip_accepted"
+"classname" "multi_manager"
 }
