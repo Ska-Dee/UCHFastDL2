@@ -2683,6 +2683,7 @@
 "rocknroll_oldies" "14"
 "spn_so" "1"
 "Make_Players_notsolid_EI" "1.1"
+"check_glitched_players" "1.2"
 "train" "11"
 "startrunning" "30"
 "upmon1go" "40"
@@ -2702,12 +2703,60 @@
 "classname" "trigger_entity_iterator"
 }
 {
-"classname" "trigger_changevalue"
+"origin" "99 11 -288"
+"triggerstate" "1"
+"target" "falling1"
+"classname_filter" "player"
+"targetname" "check_glitched_players"
+"delay_between_runs" "0.1"
+"run_mode" "2"
+"delay_between_triggers" "0.1"
+"status_filter" "1"
+"classname" "trigger_entity_iterator"
+}
+{
 "target" "!activator"
 "m_iszValueName" "solid"
 "m_iszNewValue" "0"
 "m_iszValueType" "0"
 "targetname" "notsolid"
+"classname" "trigger_changevalue"
+}
+{
+"m_fCheckInterval" "0.1"
+"m_iCheckBehavior" "0"
+"m_iCheckType" "2"
+"targetname" "falling1"
+"target" "!activator"
+"m_iszValueName" "origin"
+"m_iszSourceName" "train"
+"m_iszSourceKey" "origin"
+"netname" "falling2"
+"spawnflags" "119"
+"classname" "trigger_condition"
+}
+{
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_FloatConversion" "0"
+"m_iszValueType" "0"
+"targetname" "falling2"
+"netname" "train"
+"m_iszSrcValueName" "origin"
+"target" "!activator"
+"m_iszDstValueName" "origin"
+"message" "falling3"
+"classname" "trigger_copyvalue"
+}
+{
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_iszValueType" "1"
+"targetname" "falling3"
+"target" "!activator"
+"m_iszValueName" "origin"
+"m_iszNewValue" "0 0 72"
+"classname" "trigger_changevalue"
 }
 {
 "origin" "-1764 828 -236"

@@ -1355,6 +1355,7 @@
 "rendermode" "2"
 "material" "8"
 "health" "1"
+"target" "mine9_mm"
 "spawnflags" "2"
 "classname" "func_breakable"
 }

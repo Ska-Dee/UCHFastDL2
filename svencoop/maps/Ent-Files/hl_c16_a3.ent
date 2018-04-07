@@ -1008,6 +1008,8 @@
 "classname" "multi_manager"
 "angles" "0 0 0"
 "spawns2" "0.1#2"
+"spawns2a" "0.1#2"
+"spawns2b" "0.1#2"
 }
 {
 "origin" "1296 744 -448"
@@ -11929,6 +11931,7 @@
 }
 {
 "origin" "989 -2551 -448"
+"spawns2" "0#2"
 "spawns2a" "0#2"
 "spawns2b" "0#1"
 "targetname" "spawns2b_mm"

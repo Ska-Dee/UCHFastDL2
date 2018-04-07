@@ -5487,7 +5487,7 @@
 {
 "origin" "-2712 2152 -144"
 "angles" "0 0 0"
-"targetname" "mine9_expl"
+"targetname" "mine3_expl"
 "rendermode" "5"
 "renderamt" "255"
 "rendercolor" "0 0 0"
@@ -5777,7 +5777,7 @@
 {
 "origin" "-2712 1600 -144"
 "angles" "0 0 0"
-"targetname" "mine2_expl"
+"targetname" "mine1_expl"
 "rendermode" "5"
 "renderamt" "255"
 "rendercolor" "0 0 0"
