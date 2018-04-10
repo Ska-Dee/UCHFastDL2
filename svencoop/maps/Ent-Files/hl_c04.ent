@@ -4576,7 +4576,7 @@
 {
 "model" "*168"
 "target" "rushmusic"
-"origin" "0 0 -512"
+"origin" "0 0 512"
 "classname" "trigger_once"
 }
 {
@@ -12620,8 +12620,8 @@
 }
 {
 "m_flPercentage" "0.66"
-"minhullsize" "1312 -1160 -128"
-"maxhullsize" "1440 -1032 0"
+"minhullsize" "1224 -1176 -160"
+"maxhullsize" "1648 -464 112"
 "target" "percent_lock_3"
 "classname" "trigger_once_mp"
 }
