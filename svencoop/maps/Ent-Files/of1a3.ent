@@ -8010,6 +8010,8 @@
 "targetname" "kazooie"
 "spawnflags" "512"
 "angle" "312"
+"TriggerCondition" "4"
+"TriggerTarget" "percent_lock_1_r2"
 "classname" "monster_alien_slave"
 }
 {
@@ -8017,6 +8019,8 @@
 "targetname" "banjo"
 "spawnflags" "512"
 "angle" "250"
+"TriggerCondition" "4"
+"TriggerTarget" "percent_lock_1_r1"
 "classname" "monster_alien_slave"
 }
 {
@@ -8330,7 +8334,24 @@
 "minhullsize" "688 -1872 -256"
 "maxhullsize" "1104 592 1984"
 "target" "percent_lock_1"
+"master" "percent_lock_1_ms"
 "classname" "trigger_once_mp"
+}
+{
+"targetname" "percent_lock_1_ms"
+"classname" "multisource"
+}
+{
+"target" "percent_lock_1_ms"
+"targetname" "percent_lock_1_r1"
+"triggerstate" "1"
+"classname" "trigger_relay"
+}
+{
+"target" "percent_lock_1_ms"
+"targetname" "percent_lock_1_r2"
+"triggerstate" "1"
+"classname" "trigger_relay"
 }
 {
 "origin" "-799 628 387"
@@ -8480,4 +8501,152 @@
 "rendermode" "1"
 "targetname" "percent_lock_1_blocker"
 "classname" "func_wall_toggle"
+}
+{
+"origin" "672 -1375 127"
+"targetname" "blocker_corner_1"
+"classname" "info_target"
+}
+{
+"origin" "672 -1185 127"
+"targetname" "blocker_corner_2"
+"classname" "info_target"
+}
+{
+"origin" "672 -1185 3"
+"targetname" "blocker_corner_3"
+"classname" "info_target"
+}
+{
+"origin" "672 -1375 3"
+"targetname" "blocker_corner_4"
+"classname" "info_target"
+}
+{
+"LightningStart" "blocker_corner_1"
+"LightningEnd" "blocker_corner_2"
+"targetname" "percent_lock_1_blocker"
+"spawnflags" "3"
+"renderamt" "128"
+"rendercolor" "255 0 0"
+"TextureScroll" "100"
+"NoiseAmplitude" "0"
+"BoltWidth" "7"
+"life" "0"
+"Radius" "256"
+"renderfx" "0"
+"texture" "sprites/laserbeam.spr"
+"classname" "env_beam"
+}
+{
+"LightningStart" "blocker_corner_2"
+"LightningEnd" "blocker_corner_3"
+"targetname" "percent_lock_1_blocker"
+"spawnflags" "3"
+"renderamt" "128"
+"rendercolor" "255 0 0"
+"TextureScroll" "100"
+"NoiseAmplitude" "0"
+"BoltWidth" "7"
+"life" "0"
+"Radius" "256"
+"renderfx" "0"
+"texture" "sprites/laserbeam.spr"
+"classname" "env_beam"
+}
+{
+"LightningStart" "blocker_corner_3"
+"LightningEnd" "blocker_corner_4"
+"targetname" "percent_lock_1_blocker"
+"spawnflags" "3"
+"renderamt" "128"
+"rendercolor" "255 0 0"
+"TextureScroll" "100"
+"NoiseAmplitude" "0"
+"BoltWidth" "7"
+"life" "0"
+"Radius" "256"
+"renderfx" "0"
+"texture" "sprites/laserbeam.spr"
+"classname" "env_beam"
+}
+{
+"LightningStart" "blocker_corner_4"
+"LightningEnd" "blocker_corner_1"
+"targetname" "percent_lock_1_blocker"
+"spawnflags" "3"
+"renderamt" "128"
+"rendercolor" "255 0 0"
+"TextureScroll" "100"
+"NoiseAmplitude" "0"
+"BoltWidth" "7"
+"life" "0"
+"Radius" "256"
+"renderfx" "0"
+"texture" "sprites/laserbeam.spr"
+"classname" "env_beam"
+}
+{
+"LightningStart" "blocker_corner_1"
+"LightningEnd" "blocker_corner_2"
+"targetname" "percent_lock_1_blocker"
+"spawnflags" "2"
+"renderamt" "128"
+"rendercolor" "0 255 0"
+"TextureScroll" "100"
+"NoiseAmplitude" "0"
+"BoltWidth" "7"
+"life" "0"
+"Radius" "256"
+"renderfx" "0"
+"texture" "sprites/laserbeam.spr"
+"classname" "env_beam"
+}
+{
+"LightningStart" "blocker_corner_2"
+"LightningEnd" "blocker_corner_3"
+"targetname" "percent_lock_1_blocker"
+"spawnflags" "2"
+"renderamt" "128"
+"rendercolor" "0 255 0"
+"TextureScroll" "100"
+"NoiseAmplitude" "0"
+"BoltWidth" "7"
+"life" "0"
+"Radius" "256"
+"renderfx" "0"
+"texture" "sprites/laserbeam.spr"
+"classname" "env_beam"
+}
+{
+"LightningStart" "blocker_corner_3"
+"LightningEnd" "blocker_corner_4"
+"targetname" "percent_lock_1_blocker"
+"spawnflags" "2"
+"renderamt" "128"
+"rendercolor" "0 255 0"
+"TextureScroll" "100"
+"NoiseAmplitude" "0"
+"BoltWidth" "7"
+"life" "0"
+"Radius" "256"
+"renderfx" "0"
+"texture" "sprites/laserbeam.spr"
+"classname" "env_beam"
+}
+{
+"LightningStart" "blocker_corner_4"
+"LightningEnd" "blocker_corner_1"
+"targetname" "percent_lock_1_blocker"
+"spawnflags" "2"
+"renderamt" "128"
+"rendercolor" "0 255 0"
+"TextureScroll" "100"
+"NoiseAmplitude" "0"
+"BoltWidth" "7"
+"life" "0"
+"Radius" "256"
+"renderfx" "0"
+"texture" "sprites/laserbeam.spr"
+"classname" "env_beam"
 }

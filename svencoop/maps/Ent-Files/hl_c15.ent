@@ -3817,11 +3817,6 @@
 "classname" "env_message"
 }
 {
-"model" "*110"
-"target" "mapstart_mm"
-"classname" "trigger_once"
-}
-{
 "origin" "2701 -83 0"
 "sackmusic" "0.2"
 "angles" "0 0 0"
@@ -3907,11 +3902,10 @@
 "classname" "info_player_deathmatch"
 }
 {
-"model" "*116"
-"angles" "0 0 0"
 "delay" "8"
+"triggerstate" "1"
 "target" "mapstart_mm"
-"classname" "trigger_once"
+"classname" "trigger_auto"
 }
 {
 "origin" "2696 -56 8"

@@ -1001,9 +1001,9 @@
 }
 {
 "model" "*103"
-"damagetype" "8"
+"damagetype" "4104"
 "targetname" "steam1_hurt"
-"dmg" "60"
+"dmg" "1000"
 "classname" "trigger_hurt"
 }
 {
@@ -1856,8 +1856,8 @@
 }
 {
 "model" "*130"
-"damagetype" "8"
-"dmg" "60"
+"damagetype" "4104"
+"dmg" "1000"
 "targetname" "steam2_hurt"
 "classname" "trigger_hurt"
 }

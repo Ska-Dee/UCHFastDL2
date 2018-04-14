@@ -2649,8 +2649,8 @@
 "model" "*163"
 "targetname" "steam_3_hurt_1"
 "delay" "0"
-"damagetype" "8"
-"dmg" "20"
+"damagetype" "4104"
+"dmg" "1000"
 "spawnflags" "32"
 "classname" "trigger_hurt"
 }
@@ -2679,8 +2679,8 @@
 "model" "*164"
 "targetname" "steam_4_hurt_1"
 "delay" "0"
-"damagetype" "8"
-"dmg" "20"
+"damagetype" "4104"
+"dmg" "1000"
 "spawnflags" "32"
 "classname" "trigger_hurt"
 }
@@ -2815,8 +2815,8 @@
 "model" "*165"
 "targetname" "steam_5_hurt_1"
 "delay" "0"
-"damagetype" "8"
-"dmg" "20"
+"damagetype" "4104"
+"dmg" "1000"
 "spawnflags" "32"
 "classname" "trigger_hurt"
 }
@@ -3165,8 +3165,8 @@
 "model" "*179"
 "targetname" "steam_6_hurt_1"
 "delay" "0"
-"damagetype" "8"
-"dmg" "20"
+"damagetype" "4104"
+"dmg" "1000"
 "spawnflags" "32"
 "classname" "trigger_hurt"
 }
@@ -3577,9 +3577,9 @@
 {
 "model" "*208"
 "targetname" "steam_4_hurt_1"
-"damagetype" "8"
+"damagetype" "4104"
+"dmg" "1000"
 "delay" "0"
-"dmg" "10"
 "spawnflags" "32"
 "classname" "trigger_hurt"
 }
@@ -4194,8 +4194,8 @@
 {
 "model" "*252"
 "damagetype" "8"
-"delay" "0"
 "dmg" "10"
+"delay" "0"
 "spawnflags" "32"
 "classname" "trigger_hurt"
 }
@@ -4628,9 +4628,9 @@
 }
 {
 "model" "*270"
-"damagetype" "8"
+"damagetype" "4104"
+"dmg" "198"
 "delay" "0"
-"dmg" "20"
 "targetname" "steam_2_hurt_1"
 "spawnflags" "32"
 "classname" "trigger_hurt"
@@ -4687,8 +4687,8 @@
 "model" "*272"
 "targetname" "steam_1_hurt_1"
 "delay" "0"
-"damagetype" "8"
-"dmg" "20"
+"damagetype" "4104"
+"dmg" "90"
 "spawnflags" "32"
 "classname" "trigger_hurt"
 }
@@ -4886,8 +4886,8 @@
 "model" "*275"
 "targetname" "steam_1_hurt_1a"
 "delay" "0"
-"damagetype" "8"
-"dmg" "20"
+"damagetype" "4104"
+"dmg" "90"
 "spawnflags" "32"
 "classname" "trigger_hurt"
 }
@@ -5286,9 +5286,11 @@
 "classname" "trigger_once"
 }
 {
-"targetname" "start_music"
 "message" "../media/opfor/OpposingForce02.mp3"
-"classname" "trigger_mediaplayer"
+"volume" "10"
+"spawnflags" "1"
+"targetname" "start_music"
+"classname" "ambient_music"
 }
 {
 "origin" "2001 -809 -468"

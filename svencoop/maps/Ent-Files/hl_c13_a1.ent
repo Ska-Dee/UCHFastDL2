@@ -2055,7 +2055,9 @@
 {
 "model" "*54"
 "use_type" "3"
-"target" "c3a2_ele02"
+"target" "c3a2_ele02_mm"
+"master" "c3a2_ele02_ms"
+"locked_sound" "2"
 "renderamt" "255"
 "wait" "-1"
 "speed" "5"
@@ -2494,7 +2496,7 @@
 "use_type" "3"
 "target" "c3a2_testfire1"
 "angles" "0 0 0"
-"wait" "3"
+"wait" "-1"
 "speed" "5"
 "rendercolor" "255 255 255"
 "sounds" "8"
@@ -2506,7 +2508,7 @@
 "use_type" "3"
 "target" "c3a2_testfire2"
 "angles" "0 0 0"
-"wait" "3"
+"wait" "-1"
 "speed" "5"
 "rendercolor" "255 255 255"
 "sounds" "8"
@@ -3470,6 +3472,8 @@
 "minhullsize" "0 0 0"
 "rendercolor" "0 0 0"
 "angles" "0 272 0"
+"TriggerTarget" "key_1_train_counter"
+"TriggerCondition" "4"
 "classname" "monster_headcrab"
 }
 {
@@ -3478,6 +3482,8 @@
 "minhullsize" "0 0 0"
 "rendercolor" "0 0 0"
 "angles" "0 322 0"
+"TriggerTarget" "key_1_train_counter"
+"TriggerCondition" "4"
 "classname" "monster_headcrab"
 }
 {
@@ -3486,6 +3492,8 @@
 "minhullsize" "0 0 0"
 "rendercolor" "0 0 0"
 "angles" "0 254 0"
+"TriggerTarget" "key_1_train_counter"
+"TriggerCondition" "4"
 "classname" "monster_headcrab"
 }
 {
@@ -3494,7 +3502,56 @@
 "minhullsize" "0 0 0"
 "rendercolor" "0 0 0"
 "angles" "0 261 0"
+"TriggerTarget" "key_1_train_counter"
+"TriggerCondition" "4"
 "classname" "monster_headcrab"
+}
+{
+"origin" "-2464 480 -70"
+"maxhullsize" "0 0 0"
+"minhullsize" "0 0 0"
+"rendercolor" "0 0 0"
+"angles" "0 296 0"
+"TriggerTarget" "key_1_train_counter"
+"TriggerCondition" "4"
+"classname" "monster_headcrab"
+}
+{
+"origin" "-2512 640 -70"
+"maxhullsize" "0 0 0"
+"minhullsize" "0 0 0"
+"rendercolor" "0 0 0"
+"angles" "0 327 0"
+"TriggerTarget" "key_1_train_counter"
+"TriggerCondition" "4"
+"classname" "monster_headcrab"
+}
+{
+"origin" "-2304 480 -88"
+"maxhullsize" "0 0 0"
+"minhullsize" "0 0 0"
+"rendercolor" "0 0 0"
+"angles" "0 274 0"
+"TriggerTarget" "key_2_train_delay"
+"TriggerCondition" "4"
+"classname" "monster_bullchicken"
+}
+{
+"key_2_train" "1"
+"targetname" "key_2_train_delay"
+"classname" "multi_manager"
+}
+{
+"key_1_train" "1"
+"targetname" "key_1_train_delay"
+"classname" "multi_manager"
+}
+{
+"count" "6"
+"target" "key_1_train_delay"
+"targetname" "key_1_train_counter"
+"spawnflags" "3"
+"classname" "trigger_counter"
 }
 {
 "origin" "-2496 398 -75"
@@ -3527,30 +3584,6 @@
 {
 "origin" "-2302 795 -75"
 "classname" "info_node"
-}
-{
-"origin" "-2464 480 -70"
-"maxhullsize" "0 0 0"
-"minhullsize" "0 0 0"
-"rendercolor" "0 0 0"
-"angles" "0 296 0"
-"classname" "monster_headcrab"
-}
-{
-"origin" "-2512 640 -70"
-"maxhullsize" "0 0 0"
-"minhullsize" "0 0 0"
-"rendercolor" "0 0 0"
-"angles" "0 327 0"
-"classname" "monster_headcrab"
-}
-{
-"origin" "-2304 480 -88"
-"maxhullsize" "0 0 0"
-"minhullsize" "0 0 0"
-"rendercolor" "0 0 0"
-"angles" "0 274 0"
-"classname" "monster_bullchicken"
 }
 {
 "origin" "-2270 -33 -104"
@@ -4269,7 +4302,6 @@
 "retinal_scanner#10" "5.8"
 "retinal_scanner#11" "2"
 "retinal_scanner_door" "4"
-"countdown_start" "6"
 "classname" "multi_manager"
 }
 {
@@ -4649,633 +4681,9 @@
 "classname" "env_laser"
 }
 {
-"origin" "-3084 -564 -32"
-"targetname" "digit_10_1"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -548 -32"
-"targetname" "digit_10_2"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -564 -48"
-"targetname" "digit_10_3"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -548 -48"
-"targetname" "digit_10_4"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -564 -64"
-"targetname" "digit_10_5"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -548 -64"
-"targetname" "digit_10_6"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -540 -32"
-"targetname" "digit_1_1"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -526 -32"
-"targetname" "digit_1_2"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -540 -48"
-"targetname" "digit_1_3"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -526 -48"
-"targetname" "digit_1_4"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -540 -64"
-"targetname" "digit_1_5"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -526 -64"
-"targetname" "digit_1_6"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -516 -64"
-"targetname" "digit_dot_1"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -520 -64"
-"targetname" "digit_dot_2"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -510 -32"
-"targetname" "digit_01_1"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -496 -32"
-"targetname" "digit_01_2"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -510 -48"
-"targetname" "digit_01_3"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -496 -48"
-"targetname" "digit_01_4"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -510 -64"
-"targetname" "digit_01_5"
-"classname" "info_target"
-}
-{
-"origin" "-3084 -496 -64"
-"targetname" "digit_01_6"
-"classname" "info_target"
-}
-{
-"LightningStart" "digit_dot_1"
-"LightningEnd" "digit_dot_2"
-"targetname" "beam_digit_dot"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_10_1"
-"LightningEnd" "digit_10_2"
-"targetname" "beam_digit_10_1"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_10_2"
-"LightningEnd" "digit_10_4"
-"targetname" "beam_digit_10_2"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_10_4"
-"LightningEnd" "digit_10_6"
-"targetname" "beam_digit_10_3"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_10_5"
-"LightningEnd" "digit_10_6"
-"targetname" "beam_digit_10_4"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_10_3"
-"LightningEnd" "digit_10_5"
-"targetname" "beam_digit_10_5"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_10_1"
-"LightningEnd" "digit_10_3"
-"targetname" "beam_digit_10_6"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_10_3"
-"LightningEnd" "digit_10_4"
-"targetname" "beam_digit_10_7"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_1_1"
-"LightningEnd" "digit_1_2"
-"targetname" "beam_digit_1_1"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_1_2"
-"LightningEnd" "digit_1_4"
-"targetname" "beam_digit_1_2"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_1_4"
-"LightningEnd" "digit_1_6"
-"targetname" "beam_digit_1_3"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_1_5"
-"LightningEnd" "digit_1_6"
-"targetname" "beam_digit_1_4"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_1_3"
-"LightningEnd" "digit_1_5"
-"targetname" "beam_digit_1_5"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_1_1"
-"LightningEnd" "digit_1_3"
-"targetname" "beam_digit_1_6"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_1_3"
-"LightningEnd" "digit_1_4"
-"targetname" "beam_digit_1_7"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_01_1"
-"LightningEnd" "digit_01_2"
-"targetname" "beam_digit_01_1"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_01_2"
-"LightningEnd" "digit_01_4"
-"targetname" "beam_digit_01_2"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_01_4"
-"LightningEnd" "digit_01_6"
-"targetname" "beam_digit_01_3"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_01_5"
-"LightningEnd" "digit_01_6"
-"targetname" "beam_digit_01_4"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_01_3"
-"LightningEnd" "digit_01_5"
-"targetname" "beam_digit_01_5"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_01_1"
-"LightningEnd" "digit_01_3"
-"targetname" "beam_digit_01_6"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"LightningStart" "digit_01_3"
-"LightningEnd" "digit_01_4"
-"targetname" "beam_digit_01_7"
-"spawnflags" "2"
-"renderamt" "100"
-"rendercolor" "255 128 0"
-"TextureScroll" "100"
-"NoiseAmplitude" "0"
-"BoltWidth" "20"
-"life" "0"
-"Radius" "256"
-"renderfx" "0"
-"texture" "sprites/laserbeam.spr"
-"classname" "env_beam"
-}
-{
-"targetname" "countdown_digit_01a"
-"beam_digit_01_1" "0.5"
-"beam_digit_01_1#1" "0.6"
-"beam_digit_01_1#2" "0.8"
-"beam_digit_01_1#3" "0.9"
-"beam_digit_01_2" "0.3"
-"beam_digit_01_2#1" "0.5"
-"beam_digit_01_3" "0.7"
-"beam_digit_01_3#1" "0.8"
-"beam_digit_01_4" "0.2"
-"beam_digit_01_4#1" "0.3"
-"beam_digit_01_4#2" "0.5"
-"beam_digit_01_4#3" "0.6"
-"beam_digit_01_4#4" "0.8"
-"beam_digit_01_4#5" "0.9"
-"classname" "multi_manager"
-}
-{
-"targetname" "countdown_digit_01a"
-"beam_digit_01_5" "0.0"
-"beam_digit_01_5#1" "0.1"
-"beam_digit_01_5#2" "0.2"
-"beam_digit_01_5#3" "0.3"
-"beam_digit_01_5#4" "0.4"
-"beam_digit_01_5#5" "0.7"
-"beam_digit_01_5#6" "0.8"
-"beam_digit_01_5#7" "0.9"
-"beam_digit_01_6" "0.2"
-"beam_digit_01_6#1" "0.3"
-"beam_digit_01_6#2" "0.6"
-"beam_digit_01_6#3" "0.9"
-"classname" "multi_manager"
-}
-{
-"targetname" "countdown_digit_01a"
-"beam_digit_01_7" "0.0"
-"beam_digit_01_7#1" "0.2"
-"beam_digit_01_7#2" "0.3"
-"beam_digit_01_7#3" "0.8"
-"classname" "multi_manager"
-}
-{
-"targetname" "countdown_digit_1a"
-"beam_digit_1_1" "5.0"
-"beam_digit_1_1#1" "6.0"
-"beam_digit_1_1#2" "8.0"
-"beam_digit_1_1#3" "9.0"
-"beam_digit_1_2" "3.0"
-"beam_digit_1_2#1" "5.0"
-"beam_digit_1_3" "7.0"
-"beam_digit_1_3#1" "8.0"
-"beam_digit_1_4" "2.0"
-"beam_digit_1_4#1" "3.0"
-"beam_digit_1_4#2" "5.0"
-"beam_digit_1_4#3" "6.0"
-"beam_digit_1_4#4" "8.0"
-"beam_digit_1_4#5" "9.0"
-"classname" "multi_manager"
-}
-{
-"targetname" "countdown_digit_1a"
-"beam_digit_1_5" "0.0"
-"beam_digit_1_5#1" "1.0"
-"beam_digit_1_5#2" "2.0"
-"beam_digit_1_5#3" "3.0"
-"beam_digit_1_5#4" "4.0"
-"beam_digit_1_5#5" "7.0"
-"beam_digit_1_5#6" "8.0"
-"beam_digit_1_5#7" "9.0"
-"beam_digit_1_6" "2.0"
-"beam_digit_1_6#1" "3.0"
-"beam_digit_1_6#2" "6.0"
-"beam_digit_1_6#3" "9.0"
-"classname" "multi_manager"
-}
-{
-"targetname" "countdown_digit_1a"
-"beam_digit_1_7" "0.0"
-"beam_digit_1_7#1" "2.0"
-"beam_digit_1_7#2" "3.0"
-"beam_digit_1_7#3" "8.0"
-"countdown_digit_01a" "0.0"
-"countdown_digit_01a#1" "1.0"
-"countdown_digit_01a#2" "2.0"
-"countdown_digit_01a#3" "3.0"
-"countdown_digit_01a#4" "4.0"
-"countdown_digit_01a#5" "5.0"
-"countdown_digit_01a#6" "6.0"
-"countdown_digit_01a#7" "7.0"
-"countdown_digit_01a#8" "8.0"
-"countdown_digit_01a#9" "9.0"
-"classname" "multi_manager"
-}
-{
-"targetname" "countdown_digit_10a"
-"beam_digit_10_1" "40.0"
-"beam_digit_10_2" "50.0"
-"beam_digit_10_3" "40.0"
-"beam_digit_10_3#1" "50.0"
-"beam_digit_10_4" "40.0"
-"beam_digit_10_5" "40.0"
-"beam_digit_10_7" "40.0"
-"countdown_digit_1a" "0.0"
-"countdown_digit_1a#1" "10.0"
-"countdown_digit_1a#2" "20.0"
-"countdown_digit_1a#3" "30.0"
-"countdown_digit_1a#4" "40.0"
-"countdown_digit_1a#5" "50.0"
-"classname" "multi_manager"
-}
-{
-"targetname" "countdown_digit_10a"
-"beam_digit_10_1" "10.0"
-"beam_digit_10_1#1" "20.0"
-"beam_digit_10_2" "10.0"
-"beam_digit_10_3" "30.0"
-"beam_digit_10_4" "10.0"
-"beam_digit_10_4#1" "20.0"
-"beam_digit_10_5" "0.0"
-"beam_digit_10_5#1" "30.0"
-"beam_digit_10_6" "20.0"
-"classname" "multi_manager"
-}
-{
-"beam_digit_10_1" "0.0"
-"beam_digit_10_3" "0.0"
-"beam_digit_10_4" "0.0"
-"beam_digit_10_5" "0.0"
-"beam_digit_10_6" "0.0"
-"beam_digit_10_7" "0.0"
-"beam_digit_1_1" "0.0"
-"beam_digit_1_2" "0.0"
-"beam_digit_1_3" "0.0"
-"beam_digit_1_4" "0.0"
-"beam_digit_1_5" "0.0"
-"beam_digit_1_6" "0.0"
-"targetname" "countdown_start"
-"classname" "multi_manager"
-}
-{
-"beam_digit_01_1" "0.0"
-"beam_digit_01_2" "0.0"
-"beam_digit_01_3" "0.0"
-"beam_digit_01_4" "0.0"
-"beam_digit_01_5" "0.0"
-"beam_digit_01_6" "0.0"
-"beam_digit_dot" "0.0"
-"countdown_digit_10a" "0.1"
-"countdown_end" "60.1"
-"toggle_lift_button" "0.0"
-"targetname" "countdown_start"
-"classname" "multi_manager"
-}
-{
-"beam_digit_01_1" "0.0"
-"beam_digit_01_2" "0.0"
-"beam_digit_01_3" "0.0"
-"beam_digit_01_4" "0.0"
-"beam_digit_01_5" "0.0"
-"beam_digit_01_6" "0.0"
-"beam_digit_1_1" "0.0"
-"beam_digit_1_2" "0.0"
-"beam_digit_1_3" "0.0"
-"beam_digit_1_4" "0.0"
-"beam_digit_1_5" "0.0"
-"beam_digit_1_6" "0.0"
-"beam_digit_dot" "0.0"
-"targetname" "countdown_end"
-"classname" "multi_manager"
-}
-{
-"c3a2lift" "1.25"
-"c3a2_ele02" "0.0"
-"c3a2_ele02#1" "10.0"
-"targetname" "countdown_end"
+"c3a2lift" "5"
+"c3a2_ele02#1" "0.0"
+"targetname" "c3a2_ele02_mm"
 "classname" "multi_manager"
 }
 {
@@ -5655,3 +5063,250 @@
 "target" "percent_lock_3"
 "classname" "trigger_once_mp"
 }
+{
+"origin" "-2495 976 -56"
+"angles" "0 0 0"
+"targetname" "key_1_model"
+"movetype" "5"
+"model" "models/cubemath/key.mdl"
+"topcolor" "140"
+"classname" "item_generic"
+}
+{
+"origin" "-2880 -444 -24"
+"angles" "0 0 0"
+"targetname" "padlock_1_model"
+"movetype" "5"
+"model" "models/cubemath/padlock.mdl"
+"topcolor" "140"
+"classname" "item_generic"
+}
+{
+"origin" "-2310 976 -57"
+"angles" "0 0 0"
+"targetname" "key_2_model"
+"movetype" "5"
+"model" "models/cubemath/key.mdl"
+"topcolor" "28"
+"classname" "item_generic"
+}
+{
+"origin" "-2880 -444 -56"
+"angles" "0 0 0"
+"targetname" "padlock_2_model"
+"movetype" "5"
+"model" "models/cubemath/padlock.mdl"
+"topcolor" "28"
+"classname" "item_generic"
+}
+{
+"padlock_1_model" "0.5#2"
+"key_1_model" "0.5#2"
+"c3a2_ele02_ms" "0.5"
+"targetname" "activate_lock_1"
+"classname" "multi_manager"
+}
+{
+"padlock_2_model" "0.5#2"
+"key_2_model" "0.5#2"
+"c3a2_ele02_ms" "0.5"
+"targetname" "activate_lock_2"
+"classname" "multi_manager"
+}
+{
+"targetname" "c3a2_ele02_ms"
+"classname" "multisource"
+}
+{
+"model" "*69"
+"wheels" "32"
+"height" "0"
+"speed" "256"
+"rendermode" "1"
+"targetname" "key_1_train"
+"target" "key_1_path_0"
+"spawnflags" "10"
+"classname" "func_tracktrain"
+}
+{
+"model" "*69"
+"wheels" "32"
+"height" "0"
+"speed" "256"
+"rendermode" "1"
+"targetname" "key_2_train"
+"target" "key_2_path_0"
+"spawnflags" "10"
+"classname" "func_tracktrain"
+}
+{
+"angleoffset" "0 180 0"
+"target" "key_1_model"
+"copypointer" "key_1_train"
+"targetname" "key_1_train"
+"spawnflags" "1009"
+"classname" "trigger_setorigin"
+}
+{
+"angleoffset" "0 180 0"
+"target" "key_2_model"
+"copypointer" "key_2_train"
+"targetname" "key_2_train"
+"spawnflags" "1009"
+"classname" "trigger_setorigin"
+}
+{
+"origin" "-2495 976 -56"
+"targetname" "key_1_path_0"
+"target" "key_1_path_1"
+"speed" "128"
+"classname" "path_track"
+}
+{
+"origin" "-2496 288 -56"
+"targetname" "key_1_path_1"
+"target" "key_1_path_2"
+"speed" "192"
+"classname" "path_track"
+}
+{
+"origin" "-2520 208 -56"
+"targetname" "key_1_path_2"
+"target" "key_1_path_3"
+"speed" "256"
+"classname" "path_track"
+}
+{
+"origin" "-2578 116 -56"
+"targetname" "key_1_path_3"
+"target" "key_1_path_4"
+"classname" "path_track"
+}
+{
+"origin" "-2647 96 -56"
+"targetname" "key_1_path_4"
+"target" "key_1_path_5"
+"classname" "path_track"
+}
+{
+"origin" "-2760 96 -56"
+"targetname" "key_1_path_5"
+"target" "key_1_path_6"
+"classname" "path_track"
+}
+{
+"origin" "-2800 28 -56"
+"targetname" "key_1_path_6"
+"target" "key_1_path_7"
+"classname" "path_track"
+}
+{
+"origin" "-2810 -44 -24"
+"targetname" "key_1_path_7"
+"target" "key_1_path_8"
+"classname" "path_track"
+}
+{
+"origin" "-2810 -344 -24"
+"targetname" "key_1_path_8"
+"target" "key_1_path_9"
+"classname" "path_track"
+}
+{
+"origin" "-2810 -444 -24"
+"targetname" "key_1_path_9"
+"target" "key_1_path_10"
+"speed" "64"
+"classname" "path_track"
+}
+{
+"origin" "-2820 -444 -24"
+"targetname" "key_1_path_10"
+"target" "key_1_path_11"
+"speed" "64"
+"classname" "path_track"
+}
+{
+"origin" "-2880 -444 -24"
+"targetname" "key_1_path_11"
+"target" "key_1_path_12"
+"message" "activate_lock_1"
+"classname" "path_track"
+}
+{
+"origin" "-2880 -444 -24"
+"targetname" "key_1_path_12"
+"classname" "path_track"
+}
+{
+"origin" "-2310 976 -57"
+"targetname" "key_2_path_0"
+"target" "key_2_path_1"
+"speed" "128"
+"classname" "path_track"
+}
+{
+"origin" "-2304 288 -57"
+"targetname" "key_2_path_1"
+"target" "key_2_path_2"
+"speed" "192"
+"classname" "path_track"
+}
+{
+"origin" "-2328 208 -56"
+"targetname" "key_2_path_2"
+"target" "key_2_path_3"
+"speed" "256"
+"classname" "path_track"
+}
+{
+"origin" "-2469 104 -56"
+"targetname" "key_2_path_3"
+"target" "key_2_path_4"
+"classname" "path_track"
+}
+{
+"origin" "-2647 96 -56"
+"targetname" "key_2_path_4"
+"target" "key_2_path_5"
+"classname" "path_track"
+}
+{
+"origin" "-2760 96 -56"
+"targetname" "key_2_path_5"
+"target" "key_2_path_6"
+"classname" "path_track"
+}
+{
+"origin" "-2800 28 -56"
+"targetname" "key_2_path_6"
+"target" "key_2_path_7"
+"classname" "path_track"
+}
+{
+"origin" "-2810 -444 -56"
+"targetname" "key_2_path_7"
+"target" "key_2_path_8"
+"speed" "64"
+"classname" "path_track"
+}
+{
+"origin" "-2820 -444 -56"
+"targetname" "key_2_path_8"
+"target" "key_2_path_9"
+"speed" "64"
+"classname" "path_track"
+}
+{
+"origin" "-2880 -444 -56"
+"targetname" "key_2_path_9"
+"target" "key_2_path_10"
+"message" "activate_lock_2"
+"classname" "path_track"
+}
+{
+"origin" "-2880 -444 -56"
+"targetname" "key_2_path_10"
+"classname" "path_track"
+}
+

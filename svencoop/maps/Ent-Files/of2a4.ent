@@ -5347,6 +5347,18 @@
 "classname" "trigger_relay"
 }
 {
+"target" "percent_lock_1_ms"
+"targetname" "percent_lock_1_ms_3"
+"triggerstate" "2"
+"classname" "trigger_relay"
+}
+{
+"target" "percent_lock_1_ms_3"
+"triggerstate" "1"
+"delay" "1"
+"classname" "trigger_auto"
+}
+{
 "target" "percent_lock_1"
 "targetname" "percent_lock_1_ms"
 "classname" "multisource"
@@ -5357,4 +5369,10 @@
 "targetname" "counter_1"
 "spawnflags" "3"
 "classname" "trigger_counter"
+}
+{
+"percent_lock_1_ms_3" "0#0"
+"percent_lock_1_ms_3" "40#1"
+"targetname" "cut_door"
+"classname" "multi_manager"
 }

@@ -11649,8 +11649,19 @@
 "c1a3_liftdoor01" "0"
 "c1a3_lift_bttn_tog" "0"
 "change_c1a3_liftdoor01" "0"
+"percent_lock_3_r1" "0"
 "targetname" "c1a3_liftdoor01_firsttime"
 "classname" "multi_manager"
+}
+{
+"targetname" "percent_lock_3_ms"
+"classname" "multisource"
+}
+{
+"target" "percent_lock_3_ms"
+"targetname" "percent_lock_3_r1"
+"triggerstate" "1"
+"classname" "trigger_relay"
 }
 {
 "target" "c1a3_liftbttn_btm"
@@ -11659,7 +11670,9 @@
 "classname" "trigger_changetarget"
 }
 {
-"origin" "1400 -880 -1080"
+"origin" "1400 -880 -2080"
+"minhullsize" "-176 -300 -48"
+"maxhullsize" "248 416 336"
 "angles" "0 270 0"
 "target" "c1a3_lift_bttn_tog"
 "targetname" "checkpoint_1"
@@ -12623,6 +12636,7 @@
 "minhullsize" "1224 -1176 -160"
 "maxhullsize" "1648 -464 112"
 "target" "percent_lock_3"
+"master" "percent_lock_3_ms"
 "classname" "trigger_once_mp"
 }
 {
