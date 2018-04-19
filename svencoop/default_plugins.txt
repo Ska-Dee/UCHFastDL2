@@ -41,7 +41,7 @@
 	"plugin"
 	{
 		"name" "SinkingShip"
-		"script" "cubemath/SinkingShip2"
+		"script" "cubemath/SinkingShip3"
 	}
 	
 	"plugin"
