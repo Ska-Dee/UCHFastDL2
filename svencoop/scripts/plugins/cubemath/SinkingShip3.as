@@ -11,7 +11,7 @@ void CheckPlayerSinking(){
 		CBaseEntity@ pEntity = g_EntityFuncs.Instance( i );
 		
 		if( pEntity !is null && pEntity.GetClassname() == "deadplayer" && pEntity.pev.speed < 10.0) {
-			if(pEntity.pev.movetype != 5 || pEntity.pev.movetype != 8) {
+			if(pEntity.pev.movetype != 5 && pEntity.pev.movetype != 8) {
 				pEntity.pev.origin.z += 20.0;
 				pEntity.pev.velocity.z -= 128.0;
 				pEntity.pev.movetype = 5;
