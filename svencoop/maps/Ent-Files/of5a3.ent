@@ -1756,16 +1756,24 @@
 "classname" "weapon_satchel"
 }
 {
-"angle" "-2"
-"origin" "-760 -1232 -256"
+"origin" "-760 -1232 -240"
 "delay" "0"
-"classname" "ammo_spore"
+"angles" "0 0 0"
+"sequence" "5"
+"movetype" "5"
+"body" "1"
+"model" "models/spore_ammo.mdl"
+"classname" "item_generic"
 }
 {
-"angle" "-2"
-"classname" "ammo_spore"
 "delay" "0"
-"origin" "-832 -1240 -256"
+"origin" "-832 -1240 -240"
+"angles" "0 0 0"
+"sequence" "6"
+"movetype" "5"
+"body" "1"
+"model" "models/spore_ammo.mdl"
+"classname" "item_generic"
 }
 {
 "model" "*51"

@@ -3147,9 +3147,13 @@
 }
 {
 "origin" "-400 52 563"
-"angles" "-18 0 0"
+"angles" "-108 0 0"
 "delay" "0"
-"classname" "ammo_spore"
+"sequence" "5"
+"movetype" "5"
+"body" "1"
+"model" "models/spore_ammo.mdl"
+"classname" "item_generic"
 }
 {
 "origin" "952 -528 400"
@@ -3294,9 +3298,13 @@
 }
 {
 "origin" "-400 12 560"
-"angles" "-18 0 0"
+"angles" "-108 0 0"
 "delay" "0"
-"classname" "ammo_spore"
+"sequence" "6"
+"movetype" "5"
+"body" "1"
+"model" "models/spore_ammo.mdl"
+"classname" "item_generic"
 }
 {
 "model" "*274"
@@ -3445,9 +3453,13 @@
 }
 {
 "origin" "374 -840 80"
-"angle" "-2"
 "movetype" "5"
-"classname" "ammo_spore"
+"angles" "0 0 0"
+"sequence" "5"
+"movetype" "5"
+"body" "1"
+"model" "models/spore_ammo.mdl"
+"classname" "item_generic"
 }
 {
 "origin" "360 -824 120"

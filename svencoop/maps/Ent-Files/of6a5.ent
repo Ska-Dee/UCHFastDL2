@@ -948,10 +948,24 @@
 "classname" "func_tanklaser_of"
 }
 {
-"origin" "-47 -897 584"
+"origin" "-47 -897 600"
 "delay" "0"
-"angle" "125"
-"classname" "ammo_spore"
+"angles" "270 105 0"
+"sequence" "6"
+"movetype" "5"
+"body" "1"
+"model" "models/spore_ammo.mdl"
+"classname" "item_generic"
+}
+{
+"origin" "18 -944 604"
+"delay" "0"
+"angles" "270 13 0"
+"sequence" "5"
+"movetype" "5"
+"body" "1"
+"model" "models/spore_ammo.mdl"
+"classname" "item_generic"
 }
 {
 "origin" "144 100 244"
@@ -1029,12 +1043,6 @@
 "spawnflags" "1"
 "angle" "-1"
 "classname" "env_shooter"
-}
-{
-"origin" "18 -944 588"
-"delay" "0"
-"angle" "353"
-"classname" "ammo_spore"
 }
 {
 "model" "*59"
@@ -4839,7 +4847,7 @@
 "classname" "func_illusionary"
 }
 {
-"origin" "-47 -897 584"
+"origin" "-47 -897 600"
 "model" "models/spore.mdl"
 "delay" "0"
 "rendermode" "1"
@@ -4849,7 +4857,7 @@
 "classname" "ammo_sporeclip"
 }
 {
-"origin" "18 -944 588"
+"origin" "18 -944 604"
 "model" "models/spore.mdl"
 "delay" "0"
 "rendermode" "1"
