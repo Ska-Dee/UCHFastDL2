@@ -293,11 +293,6 @@
 "classname" "trigger_push"
 }
 {
-"model" "*20"
-"target" "fall_hurt"
-"classname" "trigger_once"
-}
-{
 "model" "*21"
 "classname" "func_wall"
 }
@@ -4712,7 +4707,8 @@
 "percent_lock_2_sound" "1"
 "percent_lock_2_changecolor" "1"
 "percent_lock_2_blocker" "1"
-"newgrunt" "1"
+"newgrunt" "2"
+"fall_hurt" "1#2"
 "targetname" "percent_lock_2"
 "classname" "multi_manager"
 }

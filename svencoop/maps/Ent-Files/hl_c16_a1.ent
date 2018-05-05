@@ -141,6 +141,7 @@
 "netname" "bshk"
 "rendercolor" "255 255 255"
 "targetname" "stalk_3_door"
+"dmg" "1000000"
 "lip" "72"
 "wait" "-1"
 "noise2" "common/null.wav"

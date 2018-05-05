@@ -9987,27 +9987,40 @@
 "classname" "multisource"
 }
 {
-"origin" "880 2161 -512"
-"targetname" "precache_checkie"
-"classname" "point_checkpoint"
-}
-{
 "origin" "421 -2019 64"
-"m_flCustomRespawnTime" "1.5"
+"m_flCustomRespawnTime" "0.1"
 "angles" "0 120 0"
 "classname" "weapon_tripmine"
 }
 {
 "origin" "400 -1578 64"
-"m_flCustomRespawnTime" "1.5"
+"m_flCustomRespawnTime" "0.1"
 "angles" "0 20 0"
 "classname" "weapon_tripmine"
 }
 {
 "origin" "768 -1632 64"
-"m_flCustomRespawnTime" "1.5"
+"m_flCustomRespawnTime" "0.1"
 "angles" "0 330 0"
 "classname" "weapon_tripmine"
+}
+{
+"run_mode" "0"
+"triggerstate" "1"
+"target" "kill_weapon_tripmine"
+"status_filter" "1"
+"classname_filter" "weapon_tripmine"
+"targetname" "kill_all_weapon_tripmine"
+"delay_between_runs" "0.5"
+"delay_between_triggers" "0.0"
+"classname" "trigger_entity_iterator"
+}
+{
+"m_iszNewValue" "86400"
+"m_iszValueName" "m_flCustomRespawnTime"
+"target" "!activator"
+"targetname" "kill_weapon_tripmine"
+"classname" "trigger_changevalue"
 }
 {
 "origin" "534 813 425"
@@ -10090,18 +10103,48 @@
 "classname" "trigger_counter"
 }
 {
-"origin" "880 2161 -272"
+"origin" "880 2161 4272"
 "angles" "0 180 0"
-"m_iszCrtEntChildClass" "point_checkpoint"
-"targetname" "activate_checkpoint"
-"classname" "trigger_createentity"
+"minhullsize" "-464 -153 -48"
+"maxhullsize" "464 1455 144"
+"targetname" "checkpoint_1"
+"classname" "point_checkpoint"
 }
 {
-"origin" "600 800 356"
+"$v_ori" "880 2161 -272"
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_FloatConversion" "0"
+"m_iszValueType" "0"
+"targetname" "activate_checkpoint"
+"netname" "activate_checkpoint"
+"m_iszSrcValueName" "$v_ori"
+"target" "checkpoint_1"
+"m_iszDstValueName" "origin"
+"spawnflags" "128"
+"classname" "trigger_copyvalue"
+}
+{
+"origin" "600 800 4356"
 "angles" "0 60 0"
-"m_iszCrtEntChildClass" "point_checkpoint"
+"minhullsize" "-216 -288 -36"
+"maxhullsize" "312 576 172"
+"targetname" "checkpoint_2"
+"classname" "point_checkpoint"
+}
+{
+"$v_ori" "600 800 356"
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_FloatConversion" "0"
+"m_iszValueType" "0"
 "targetname" "activate_checkpoint2"
-"classname" "trigger_createentity"
+"netname" "activate_checkpoint2"
+"m_iszSrcValueName" "$v_ori"
+"target" "checkpoint_2"
+"m_iszDstValueName" "origin"
+"spawnflags" "128"
+"classname" "trigger_copyvalue"
 }
 {
 "origin" "880 2161 -272"
@@ -11258,6 +11301,7 @@
 "beam_digit_1_6" "0.0"
 "beam_digit_dot" "0.0"
 "blocker_1" "0.0"
+"kill_all_weapon_tripmine" "10"
 "targetname" "countdown_end"
 "classname" "multi_manager"
 }

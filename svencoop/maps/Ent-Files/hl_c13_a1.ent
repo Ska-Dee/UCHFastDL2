@@ -23,6 +23,7 @@
 "speed" "100"
 "target" "big01"
 "sounds" "1"
+"dmg" "1000000"
 "targetname" "bigelevator"
 "classname" "func_train"
 }

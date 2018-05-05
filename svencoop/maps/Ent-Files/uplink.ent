@@ -15463,6 +15463,8 @@
 }
 {
 "classname" "point_checkpoint"
+"minhullsize" "-800 -400 -59"
+"maxhullsize" "16 400 237"
 "origin" "3171 2849 2019"
 }
 {
@@ -15474,6 +15476,8 @@
 }
 {
 "classname" "point_checkpoint"
+"minhullsize" "-16 -96 -61"
+"maxhullsize" "282 96 99"
 "origin" "-1610 -160 61"
 }
 {
@@ -16942,14 +16946,29 @@
 "classname" "trigger_counter"
 }
 {
-"origin" "1956 904 1533"
+"origin" "1956 904 5524"
 "angles" "0 4 0"
-"m_iszCrtEntChildClass" "point_checkpoint"
-"targetname" "activate_checkpoint"
-"classname" "trigger_createentity"
+"minhullsize" "-612 -1544 -84"
+"maxhullsize" "220 136 412"
+"targetname" "checkpoint_1"
+"classname" "point_checkpoint"
 }
 {
-"origin" "1956 904 1533"
+"$v_ori" "1956 904 1524"
+"m_iAppendSpaces" "0"
+"m_trigonometricBehaviour" "0"
+"m_FloatConversion" "0"
+"m_iszValueType" "0"
+"targetname" "activate_checkpoint"
+"netname" "activate_checkpoint"
+"m_iszSrcValueName" "$v_ori"
+"target" "checkpoint_1"
+"m_iszDstValueName" "origin"
+"spawnflags" "128"
+"classname" "trigger_copyvalue"
+}
+{
+"origin" "1956 904 1524"
 "targetname" "funnel_checkie"
 "classname" "env_funnel"
 }
@@ -16977,6 +16996,8 @@
 }
 {
 "origin" "2106 20 1243"
+"minhullsize" "-66 -508 -91"
+"maxhullsize" "270 68 101"
 "classname" "point_checkpoint"
 }
  

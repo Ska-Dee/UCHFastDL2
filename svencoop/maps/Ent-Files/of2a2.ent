@@ -708,12 +708,14 @@
 }
 {
 "model" "*38"
+"master" "pitdrone_gate_ms"
 "angles" "0 0 0"
 "rendercolor" "0 0 0"
 "target" "g_door"
 "wait" "2"
 "sounds" "9"
 "speed" "5"
+"locked_sound" "2"
 "spawnflags" "1"
 "classname" "func_button"
 }
@@ -1725,6 +1727,7 @@
 }
 {
 "model" "*62"
+"target" "key_start_train_mm"
 "rendercolor" "0 0 0"
 "explosion" "1"
 "weapon" "1"
@@ -8565,4 +8568,214 @@
 "origin" "-428 -1270 -144"
 "angles" "0 135 0"
 "classname" "point_checkpoint"
+}
+{
+"origin" "-352 -1472 -160"
+"angles" "0 180 0"
+"targetname" "key_1_model"
+"movetype" "5"
+"model" "models/cubemath/key.mdl"
+"topcolor" "85"
+"classname" "item_generic"
+}
+{
+"origin" "-1408 -984 -112"
+"angles" "0 0 0"
+"targetname" "padlock_1_model"
+"movetype" "5"
+"model" "models/cubemath/padlock.mdl"
+"topcolor" "85"
+"classname" "item_generic"
+}
+{
+"model" "*38"
+"wheels" "32"
+"height" "0"
+"speed" "256"
+"rendermode" "1"
+"targetname" "key_1_train"
+"target" "key_1_path_0"
+"spawnflags" "10"
+"classname" "func_tracktrain"
+}
+{
+"angleoffset" "0 180 0"
+"target" "key_1_model"
+"copypointer" "key_1_train"
+"targetname" "key_1_train"
+"spawnflags" "1009"
+"classname" "trigger_setorigin"
+}
+{
+"targetname" "pitdrone_gate_ms"
+"classname" "multisource"
+}
+{
+"padlock_1_model" "0.5#2"
+"key_1_model" "0.5#2"
+"pitdrone_gate_ms" "0.5#1"
+"targetname" "activate_lock_1"
+"classname" "multi_manager"
+}
+{
+"key_1_train" "1.0"
+"targetname" "key_start_train_mm"
+"classname" "multi_manager"
+}
+{
+"origin" "-352 -1472 -160"
+"targetname" "key_1_path_0"
+"target" "key_1_path_1"
+"speed" "64"
+"classname" "path_track"
+}
+{
+"origin" "-352 -1455 -160"
+"targetname" "key_1_path_1"
+"target" "key_1_path_2"
+"speed" "128"
+"classname" "path_track"
+}
+{
+"origin" "-352 -1425 -160"
+"targetname" "key_1_path_2"
+"target" "key_1_path_3"
+"speed" "192"
+"classname" "path_track"
+}
+{
+"origin" "-364 -1386 -156"
+"targetname" "key_1_path_3"
+"target" "key_1_path_4"
+"speed" "256"
+"classname" "path_track"
+}
+{
+"origin" "-449 -1273 -152"
+"targetname" "key_1_path_4"
+"target" "key_1_path_5"
+"classname" "path_track"
+}
+{
+"origin" "-509 -1197 -148"
+"targetname" "key_1_path_5"
+"target" "key_1_path_6"
+"classname" "path_track"
+}
+{
+"origin" "-557 -1137 -144"
+"targetname" "key_1_path_6"
+"target" "key_1_path_7"
+"classname" "path_track"
+}
+{
+"origin" "-584 -1066 -140"
+"targetname" "key_1_path_7"
+"target" "key_1_path_8"
+"classname" "path_track"
+}
+{
+"origin" "-594 -981 -136"
+"targetname" "key_1_path_8"
+"target" "key_1_path_9"
+"classname" "path_track"
+}
+{
+"origin" "-614 -844 -132"
+"targetname" "key_1_path_9"
+"target" "key_1_path_10"
+"classname" "path_track"
+}
+{
+"origin" "-628 -754 -128"
+"targetname" "key_1_path_10"
+"target" "key_1_path_11"
+"classname" "path_track"
+}
+{
+"origin" "-639 -713 -124"
+"targetname" "key_1_path_11"
+"target" "key_1_path_12"
+"classname" "path_track"
+}
+{
+"origin" "-677 -669 -120"
+"targetname" "key_1_path_12"
+"target" "key_1_path_13"
+"classname" "path_track"
+}
+{
+"origin" "-717 -642 -119"
+"targetname" "key_1_path_13"
+"target" "key_1_path_14"
+"classname" "path_track"
+}
+{
+"origin" "-764 -629 -118"
+"targetname" "key_1_path_14"
+"target" "key_1_path_15"
+"classname" "path_track"
+}
+{
+"origin" "-834 -621 -117"
+"targetname" "key_1_path_15"
+"target" "key_1_path_16"
+"classname" "path_track"
+}
+{
+"origin" "-910 -629 -116"
+"targetname" "key_1_path_16"
+"target" "key_1_path_17"
+"classname" "path_track"
+}
+{
+"origin" "-995 -659 -115"
+"targetname" "key_1_path_17"
+"target" "key_1_path_18"
+"classname" "path_track"
+}
+{
+"origin" "-1045 -698 -114"
+"targetname" "key_1_path_18"
+"target" "key_1_path_19"
+"classname" "path_track"
+}
+{
+"origin" "-1102 -756 -113"
+"targetname" "key_1_path_19"
+"target" "key_1_path_20"
+"classname" "path_track"
+}
+{
+"origin" "-1179 -859 -112"
+"targetname" "key_1_path_20"
+"target" "key_1_path_21"
+"speed" "192"
+"classname" "path_track"
+}
+{
+"origin" "-1245 -934 -112"
+"targetname" "key_1_path_21"
+"target" "key_1_path_22"
+"speed" "128"
+"classname" "path_track"
+}
+{
+"origin" "-1308 -984 -112"
+"targetname" "key_1_path_22"
+"target" "key_1_path_23"
+"speed" "64"
+"classname" "path_track"
+}
+{
+"origin" "-1408 -984 -112"
+"targetname" "key_1_path_23"
+"target" "key_1_path_24"
+"message" "activate_lock_1"
+"classname" "path_track"
+}
+{
+"origin" "-1408 -984 -112"
+"targetname" "key_1_path_24"
+"classname" "path_track"
 }
