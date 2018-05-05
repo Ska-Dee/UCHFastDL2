@@ -1296,9 +1296,9 @@ final class Diffy {
 		
 		if(m_Fails > 0){
 			if(d == 1.0){
-				d = d - double(m_Fails-1)*0.04 - 0.001;
+				d = d - double(m_Fails-1)*0.1 - 0.001;
 			}else{
-				d = d - double(m_Fails-0)*0.04;
+				d = d - double(m_Fails-0)*0.1;
 			}
 			mode = 2;
 		}

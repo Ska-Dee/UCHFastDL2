@@ -31,7 +31,7 @@ const int g_iMessageLifeTime = 2;	//How many seconds to keep showing the message
 
 HookReturnCode PlayerDecalHook( CBasePlayer@ pPlayer, const TraceResult& in trace )
 {
-	g_PlayerDecalTracker.PlayerDecal( pPlayer, trace );
+	g_PlayerDecalTracker.CreateDecal( pPlayer, trace );
 	
 	return HOOK_CONTINUE;
 }
@@ -100,7 +100,17 @@ final class PlayerDecal
 		
 		m_flCreationTime = flCreationTime;
 		
-		return IsValid();
+		bool isValid = IsValid();
+		
+		if(isValid){
+			string finalStr = "PlayerDecalTracker: Player " + m_szPlayerName + " (" + m_szAuthId + ") sprayed on position [" + 
+			floor(m_vecPosition.x+0.5f) + ", " +
+			floor(m_vecPosition.y+0.5f) + ", " +
+			floor(m_vecPosition.z+0.5f) + "]";
+			g_Game.AlertMessage( at_logged, "%1\n", finalStr );
+		}
+		
+		return isValid;
 	}
 	
 	void Reset()
@@ -238,7 +248,7 @@ final class PlayerDecalTracker
 	/*
 	*	Creates a new decal. The given player is the owner, the given trace result contains position data.
 	*/
-	void PlayerDecal( CBasePlayer@ pPlayer, const TraceResult& in trace )
+	void CreateDecal( CBasePlayer@ pPlayer, const TraceResult& in trace )
 	{
 		if( pPlayer is null )
 			return;

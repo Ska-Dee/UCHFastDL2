@@ -11,7 +11,11 @@ HookReturnCode ClientSayAdminSay( SayParameters@ pParams ) {
 	string args = pParams.GetCommand();
 	args.ToLowercase();
 	
-	if(args.Find("admin_say ") == 0){
+	if(
+			args.Find("admin_say ") == 0 ||
+			args.Find("!admin_say ") == 0 ||
+			args.Find("/admin_say ") == 0
+	){
 		string finalStr = "ADMINISTRATOR: "+pParams.GetCommand().SubString(10);
 		
 		pParams.ShouldHide = true;
