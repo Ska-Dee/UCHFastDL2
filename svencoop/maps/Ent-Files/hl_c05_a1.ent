@@ -6093,6 +6093,7 @@
 "percent_lock_1_sound" "1"
 "percent_lock_1_changecolor" "1"
 "ladder_wall" "1"
+"antirush_tele" "1#2"
 "targetname" "percent_lock_1"
 "classname" "multi_manager"
 }
@@ -6794,4 +6795,19 @@
 "delay" "1"
 "target" "cavetele_sprites"
 "classname" "trigger_auto"
+}
+{
+"model" "*35"
+"origin" "0 -320 0"
+"targetname" "antirush_tele"
+"target" "antirush_dest"
+"classname" "trigger_teleport"
+}
+{
+"origin" "-1986 -3124 -1784"
+"teleport_cooldown" "0.1"
+"angles" "0 70 0"
+"targetname" "antirush_dest"
+"spawnflags" "32"
+"classname" "info_teleport_destination"
 }

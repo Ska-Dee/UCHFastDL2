@@ -26,6 +26,12 @@
 "classname" "func_ladder"
 }
 {
+"model" "*2"
+"origin" "1 0 0"
+"targetname" "reactorsparks_blocker"
+"classname" "func_wall"
+}
+{
 "model" "*3"
 "classname" "func_ladder"
 }
@@ -336,9 +342,15 @@
 }
 {
 "model" "*32"
-"angles" "0 0 0"
-"target" "reactorsparks_mm"
-"classname" "trigger_once"
+"origin" "0 0 152"
+"targetname" "reactorsparks_blocker"
+"classname" "func_wall"
+}
+{
+"model" "*32"
+"origin" "237 0 152"
+"targetname" "reactorsparks_blocker"
+"classname" "func_wall"
 }
 {
 "model" "*33"
@@ -504,8 +516,16 @@
 "message" "pressed_one_already_togg"
 "angles" "0 0 0"
 "targetname" "core1"
-"target" "core2"
+"target" "core1a"
 "spawnflags" "1"
+"classname" "path_corner"
+}
+{
+"origin" "1872 1536 -1207"
+"message" "reactorsparks_mm"
+"angles" "0 0 0"
+"targetname" "core1a"
+"target" "core2"
 "classname" "path_corner"
 }
 {
@@ -1965,6 +1985,7 @@
 "reactorspark1" "10"
 "reactorspark2" "15"
 "laserdoor_mm1" "4"
+"reactorsparks_blocker" "0#2"
 "classname" "multi_manager"
 }
 {

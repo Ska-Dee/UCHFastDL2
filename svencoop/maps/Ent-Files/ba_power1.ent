@@ -1341,7 +1341,7 @@
 "model" "*59"
 "target" "lift_path_1"
 "skin" "0"
-"dmg" "0"
+"dmg" "1000000"
 "rendercolor" "0 0 0"
 "renderamt" "255"
 "rendermode" "4"
@@ -7617,9 +7617,11 @@
 "classname" "trigger_relay"
 }
 {
-"targetname" "muzak"
 "message" "../media/opfor/OpposingForce14.mp3"
-"classname" "trigger_mediaplayer"
+"volume" "10"
+"spawnflags" "1"
+"targetname" "muzak"
+"classname" "ambient_music"
 }
 {
 "origin" "24 856 -512"

@@ -427,6 +427,7 @@
 "movesnd" "9"
 "targetname" "acid_vator"
 "renderamt" "0"
+"dmg" "1000000"
 "spawnflags" "1"
 "classname" "func_plat"
 }
@@ -6065,9 +6066,11 @@
 "classname" "trigger_auto"
 }
 {
-"targetname" "muzak"
 "message" "../media/opfor/OpposingForce03.mp3"
-"classname" "trigger_mediaplayer"
+"volume" "10"
+"spawnflags" "1"
+"targetname" "muzak"
+"classname" "ambient_music"
 }
 {
 "origin" "-757 -534 231"

@@ -247,6 +247,7 @@
 "wait" "-1"
 "sounds" "21"
 "speed" "50"
+"master" "vent_wheel_ms"
 "spawnflags" "128"
 "classname" "func_rot_button"
 }

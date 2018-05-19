@@ -5737,6 +5737,8 @@
 {
 "origin" "-848 428 -1648"
 "angles" "0 0 0"
+"minhullsize" "-432 -556 -48"
+"maxhullsize" "64 116 288"
 "classname" "point_checkpoint"
 }
 {

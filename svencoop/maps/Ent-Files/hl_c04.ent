@@ -4562,8 +4562,15 @@
 {
 "model" "*166"
 "angles" "0 0 0"
-"target" "c1a3watch"
+"target" "c1a3watch_mm"
 "classname" "trigger_once"
+}
+{
+"c1a3watch" "0"
+"c1a3watch" "4#2"
+"c1a3kill_gman" "4"
+"targetname" "c1a3watch_mm"
+"classname" "multi_manager"
 }
 {
 "model" "*167"

@@ -1560,6 +1560,34 @@
 "classname" "func_wall"
 }
 {
+"model" "*117"
+"origin" "0 0 120"
+"angles" "0 0 0"
+"rendermode" "1"
+"classname" "func_wall"
+}
+{
+"model" "*118"
+"origin" "0 0 120"
+"angles" "0 0 0"
+"rendermode" "1"
+"classname" "func_wall"
+}
+{
+"model" "*117"
+"origin" "0 0 150"
+"angles" "0 0 0"
+"rendermode" "1"
+"classname" "func_wall"
+}
+{
+"model" "*118"
+"origin" "0 0 150"
+"angles" "0 0 0"
+"rendermode" "1"
+"classname" "func_wall"
+}
+{
 "model" "*119"
 "explosion" "1"
 "weapon" "1"

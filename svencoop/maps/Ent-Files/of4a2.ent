@@ -1372,6 +1372,7 @@
 "renderamt" "125"
 "rendermode" "2"
 "renderfx" "0"
+"m_iObeyTriggerMode" "2"
 "spawnflags" "32"
 "angle" "-1"
 "classname" "func_door"
@@ -1395,6 +1396,7 @@
 "stopsnd" "4"
 "movesnd" "5"
 "speed" "100"
+"m_iObeyTriggerMode" "2"
 "spawnflags" "32"
 "angle" "-1"
 "classname" "func_door"
@@ -1445,8 +1447,13 @@
 "classname" "func_door"
 }
 {
+"targetname" "biodome2_airlock_relay"
+"biodome2_airlock_1b" "0#1"
+"classname" "multi_manager"
+}
+{
 "model" "*90"
-"netname" "biodome2_airlock_1b"
+"netname" "biodome2_airlock_relay"
 "unlocked_sentence" "0"
 "locked_sentence" "0"
 "unlocked_sound" "0"

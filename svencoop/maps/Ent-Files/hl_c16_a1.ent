@@ -5550,7 +5550,7 @@
 "angles" "0 0 0"
 "targetname" "buster"
 "monstertype" "monster_alien_slave"
-"monstercount" "2"
+"monstercount" "1"
 "delay" "900"
 "m_imaxlivechildren" "1"
 "spawnflags" "2"
@@ -5567,7 +5567,7 @@
 {
 "origin" "-736 96 384"
 "angles" "0 0 0"
-"monstercount" "2"
+"monstercount" "1"
 "delay" "900"
 "m_imaxlivechildren" "1"
 "monstertype" "monster_alien_controller"
@@ -5606,7 +5606,7 @@
 {
 "origin" "440 -608 624"
 "angles" "0 135 0"
-"monstercount" "2"
+"monstercount" "1"
 "delay" "900"
 "m_imaxlivechildren" "1"
 "monstertype" "monster_alien_slave"
@@ -5619,7 +5619,7 @@
 {
 "origin" "-504 872 2968"
 "angles" "0 0 0"
-"monstercount" "2"
+"monstercount" "1"
 "delay" "900"
 "m_imaxlivechildren" "1"
 "monstertype" "monster_alien_slave"

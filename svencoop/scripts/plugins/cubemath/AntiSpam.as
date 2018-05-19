@@ -69,6 +69,8 @@ HookReturnCode ClientPutInServerSpamo( CBasePlayer@ pPlayer ){
 }
 
 HookReturnCode ClientSaySpamo(SayParameters@ pParams){
+	if(pParams.ShouldHide) return HOOK_CONTINUE;
+	
 	CBasePlayer@ pPlayer = pParams.GetPlayer();
 	
 	string str = pParams.GetCommand();
@@ -87,6 +89,10 @@ HookReturnCode ClientSaySpamo(SayParameters@ pParams){
 		
 		string aStr = "AntiSpam: Your Mute will end in: "+seconds+"."+secDiv10+"s.\n";
 		g_PlayerFuncs.ClientPrint( pPlayer, HUD_PRINTTALK, aStr );
+		return HOOK_CONTINUE;
+	}
+	
+	if (pParams.ShouldHide){
 		return HOOK_CONTINUE;
 	}
 	

@@ -473,13 +473,6 @@
 "classname" "func_wall"
 }
 {
-"model" "*44"
-"angles" "0 0 0"
-"target" "probe_arm_mm"
-"spawnflags" "6"
-"classname" "trigger_once"
-}
-{
 "model" "*45"
 "angles" "0 0 0"
 "explosion" "1"
@@ -2245,6 +2238,8 @@
 "origin" "1512 610 -308"
 "angles" "0 0 0"
 "targetname" "probe_arm_mm"
+"probe_arm_trigger_once" "0#2"
+"probe_arm_timer" "0#2"
 "probe_arm_1" "0"
 "probe_arm_2" ".3"
 "probe_arm_3" ".5"
@@ -2261,6 +2256,14 @@
 "classname" "multi_manager"
 }
 {
+"model" "*44"
+"angles" "0 0 0"
+"target" "probe_arm_mm"
+"targetname" "probe_arm_trigger_once"
+"spawnflags" "6"
+"classname" "trigger_once"
+}
+{
 "origin" "1158 624 -445"
 "angles" "0 0 0"
 "targetname" "sample_cart_liftmm"
@@ -2268,9 +2271,16 @@
 "sample_delivery_door1" "1"
 "sample_cart1" "0"
 "sample_fence" "3"
+"probe_arm_timer" "45"
 "red" "2.9"
 "sample_block_wall_kill" "0"
 "classname" "multi_manager"
+}
+{
+"target" "probe_arm_mm"
+"targetname" "probe_arm_timer"
+"triggerstate" "1"
+"classname" "trigger_relay"
 }
 {
 "origin" "1146 582 -281"

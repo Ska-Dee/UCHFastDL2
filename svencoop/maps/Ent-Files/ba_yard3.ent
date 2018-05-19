@@ -2959,8 +2959,11 @@
 "gen" "0"
 "svenmaster" "0"
 "rosen_access_mm_2_wall_toggle" "1"
-"door_burst_grunt_seq_mm" "2"
-"basement_door_1" "2.5"
+"kill_grunt_door_blocker" "2"
+"basement_door_1" "2.1"
+"door_burst_grunt_1_blocker" "2.1"
+"basement_door_1#1" "2.5"
+"door_burst_grunt_1" "0.2#2"
 "classname" "multi_manager"
 }
 {
