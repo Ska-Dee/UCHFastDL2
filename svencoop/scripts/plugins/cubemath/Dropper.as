@@ -18,6 +18,14 @@ HookReturnCode ClientSayDropper(SayParameters@ pParams){
 	if( str == "DROPAMMO" ){
 		pParams.ShouldHide = true;
 		
+		if( pPlayer is null || !pPlayer.IsConnected() )
+			return HOOK_HANDLED;
+		
+		pParams.ShouldHide = true;
+		
+		if( pPlayer.IsAlive() )
+			return HOOK_HANDLED;
+		
 		string ammoName1 = "";
 		string ammoName2 = "";
 		
