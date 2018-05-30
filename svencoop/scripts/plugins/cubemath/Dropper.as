@@ -23,7 +23,7 @@ HookReturnCode ClientSayDropper(SayParameters@ pParams){
 		
 		pParams.ShouldHide = true;
 		
-		if( pPlayer.IsAlive() )
+		if( !pPlayer.IsAlive() )
 			return HOOK_HANDLED;
 		
 		string ammoName1 = "";
