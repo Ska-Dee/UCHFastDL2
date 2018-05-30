@@ -16,8 +16,6 @@ HookReturnCode ClientSayDropper(SayParameters@ pParams){
 	str.ToUppercase();
 	
 	if( str == "DROPAMMO" ){
-		pParams.ShouldHide = true;
-		
 		if( pPlayer is null || !pPlayer.IsConnected() )
 			return HOOK_HANDLED;
 		
