@@ -823,7 +823,7 @@
 "angles" "0 0 0"
 "keep_inventory" "1"
 "targetname" "change"
-"map" "hl_c14"
+"map" "hl_c13_and_a_half"
 "spawnflags" "2"
 "classname" "trigger_changelevel"
 }
