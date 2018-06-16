@@ -25,6 +25,7 @@
 "wait" "4"
 "speed" "100"
 "rendercolor" "255 255 255"
+"spawnflags" "512"
 "targetname" "lab4doors1"
 "classname" "func_door"
 }
@@ -39,6 +40,7 @@
 "speed" "100"
 "rendercolor" "255 255 255"
 "wait" "4"
+"spawnflags" "512"
 "targetname" "lab4doors1"
 "lip" "16"
 "classname" "func_door"

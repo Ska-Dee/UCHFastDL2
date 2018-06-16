@@ -29,7 +29,7 @@
 "wait" "-1"
 "rendercolor" "255 255 255"
 "speed" "8"
-"spawnflags" "32"
+"spawnflags" "544"
 "classname" "func_door"
 }
 {
@@ -50,7 +50,7 @@
 "targetname" "sl09_door"
 "lip" "24"
 "speed" "8"
-"spawnflags" "32"
+"spawnflags" "544"
 "classname" "func_door"
 }
 {
@@ -4053,7 +4053,7 @@
 "targetname" "sl07_door"
 "lip" "24"
 "speed" "8"
-"spawnflags" "33"
+"spawnflags" "545"
 "classname" "func_door"
 }
 {
@@ -6273,7 +6273,7 @@
 "targetname" "sl07_door2"
 "lip" "24"
 "speed" "8"
-"spawnflags" "33"
+"spawnflags" "545"
 "classname" "func_door"
 }
 {
@@ -6430,7 +6430,7 @@
 "targetname" "sl06_door"
 "lip" "24"
 "speed" "8"
-"spawnflags" "32"
+"spawnflags" "544"
 "classname" "func_door"
 }
 {
@@ -11428,7 +11428,7 @@
 "wait" "-1"
 "rendercolor" "255 255 255"
 "speed" "8"
-"spawnflags" "33"
+"spawnflags" "545"
 "classname" "func_door"
 }
 {
