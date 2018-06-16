@@ -6,3 +6,5 @@ models/cubemath/padlock.mdl
 models/cubemath/arrow2d.mdl
 models/player/nsmbw_wendy/nsmbw_wendy.bmp
 models/player/nsmbw_wendy/nsmbw_wendy.mdl
+models/player/crash_bandicoot/crash_bandicoot.bmp
+models/player/crash_bandicoot/crash_bandicoot.mdl
