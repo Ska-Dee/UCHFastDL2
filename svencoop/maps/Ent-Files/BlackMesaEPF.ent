@@ -100,12 +100,6 @@
 "classname" "env_spark"
 }
 {
-"model" "*1"
-"damagetype" "256"
-"dmg" "5"
-"classname" "trigger_hurt"
-}
-{
 "origin" "-124 -1568 16"
 "displayname" "Professor James"
 "targetname" "Bebb"
@@ -11281,5 +11275,9 @@
 {
 "classname" "point_checkpoint"
 "origin" "-306 264 103"
+}
+{
+"classname" "point_checkpoint"
+"origin" "318 496 -93"
 }
  

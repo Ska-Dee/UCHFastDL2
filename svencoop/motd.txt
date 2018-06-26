@@ -1,1 +1,31 @@
-I am too lazy to write proper informations and rules for this Server.
+This Server sucks because the owner didn't changed the motd.txt
+Join 108.61.112.207:27015 instand.
+
+Now lets FUCK this Server!
+Open your console and write: rcon_password nudes
+You should being able to send commands to the server.
+Example: rcon say Hello World!
+
+You can ban or kick everyone you hate!
+rcon banid "STEAM_0:0:0" 0 kick
+rcon kick "EvilGuy666" "Fuck You!"
+
+Change to a different map!
+Make sure that the map exists on the Server!
+rcon changelevel hl_c11_a1
+
+NEVER EVER EVER EVER EVER EVER EVER EVER EVER
+EVER EVER EVER EVER EVER EVER EVER EVER EVER
+EVER EVER EVER EVER EVER EVER EVER EVER EVER
+EVER EVER EVER EVER ENTER THIS COMMAND:
+rcon quit
+Or else the Server will commit SUDOKU!
+
+Rules:
+- Be an Asshole!
+- Block People!
+- Spam in Chat and Voice!
+- Spray Porn!
+- Ban everyone you see!
+- Send Nudes!
+- Take a SHIT on the floor!
